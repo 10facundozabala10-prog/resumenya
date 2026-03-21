@@ -1668,9 +1668,9 @@ body.focus-mode .ideas-list li { font-size: 0.95rem; line-height: 1.88; }
   background: rgba(200,72,26,0.06);
 }
 
-/* Tag cloud section */
+/* Tag cloud section — single scrollable row */
 .tag-cloud-section {
-  padding: var(--s3) var(--page-pad);
+  padding: var(--s2) var(--page-pad);
   border-bottom: 1px solid var(--border);
   background: var(--bg);
 }
@@ -1678,7 +1678,7 @@ body.focus-mode .ideas-list li { font-size: 0.95rem; line-height: 1.88; }
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: var(--s2);
+  margin-bottom: var(--s1);
 }
 .tag-cloud-title {
   font-family: var(--font-mono);
@@ -1700,11 +1700,21 @@ body.focus-mode .ideas-list li { font-size: 0.95rem; line-height: 1.88; }
 }
 .tag-cloud-clear.visible { display: block; }
 .tag-cloud-clear:hover { opacity: 0.7; }
+
+/* Single horizontal scrollable row */
 .tag-cloud {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: 0.4rem;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  mask-image: linear-gradient(to right, transparent 0%, black 2%, black 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2%, black 95%, transparent 100%);
 }
+.tag-cloud::-webkit-scrollbar { display: none; }
+
 .tag-cloud-item {
   font-family: var(--font-mono);
   font-size: 0.62rem;
@@ -1718,6 +1728,7 @@ body.focus-mode .ideas-list li { font-size: 0.95rem; line-height: 1.88; }
   transition: all 0.18s;
   white-space: nowrap;
   user-select: none;
+  flex-shrink: 0;
 }
 .tag-cloud-item:hover {
   border-color: rgba(200,72,26,0.4);
@@ -4509,10 +4520,9 @@ function renderTagCloud() {
   if (!cloud) return;
   const tags = getAllTags();
   cloud.innerHTML = tags.map(t => {
-    const count = getTagCount(t);
     return `<button class="tag-cloud-item ${tagActivo === t ? 'active' : ''}"
       onclick="setTag('${t.replace(/'/g,"\\'")}')">
-      ${t} <span style="opacity:0.5;font-size:0.52rem">(${count})</span>
+      ${t}
     </button>`;
   }).join('');
 }
