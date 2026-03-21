@@ -840,6 +840,8 @@ nav {
   flex: 1;
   min-width: 200px;
   max-width: 420px;
+  display: flex;
+  align-items: center;
 }
 .search-wrap svg {
   position: absolute;
@@ -848,13 +850,15 @@ nav {
   transform: translateY(-50%);
   opacity: 0.3;
   pointer-events: none;
+  z-index: 1;
 }
 .search-input {
+  flex: 1;
   width: 100%;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--r2);
-  padding: 0.65rem var(--s2) 0.65rem 2.6rem;
+  padding: 0.65rem 5.5rem 0.65rem 2.6rem;
   font-size: 0.88rem;
   color: var(--ink);
   outline: none;
@@ -864,6 +868,38 @@ nav {
 .search-input:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(200,72,26,0.1);
+}
+/* Spotlight hint floats inside the input on the right */
+.spotlight-hint {
+  position: absolute;
+  right: var(--s2);
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 0.18rem 0.45rem;
+  border: 1px solid var(--border);
+  border-radius: var(--r1);
+  background: var(--card);
+  transition: all 0.15s;
+  white-space: nowrap;
+  pointer-events: all;
+}
+.spotlight-hint:hover { border-color: var(--accent); color: var(--accent); }
+.spotlight-hint kbd {
+  background: var(--surface);
+  border: 1px solid var(--border-md);
+  border-radius: 3px;
+  padding: 0.05rem 0.35rem;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--sub);
 }
 
 .filtros {
@@ -965,16 +1001,17 @@ nav {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: var(--s3);
+  padding-bottom: var(--s2);
 }
 
 .book-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--r3);
-  padding: var(--s3) var(--s3) var(--s3) calc(var(--s3) + 14px);
+  padding: var(--s3) var(--s3) calc(var(--s3) + 22px) calc(var(--s3) + 14px);
   cursor: pointer;
   position: relative;
-  overflow: hidden;
+  overflow: visible;
   transition: transform 0.3s cubic-bezier(.4,0,.2,1),
               box-shadow 0.3s ease,
               border-color 0.25s ease,
@@ -994,6 +1031,7 @@ nav {
   opacity: 0;
   transition: opacity 0.28s;
   border-radius: var(--r3) 0 0 var(--r3);
+  pointer-events: none;
 }
 .book-card:hover {
   transform: translateY(-3px);
@@ -1036,16 +1074,22 @@ nav {
 
 .amazon-card-badge {
   position: absolute;
-  bottom: var(--s2); right: var(--s2);
+  bottom: var(--s2);
+  right: var(--s2);
   background: rgba(255,153,0,0.12);
   color: #C98010;
   font-family: var(--font-mono);
   font-size: 0.52rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0.15rem 0.45rem;
+  padding: 0.22rem 0.6rem;
   border-radius: var(--pill);
-  border: 1px solid rgba(255,153,0,0.18);
+  border: 1px solid rgba(255,153,0,0.25);
+  white-space: nowrap;
+  line-height: 1.4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .card-genre {
@@ -4602,25 +4646,6 @@ footer {
   @page { margin: 2.5cm; }
 }
 #print-area { display: none; }
-
-/* ══════════════════════════════════════════════════════
-   SPOTLIGHT KEYBOARD SHORTCUT HINT
-══════════════════════════════════════════════════════ */
-.spotlight-hint {
-  display: inline-flex; align-items: center; gap: 0.3rem;
-  font-family: var(--font-mono); font-size: 0.58rem;
-  color: var(--muted); cursor: pointer;
-  padding: 0.2rem 0.5rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r1);
-  transition: all 0.15s;
-}
-.spotlight-hint:hover { border-color: var(--accent); color: var(--accent); }
-.spotlight-hint kbd {
-  background: var(--card); border: 1px solid var(--border-md);
-  border-radius: 3px; padding: 0.05rem 0.35rem;
-  font-family: var(--font-mono); font-size: 0.55rem; color: var(--sub);
-}
 
 /* ══════════════════════════════════════════════════════
    LECTOR POR SECCIONES (PAGINADO)
