@@ -3,7 +3,82 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>LEER — Resúmenes de Libros</title>
+
+<!-- ═══ SEO PRIMARIO ═══════════════════════════════════════ -->
+<title>Resúmenes de Libros | LEER — Lee menos, comprende más</title>
+<meta name="description" content="Resúmenes completos y profundos de los libros más influyentes: filosofía, psicología, negocios, ciencia e historia. Ideas principales, lecciones y por qué leerlos.">
+<meta name="keywords" content="resúmenes de libros, resumen libro, libros resumidos, filosofía, psicología, negocios, ciencia, historia, Sapiens, Meditaciones, Atomic Habits, pensar rápido pensar despacio">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="author" content="LEER — Resúmenes de Libros">
+<link rel="canonical" href="https://resumenya.com/">
+
+<!-- ═══ OPEN GRAPH (Facebook, WhatsApp, LinkedIn) ══════════ -->
+<meta property="og:type"        content="website">
+<meta property="og:locale"      content="es_ES">
+<meta property="og:site_name"   content="LEER — Resúmenes de Libros">
+<meta property="og:title"       content="Resúmenes de Libros | LEER">
+<meta property="og:description" content="Resúmenes profundos de los libros más influyentes. Ideas principales, lecciones aplicables y por qué leerlos. Filosofía, psicología, negocios, ciencia e historia.">
+<meta property="og:url"         content="https://resumenya.com/">
+<meta property="og:image"       content="https://resumenya.com/og-image.png">
+
+<!-- ═══ TWITTER CARD ═══════════════════════════════════════ -->
+<meta name="twitter:card"        content="summary_large_image">
+<meta name="twitter:title"       content="Resúmenes de Libros | LEER">
+<meta name="twitter:description" content="Resúmenes profundos de los libros más influyentes. Lee menos, comprende más.">
+<meta name="twitter:image"       content="https://resumenya.com/og-image.png">
+
+<!-- ═══ SCHEMA.ORG — SITIO WEB ════════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "LEER — Resúmenes de Libros",
+  "url": "https://resumenya.com/",
+  "description": "Resúmenes completos y profundos de los libros más influyentes en filosofía, psicología, negocios, ciencia e historia.",
+  "inLanguage": "es",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://resumenya.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<!-- ═══ SCHEMA.ORG — COLECCIÓN DE LIBROS ══════════════════ -->
+<script type="application/ld+json" id="schema-books">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Resúmenes de libros influyentes",
+  "description": "Colección de resúmenes profundos de los mejores libros de filosofía, psicología, negocios, ciencia e historia",
+  "url": "https://resumenya.com/",
+  "numberOfItems": 36,
+  "itemListElement": []
+}
+</script>
+
+<!-- ═══ SCHEMA.ORG — BREADCRUMB ═══════════════════════════ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Inicio",
+      "item": "https://resumenya.com/"
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Biblioteca",
+      "item": "https://resumenya.com/#biblioteca"
+    }
+  ]
+}
+</script>
+
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Outfit:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* ═══════════════════════════════════════════════════════════
@@ -3553,6 +3628,9 @@ function abrirModal(libro) {
   document.getElementById('modal-ver').classList.add('open');
   document.body.style.overflow = 'hidden';
 
+  // SEO dinámico
+  actualizarSEOLibro(libro);
+
   // Guardar en historial de recientes
   guardarReciente(libro);
 
@@ -3566,7 +3644,7 @@ function cerrarModal(id) {
   document.body.style.overflow = '';
   if (id === 'modal-ver') {
     Audio.detener();
-    // Exit focus mode
+    restaurarSEOGeneral();
     if (focusMode) {
       focusMode = false;
       document.body.classList.remove('focus-mode');
@@ -3775,6 +3853,7 @@ function navegarModal(dir) {
   document.getElementById('notas-saved').classList.remove('visible');
   document.getElementById('modal-ver-content').scrollTop = 0;
   actualizarNavBotones();
+  actualizarSEOLibro(libro);
 }
 
 // --- ESTADÍSTICAS ---
@@ -4592,6 +4671,98 @@ document.addEventListener('click', e => {
   if (!e.target.closest('.search-wrap')) cerrarSuggestions();
 });
 
+// --- SEO DINÁMICO ---
+function slug(titulo) {
+  return titulo.toLowerCase()
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+}
+
+function generarSchemaLibros() {
+  const schema = JSON.parse(document.getElementById('schema-books').textContent);
+  schema.numberOfItems = libros.length;
+  schema.itemListElement = libros.map((l, i) => ({
+    '@type': 'ListItem',
+    position: i + 1,
+    url: `https://resumenya.com/#${slug(l.titulo)}`,
+    name: `Resumen de ${l.titulo} — ${l.autor}`
+  }));
+  document.getElementById('schema-books').textContent = JSON.stringify(schema, null, 2);
+}
+
+function actualizarSEOLibro(libro) {
+  // Actualizar title y meta description para el libro abierto
+  const tituloSEO = `Resumen de "${libro.titulo}" — ${libro.autor} | LEER`;
+  const descSEO   = `${libro.sinopsis.slice(0, 155).trim()}…`;
+
+  document.title = tituloSEO;
+
+  let metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.content = descSEO;
+
+  let ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.content = tituloSEO;
+
+  let ogDesc = document.querySelector('meta[property="og:description"]');
+  if (ogDesc) ogDesc.content = descSEO;
+
+  let twTitle = document.querySelector('meta[name="twitter:title"]');
+  if (twTitle) twTitle.content = tituloSEO;
+
+  let twDesc = document.querySelector('meta[name="twitter:description"]');
+  if (twDesc) twDesc.content = descSEO;
+
+  // Canonical con hash del libro
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) canonical.href = `https://resumenya.com/#${slug(libro.titulo)}`;
+
+  // Inyectar Schema.org individual para este libro
+  let schemaLibro = document.getElementById('schema-libro-activo');
+  if (!schemaLibro) {
+    schemaLibro = document.createElement('script');
+    schemaLibro.type = 'application/ld+json';
+    schemaLibro.id   = 'schema-libro-activo';
+    document.head.appendChild(schemaLibro);
+  }
+  schemaLibro.textContent = JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    'name': libro.titulo,
+    'author': { '@type': 'Person', 'name': libro.autor },
+    'datePublished': String(libro.anio),
+    'numberOfPages': libro.paginas || undefined,
+    'inLanguage': 'es',
+    'genre': genreLabels[libro.categoria] || libro.categoria,
+    'description': libro.sinopsis,
+    'review': {
+      '@type': 'Review',
+      'reviewBody': libro.porque,
+      'reviewRating': {
+        '@type': 'Rating',
+        'ratingValue': libro.rating,
+        'bestRating': 5,
+        'worstRating': 1
+      },
+      'author': { '@type': 'Organization', 'name': 'LEER' }
+    },
+    ...(libro.linkAfiliado ? { 'offers': {
+      '@type': 'Offer',
+      'url': libro.linkAfiliado,
+      'seller': { '@type': 'Organization', 'name': 'Amazon' }
+    }} : {})
+  });
+}
+
+function restaurarSEOGeneral() {
+  document.title = 'Resúmenes de Libros | LEER — Lee menos, comprende más';
+  let metaDesc = document.querySelector('meta[name="description"]');
+  if (metaDesc) metaDesc.content = 'Resúmenes completos y profundos de los libros más influyentes: filosofía, psicología, negocios, ciencia e historia. Ideas principales, lecciones y por qué leerlos.';
+  let ogTitle = document.querySelector('meta[property="og:title"]');
+  if (ogTitle) ogTitle.content = 'Resúmenes de Libros | LEER';
+  let canonical = document.querySelector('link[rel="canonical"]');
+  if (canonical) canonical.href = 'https://resumenya.com/';
+}
+
 // Init
 initDark();
 initFraseDia();
@@ -4600,6 +4771,7 @@ renderGrid(libros);
 actualizarProgreso();
 renderRecientes();
 renderTagCloud();
+generarSchemaLibros();
 </script>
 </body>
 </html>
