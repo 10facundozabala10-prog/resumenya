@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://resumenya.com/</loc>
     <lastmod>2026-03-21</lastmod>
@@ -11,209 +12,356 @@
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Meditaciones | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-mundo-y-sus-demonios</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El mundo y sus demonios | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#pensar-rapido-pensar-despacio</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Pensar rápido, pensar despacio | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#sobre-la-brevedad-de-la-vida</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Sobre la brevedad de la vida | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-juego-infinito</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El juego infinito | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#sapiens</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Sapiens | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-hombre-en-busca-de-sentido</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El hombre en busca de sentido | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#atomic-habits</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Atomic Habits | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-poder-del-ahora</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El poder del ahora | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#deep-work</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Deep Work | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#armas-germenes-y-acero</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Armas, gérmenes y acero | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#la-inteligencia-emocional</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de La inteligencia emocional | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-principe</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El príncipe | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-gen-egoista</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El gen egoísta | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#como-ganar-amigos-e-influir-sobre-las-personas</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Cómo ganar amigos e influir sobre las personas | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-arte-de-la-guerra</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El arte de la guerra | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#una-breve-historia-del-tiempo</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Una breve historia del tiempo | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#factfulness</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Factfulness | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#padre-rico-padre-pobre</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Padre rico, padre pobre | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-poder-de-los-habitos</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El poder de los hábitos | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#siddhartha</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Siddhartha | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#los-juegos-del-hambre</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Los juegos del hambre | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#1984</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de 1984 | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#la-psicologia-del-dinero</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de La psicología del dinero | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#crimen-y-castigo</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Crimen y castigo | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-alquimista</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El alquimista | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#thinking-fast-and-slow</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Thinking, Fast and Slow | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#estoicismo-el-arte-de-vivir</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Estoicismo: El arte de vivir | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#educated</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Educated | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-retrato-de-dorian-gray</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El retrato de Dorian Gray | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#cien-anos-de-soledad</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Cien años de soledad | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-poder</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El poder | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#la-metamorfosis</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de La metamorfosis | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#influencia-la-psicologia-de-la-persuasion</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de Influencia: La psicología de la persuasión | LEER</title>
   </url>
   <url>
     <loc>https://resumenya.com/#el-lobo-estepario</loc>
     <lastmod>2026-03-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+    <title>Resumen de El lobo estepario | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#el-extranjero</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de El extranjero | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#asi-hablo-zaratustra</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de Así habló Zaratustra | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#la-republica</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de La República | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#el-inversor-inteligente</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de El inversor inteligente | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#el-cerebro-de-buda</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de El cerebro de Buda | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#un-mundo-feliz</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de Un mundo feliz | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#nunca-dividas-la-diferencia</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de Nunca dividas la diferencia | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#el-origen-de-las-especies</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de El origen de las especies | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#los-hermanos-karamazov</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de Los hermanos Karamázov | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#minimalismo-digital</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de Minimalismo digital | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#el-arte-de-amar</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de El arte de amar | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#homo-deus</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de Homo Deus | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#ikigai</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de Ikigai | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#esencialismo</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de Esencialismo | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#el-camino-del-artista</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de El camino del artista | LEER</title>
+  </url>
+  <url>
+    <loc>https://resumenya.com/#los-cuatro-acuerdos</loc>
+    <lastmod>2026-03-21</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <title>Resumen de Los cuatro acuerdos | LEER</title>
   </url>
 </urlset>
