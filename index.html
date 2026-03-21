@@ -10723,8 +10723,9 @@ function applyLang() {
   const footerCatKeys = ['filtroFilosofia','filtroPsicologia','filtroNegocios','filtroCiencia','filtroHistoria','filtroAutoayuda'];
   footerCatLinks.forEach((btn, i) => { if (footerCatKeys[i]) btn.textContent = t(footerCatKeys[i]); });
 
-  // ── 21. RE-RENDER dinámico ────────────────────────────────────
-  // Todos los elementos generados por JS necesitan re-renderizarse
+  // ── 21. RE-RENDER dinámico (solo después de init completo) ───
+  if (!langIniciado) return; // durante la carga inicial, no re-renderizar
+
   filtrar();
   renderTagCloud();
   renderRecientes();
@@ -10732,24 +10733,23 @@ function applyLang() {
   if (typeof renderGoals === 'function')   renderGoals();
   if (typeof renderHeatmap === 'function') renderHeatmap(heatmapCurrentYear);
   if (typeof initLecturaDia === 'function') {
-    // Retranslate daily section labels
     const dailyEyebrow = document.getElementById('daily-eyebrow');
     if (dailyEyebrow) dailyEyebrow.textContent = langActivo === 'en' ? '☀️ Book of the day' : '☀️ Lectura del día';
     const dailyDayLbl = document.getElementById('daily-day-label');
     if (dailyDayLbl) dailyDayLbl.textContent = langActivo === 'en' ? 'day of the year' : 'día del año';
   }
-  // Spotlight placeholder
   const spInput = document.getElementById('spotlight-input');
   if (spInput) spInput.placeholder = langActivo === 'en'
     ? 'Search books, authors, topics, notes…'
     : 'Buscar libros, autores, temas, notas…';
-  // Readlist panel if open
   if (document.getElementById('readlist-overlay')?.classList.contains('open')) renderReadlistPanel();
 }
 
+let langIniciado = false; // flag: true después del primer render completo
+
 function initLang() {
   langActivo = localStorage.getItem('lang') || 'es';
-  applyLang();
+  applyLang(); // solo traduce DOM estático, no llama renders
 }
 
 // --- SPOTLIGHT GLOBAL (Cmd+K / Ctrl+K) ---
@@ -11491,6 +11491,9 @@ setTimeout(() => {
   initLecturaDia();
   verificarLogros();
   getReadlist().forEach(titulo => showReadlistBadge(titulo, true));
+  // Marcar init completo y re-aplicar idioma sobre contenido dinámico
+  langIniciado = true;
+  applyLang(); // ahora sí traduce el contenido generado dinámicamente
   // Spotlight hint in search bar
   const searchWrap = document.querySelector('.search-wrap');
   if (searchWrap && !searchWrap.querySelector('.spotlight-hint')) {
