@@ -16,7 +16,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="LEER">
-<link rel="manifest" href="data:application/json,{&quot;name&quot;:&quot;LEER — Resúmenes de Libros&quot;,&quot;short_name&quot;:&quot;LEER&quot;,&quot;start_url&quot;:&quot;/&quot;,&quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;%230B0907&quot;,&quot;theme_color&quot;:&quot;%230B0907&quot;,&quot;description&quot;:&quot;Resúmenes de los libros más influyentes&quot;,&quot;icons&quot;:[{&quot;src&quot;:&quot;https://resumenya.com/icon-192.png&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/png&quot;},{&quot;src&quot;:&quot;https://resumenya.com/icon-512.png&quot;,&quot;sizes&quot;:&quot;512x512&quot;,&quot;type&quot;:&quot;image/png&quot;}]}">
 <link rel="canonical" href="https://resumenya.com/">
 <link rel="alternate" type="application/xml" href="https://resumenya.com/sitemap.xml">
 
@@ -840,8 +839,6 @@ nav {
   flex: 1;
   min-width: 200px;
   max-width: 420px;
-  display: flex;
-  align-items: center;
 }
 .search-wrap svg {
   position: absolute;
@@ -850,15 +847,13 @@ nav {
   transform: translateY(-50%);
   opacity: 0.3;
   pointer-events: none;
-  z-index: 1;
 }
 .search-input {
-  flex: 1;
   width: 100%;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--r2);
-  padding: 0.65rem 5.5rem 0.65rem 2.6rem;
+  padding: 0.65rem var(--s2) 0.65rem 2.6rem;
   font-size: 0.88rem;
   color: var(--ink);
   outline: none;
@@ -868,38 +863,6 @@ nav {
 .search-input:focus {
   border-color: var(--accent);
   box-shadow: 0 0 0 3px rgba(200,72,26,0.1);
-}
-/* Spotlight hint floats inside the input on the right */
-.spotlight-hint {
-  position: absolute;
-  right: var(--s2);
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  color: var(--muted);
-  cursor: pointer;
-  padding: 0.18rem 0.45rem;
-  border: 1px solid var(--border);
-  border-radius: var(--r1);
-  background: var(--card);
-  transition: all 0.15s;
-  white-space: nowrap;
-  pointer-events: all;
-}
-.spotlight-hint:hover { border-color: var(--accent); color: var(--accent); }
-.spotlight-hint kbd {
-  background: var(--surface);
-  border: 1px solid var(--border-md);
-  border-radius: 3px;
-  padding: 0.05rem 0.35rem;
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  color: var(--sub);
 }
 
 .filtros {
@@ -1001,17 +964,16 @@ nav {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: var(--s3);
-  padding-bottom: var(--s2);
 }
 
 .book-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--r3);
-  padding: var(--s3) var(--s3) calc(var(--s3) + 22px) calc(var(--s3) + 14px);
+  padding: var(--s3) var(--s3) var(--s3) calc(var(--s3) + 14px);
   cursor: pointer;
   position: relative;
-  overflow: visible;
+  overflow: hidden;
   transition: transform 0.3s cubic-bezier(.4,0,.2,1),
               box-shadow 0.3s ease,
               border-color 0.25s ease,
@@ -1031,7 +993,6 @@ nav {
   opacity: 0;
   transition: opacity 0.28s;
   border-radius: var(--r3) 0 0 var(--r3);
-  pointer-events: none;
 }
 .book-card:hover {
   transform: translateY(-3px);
@@ -1074,22 +1035,16 @@ nav {
 
 .amazon-card-badge {
   position: absolute;
-  bottom: var(--s2);
-  right: var(--s2);
+  bottom: var(--s2); right: var(--s2);
   background: rgba(255,153,0,0.12);
   color: #C98010;
   font-family: var(--font-mono);
   font-size: 0.52rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  padding: 0.22rem 0.6rem;
+  padding: 0.15rem 0.45rem;
   border-radius: var(--pill);
-  border: 1px solid rgba(255,153,0,0.25);
-  white-space: nowrap;
-  line-height: 1.4;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.25rem;
+  border: 1px solid rgba(255,153,0,0.18);
 }
 
 .card-genre {
@@ -4114,840 +4069,6 @@ footer {
 .btn-shareimg-cp  { background: var(--card); color: var(--sub); border: 1px solid var(--border); }
 .btn-shareimg-cp:hover  { border-color: var(--border-md); color: var(--ink); }
 
-/* ══════════════════════════════════════════════════════
-   LOGROS Y BADGES
-══════════════════════════════════════════════════════ */
-.badge-toast {
-  position: fixed;
-  bottom: var(--s5);
-  left: 50%;
-  transform: translateX(-50%) translateY(20px);
-  z-index: 2000;
-  background: linear-gradient(135deg, var(--surface), var(--card));
-  border: 1px solid var(--border-md);
-  border-radius: var(--r3);
-  padding: var(--s2) var(--s4);
-  display: flex;
-  align-items: center;
-  gap: var(--s2);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.5);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.4s, transform 0.4s cubic-bezier(.4,0,.2,1);
-  min-width: 280px;
-  max-width: 420px;
-}
-.badge-toast.visible {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-.badge-toast-icon {
-  font-size: 2rem;
-  flex-shrink: 0;
-  line-height: 1;
-}
-.badge-toast-body {}
-.badge-toast-label {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: 0.2rem;
-}
-.badge-toast-title {
-  font-family: var(--font-display);
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.15rem;
-}
-.badge-toast-desc {
-  font-size: 0.75rem;
-  color: var(--muted);
-  line-height: 1.5;
-}
-
-/* Logros en el panel de stats */
-.badges-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: var(--s2);
-  margin-top: var(--s2);
-}
-.badge-item {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r2);
-  padding: var(--s2) var(--s2);
-  text-align: center;
-  transition: border-color 0.2s;
-}
-.badge-item.earned {
-  border-color: rgba(200,72,26,0.3);
-  background: rgba(200,72,26,0.05);
-}
-.badge-item-icon { font-size: 1.6rem; line-height: 1; margin-bottom: 0.3rem; }
-.badge-item-name {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--ink);
-  margin-bottom: 0.15rem;
-  line-height: 1.3;
-}
-.badge-item-desc { font-size: 0.68rem; color: var(--muted); line-height: 1.4; }
-.badge-item:not(.earned) .badge-item-icon { filter: grayscale(1); opacity: 0.3; }
-.badge-item:not(.earned) .badge-item-name { color: var(--muted); }
-
-/* ══════════════════════════════════════════════════════
-   LECTURA DEL DÍA
-══════════════════════════════════════════════════════ */
-.daily-section {
-  padding: var(--s3) var(--page-pad);
-  border-bottom: 1px solid var(--border);
-  background: var(--surface);
-  display: none;
-}
-.daily-section.visible { display: block; }
-.daily-inner {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--s4);
-  flex-wrap: wrap;
-}
-.daily-left { flex: 1; min-width: 240px; }
-.daily-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: var(--s1);
-  display: flex;
-  align-items: center;
-  gap: var(--s1);
-}
-.daily-eyebrow::before {
-  content: '';
-  display: inline-block;
-  width: 16px; height: 1px;
-  background: var(--accent);
-}
-.daily-titulo {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.2rem;
-  cursor: pointer;
-  transition: color 0.2s;
-}
-.daily-titulo:hover { color: var(--accent); }
-.daily-autor {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 0.88rem;
-  color: var(--muted);
-  margin-bottom: var(--s2);
-}
-.daily-fragmento {
-  font-size: 0.86rem;
-  line-height: 1.8;
-  color: var(--sub);
-  max-width: 55ch;
-  margin-bottom: var(--s2);
-  border-left: 2px solid var(--border);
-  padding-left: var(--s2);
-}
-.daily-actions { display: flex; gap: var(--s1); flex-wrap: wrap; }
-.btn-daily-leer {
-  padding: 0.42rem var(--s3);
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: var(--r2);
-  font-size: 0.78rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.2s;
-  font-family: var(--font-body);
-}
-.btn-daily-leer:hover { background: #a83a14; }
-.daily-right {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--s1);
-  flex-shrink: 0;
-}
-.daily-day-num {
-  font-family: var(--font-display);
-  font-size: 3rem;
-  font-weight: 600;
-  line-height: 1;
-  color: var(--accent);
-  opacity: 0.35;
-}
-.daily-day-label {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.daily-streak {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  color: var(--accent-2);
-  background: rgba(181,131,26,0.1);
-  border: 1px solid rgba(181,131,26,0.25);
-  border-radius: var(--pill);
-  padding: 0.2rem 0.65rem;
-}
-
-/* ══════════════════════════════════════════════════════
-   SPOTLIGHT / CMD+K
-══════════════════════════════════════════════════════ */
-.spotlight-overlay {
-  position: fixed; inset: 0; z-index: 2000;
-  background: rgba(0,0,0,0.65);
-  backdrop-filter: blur(12px);
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding: clamp(60px, 10vh, 140px) var(--s4) var(--s4);
-  opacity: 0; pointer-events: none;
-  transition: opacity 0.2s;
-}
-.spotlight-overlay.open { opacity: 1; pointer-events: all; }
-
-.spotlight-panel {
-  background: var(--surface);
-  border: 1px solid var(--border-md);
-  border-radius: var(--r4);
-  width: 100%;
-  max-width: 640px;
-  max-height: 70vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 32px 96px rgba(0,0,0,0.6);
-  transform: scale(0.97) translateY(-8px);
-  transition: transform 0.22s cubic-bezier(.4,0,.2,1);
-  overflow: hidden;
-}
-.spotlight-overlay.open .spotlight-panel {
-  transform: scale(1) translateY(0);
-}
-
-.spotlight-input-row {
-  display: flex;
-  align-items: center;
-  gap: var(--s2);
-  padding: var(--s2) var(--s3);
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-.spotlight-search-icon {
-  font-size: 1rem;
-  color: var(--muted);
-  flex-shrink: 0;
-}
-.spotlight-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  outline: none;
-  font-size: 1.05rem;
-  color: var(--ink);
-  font-family: var(--font-body);
-  font-weight: 300;
-}
-.spotlight-input::placeholder { color: var(--muted); }
-.spotlight-kbd-close {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--muted);
-  background: var(--card);
-  border: 1px solid var(--border-md);
-  border-radius: 4px;
-  padding: 0.2rem 0.5rem;
-  flex-shrink: 0;
-}
-
-.spotlight-results {
-  overflow-y: auto;
-  flex: 1;
-  scrollbar-width: thin;
-  scrollbar-color: var(--border) transparent;
-}
-
-.spotlight-section-label {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--muted);
-  padding: 0.65rem var(--s3) 0.3rem;
-  position: sticky;
-  top: 0;
-  background: var(--surface);
-  backdrop-filter: blur(12px);
-}
-
-.spotlight-item {
-  display: flex;
-  align-items: center;
-  gap: var(--s2);
-  padding: 0.65rem var(--s3);
-  cursor: pointer;
-  transition: background 0.12s;
-  border-left: 2px solid transparent;
-}
-.spotlight-item:hover,
-.spotlight-item.sp-highlighted {
-  background: var(--card);
-  border-left-color: var(--accent);
-}
-.spotlight-item-icon {
-  font-size: 0.95rem;
-  flex-shrink: 0;
-  width: 24px;
-  text-align: center;
-}
-.spotlight-item-body { flex: 1; min-width: 0; }
-.spotlight-item-title {
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: var(--ink);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.spotlight-item-title mark {
-  background: rgba(200,72,26,0.2);
-  color: var(--accent);
-  border-radius: 2px;
-}
-.spotlight-item-sub {
-  font-size: 0.7rem;
-  color: var(--muted);
-  margin-top: 0.1rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.spotlight-item-right {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  color: var(--muted);
-  flex-shrink: 0;
-}
-.spotlight-empty {
-  padding: var(--s5) var(--s3);
-  text-align: center;
-  font-family: var(--font-display);
-  font-size: 0.95rem;
-  font-style: italic;
-  color: var(--muted);
-}
-.spotlight-footer {
-  padding: 0.5rem var(--s3);
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: var(--s3);
-  flex-shrink: 0;
-  background: var(--card);
-}
-.spotlight-footer-hint {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  color: var(--muted);
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-}
-.spotlight-footer-hint kbd {
-  background: var(--surface);
-  border: 1px solid var(--border-md);
-  border-radius: 3px;
-  padding: 0.08rem 0.38rem;
-  font-family: var(--font-mono);
-  font-size: 0.55rem;
-  color: var(--sub);
-}
-
-/* ══════════════════════════════════════════════════════
-   LISTA DE LECTURA
-══════════════════════════════════════════════════════ */
-.readlist-overlay {
-  position: fixed; inset: 0; z-index: 1000;
-  background: rgba(0,0,0,0.75);
-  backdrop-filter: blur(10px);
-  display: flex; align-items: center; justify-content: center;
-  padding: clamp(var(--s2), 3vw, var(--s5));
-  opacity: 0; pointer-events: none; transition: opacity 0.28s;
-}
-.readlist-overlay.open { opacity: 1; pointer-events: all; }
-.readlist-panel {
-  background: var(--surface);
-  border: 1px solid var(--border-md);
-  border-radius: var(--r4);
-  max-width: 560px; width: 100%;
-  max-height: 88vh;
-  display: flex; flex-direction: column;
-  box-shadow: 0 32px 96px rgba(0,0,0,0.6);
-  transform: translateY(18px);
-  transition: transform 0.32s cubic-bezier(.4,0,.2,1);
-  overflow: hidden;
-}
-.readlist-overlay.open .readlist-panel { transform: translateY(0); }
-.readlist-header {
-  display: flex; align-items: center; justify-content: space-between;
-  padding: var(--s3) var(--s4);
-  border-bottom: 1px solid var(--border);
-  flex-shrink: 0;
-}
-.readlist-header h2 {
-  font-family: var(--font-display);
-  font-size: 1.3rem; font-weight: 600;
-}
-.readlist-count {
-  font-family: var(--font-mono);
-  font-size: 0.62rem; color: var(--muted);
-  display: block; margin-top: 0.15rem;
-}
-.readlist-body {
-  overflow-y: auto; flex: 1;
-  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
-}
-.readlist-empty {
-  padding: var(--s6) var(--s4); text-align: center;
-  font-family: var(--font-display); font-size: 1rem;
-  font-style: italic; color: var(--muted);
-}
-.readlist-item {
-  display: flex; align-items: center; gap: var(--s2);
-  padding: var(--s2) var(--s4);
-  border-bottom: 1px solid var(--border);
-  transition: background 0.15s;
-  cursor: grab;
-}
-.readlist-item:active { cursor: grabbing; }
-.readlist-item:hover { background: var(--card); }
-.readlist-item.dragging { opacity: 0.4; background: var(--card); }
-.readlist-item.drag-over { border-top: 2px solid var(--accent); }
-.readlist-drag-handle {
-  color: var(--muted); font-size: 0.8rem; cursor: grab; flex-shrink: 0;
-  padding: 0 0.25rem;
-}
-.readlist-item-info { flex: 1; min-width: 0; }
-.readlist-item-titulo {
-  font-size: 0.9rem; font-weight: 500; color: var(--ink);
-  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-  cursor: pointer;
-}
-.readlist-item-titulo:hover { color: var(--accent); }
-.readlist-item-autor {
-  font-size: 0.72rem; color: var(--muted);
-  font-style: italic; margin-top: 0.1rem;
-}
-.readlist-item-cat {
-  font-family: var(--font-mono); font-size: 0.56rem;
-  letter-spacing: 0.08em; text-transform: uppercase;
-  padding: 0.12rem 0.5rem; border-radius: var(--pill);
-  flex-shrink: 0;
-}
-.readlist-item-actions { display: flex; gap: 0.25rem; flex-shrink: 0; }
-.readlist-action-btn {
-  background: none; border: none; cursor: pointer;
-  font-size: 0.75rem; color: var(--muted);
-  padding: 0.2rem 0.35rem; border-radius: var(--r1);
-  transition: all 0.15s;
-}
-.readlist-action-btn:hover { background: var(--card); color: var(--sub); }
-.readlist-action-btn.del:hover { color: var(--accent); }
-.readlist-footer {
-  padding: var(--s2) var(--s4);
-  border-top: 1px solid var(--border);
-  display: flex; gap: var(--s1); flex-wrap: wrap;
-  background: var(--card); flex-shrink: 0;
-}
-.btn-readlist-clear {
-  font-family: var(--font-mono); font-size: 0.62rem;
-  color: var(--muted); background: none; border: none;
-  cursor: pointer; padding: 0; transition: color 0.2s; letter-spacing: 0.06em;
-}
-.btn-readlist-clear:hover { color: var(--accent); }
-.btn-readlist-maratonear {
-  margin-left: auto;
-  padding: 0.35rem var(--s2);
-  background: var(--accent); color: #fff;
-  border: none; border-radius: var(--r2);
-  font-size: 0.72rem; font-weight: 500; cursor: pointer;
-  transition: background 0.18s; font-family: var(--font-body);
-}
-.btn-readlist-maratonear:hover { background: #a83a14; }
-
-/* Indicador en card si está en la lista */
-.readlist-badge {
-  position: absolute; top: var(--s1); left: var(--s1);
-  background: var(--accent-2); color: var(--bg);
-  border-radius: var(--pill); font-size: 0.55rem;
-  font-family: var(--font-mono); padding: 0.1rem 0.5rem;
-  letter-spacing: 0.06em; text-transform: uppercase;
-  pointer-events: none;
-}
-
-/* ══════════════════════════════════════════════════════
-   MODO IMPRESIÓN
-══════════════════════════════════════════════════════ */
-@media print {
-  body > *:not(#print-area) { display: none !important; }
-  #print-area {
-    display: block !important;
-    font-family: Georgia, serif;
-    font-size: 11pt;
-    line-height: 1.8;
-    color: #000;
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0;
-  }
-  #print-area h1 {
-    font-size: 22pt; font-weight: bold;
-    border-bottom: 2px solid #000; padding-bottom: 6pt;
-    margin-bottom: 4pt;
-  }
-  #print-area .print-meta {
-    font-size: 9pt; color: #555; margin-bottom: 16pt;
-    font-family: monospace;
-  }
-  #print-area h2 {
-    font-size: 12pt; font-weight: bold; margin-top: 18pt;
-    text-transform: uppercase; letter-spacing: 0.08em;
-  }
-  #print-area blockquote {
-    border-left: 3px solid #000; margin: 12pt 0;
-    padding-left: 12pt; font-style: italic;
-  }
-  #print-area ul { margin: 6pt 0 6pt 18pt; }
-  #print-area li { margin-bottom: 4pt; }
-  #print-area .print-footer {
-    margin-top: 24pt; border-top: 1px solid #ccc;
-    padding-top: 6pt; font-size: 8pt; color: #999;
-    font-family: monospace;
-  }
-  @page { margin: 2.5cm; }
-}
-#print-area { display: none; }
-
-/* ══════════════════════════════════════════════════════
-   LECTOR POR SECCIONES (PAGINADO)
-══════════════════════════════════════════════════════ */
-.modal.section-mode .modal-full-content { display: none; }
-.modal.section-mode .section-reader     { display: flex; }
-
-.section-reader {
-  display: none;
-  flex-direction: column;
-  min-height: 60vh;
-}
-
-.sr-progress-bar {
-  display: flex;
-  gap: 3px;
-  margin-bottom: var(--s3);
-  flex-shrink: 0;
-}
-.sr-progress-pip {
-  flex: 1;
-  height: 3px;
-  background: var(--border);
-  border-radius: 2px;
-  transition: background 0.3s;
-}
-.sr-progress-pip.done    { background: var(--accent); }
-.sr-progress-pip.current { background: var(--accent-2); }
-
-.sr-section-label {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--accent);
-  margin-bottom: var(--s1);
-  flex-shrink: 0;
-}
-.sr-section-title {
-  font-family: var(--font-display);
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: var(--s2);
-  flex-shrink: 0;
-}
-.sr-content {
-  font-size: 0.92rem;
-  line-height: 1.85;
-  color: var(--sub);
-  flex: 1;
-  animation: srFadeIn 0.35s ease both;
-}
-.sr-content p  { margin-bottom: var(--s2); }
-.sr-content ul { margin-left: var(--s3); margin-bottom: var(--s2); }
-.sr-content li { margin-bottom: 0.4rem; }
-.sr-content blockquote {
-  border-left: 2px solid var(--accent-2);
-  padding: var(--s2) var(--s2);
-  background: rgba(181,131,26,0.05);
-  border-radius: 0 var(--r2) var(--r2) 0;
-  font-style: italic;
-  font-family: var(--font-display);
-  font-size: 1rem;
-  margin-bottom: var(--s2);
-}
-@keyframes srFadeIn {
-  from { opacity: 0; transform: translateX(14px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-.sr-nav {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--s2);
-  margin-top: var(--s4);
-  flex-shrink: 0;
-}
-.sr-nav-btn {
-  padding: 0.5rem var(--s3);
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r2);
-  font-size: 0.8rem;
-  font-family: var(--font-body);
-  color: var(--sub);
-  cursor: pointer;
-  transition: all 0.18s;
-}
-.sr-nav-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--ink); }
-.sr-nav-btn:disabled { opacity: 0.3; cursor: default; }
-.sr-nav-btn.primary { background: var(--accent); color: #fff; border-color: var(--accent); }
-.sr-nav-btn.primary:hover { background: #a83a14; }
-.sr-counter {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--muted);
-}
-
-/* Toggle mode button */
-.btn-section-mode {
-  background: transparent;
-  border: 1px solid var(--border);
-  border-radius: var(--r2);
-  padding: 0.28rem 0.65rem;
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.18s;
-  flex-shrink: 0;
-}
-.btn-section-mode:hover  { border-color: var(--accent); color: var(--accent); }
-.btn-section-mode.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-/* ══════════════════════════════════════════════════════
-   PANEL DE TIPOGRAFÍA Y APARIENCIA
-══════════════════════════════════════════════════════ */
-.typo-panel {
-  position: fixed;
-  bottom: var(--s5);
-  right: var(--s4);
-  z-index: 900;
-  background: var(--surface);
-  border: 1px solid var(--border-md);
-  border-radius: var(--r3);
-  padding: var(--s3);
-  width: 260px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.4);
-  display: none;
-  flex-direction: column;
-  gap: var(--s2);
-  animation: fadeUp 0.25s ease both;
-}
-.typo-panel.open { display: flex; }
-
-.typo-panel-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--s1);
-}
-.typo-panel-title {
-  font-family: var(--font-mono);
-  font-size: 0.6rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-.typo-panel-close {
-  background: none; border: none; cursor: pointer;
-  font-size: 0.72rem; color: var(--muted); padding: 0;
-  transition: color 0.15s;
-}
-.typo-panel-close:hover { color: var(--ink); }
-
-.typo-row {
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-}
-.typo-row-label {
-  font-family: var(--font-mono);
-  font-size: 0.58rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
-  display: flex;
-  justify-content: space-between;
-}
-.typo-row-val { color: var(--sub); }
-
-.typo-slider {
-  -webkit-appearance: none; appearance: none;
-  width: 100%; height: 3px;
-  background: var(--border-md);
-  border-radius: 2px; outline: none; cursor: pointer;
-}
-.typo-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 14px; height: 14px;
-  border-radius: 50%;
-  background: var(--accent);
-  border: 2px solid var(--surface);
-  box-shadow: 0 2px 6px rgba(200,72,26,0.35);
-  transition: transform 0.15s;
-}
-.typo-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
-
-.typo-btn-row {
-  display: flex; gap: var(--s1);
-}
-.typo-btn {
-  flex: 1;
-  padding: 0.35rem 0;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: var(--r2);
-  font-size: 0.72rem;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.15s;
-  font-family: var(--font-body);
-  text-align: center;
-}
-.typo-btn:hover  { border-color: var(--border-md); color: var(--sub); }
-.typo-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
-
-.typo-reset {
-  font-family: var(--font-mono); font-size: 0.6rem;
-  color: var(--muted); background: none; border: none;
-  cursor: pointer; padding: 0; text-align: center;
-  width: 100%; transition: color 0.15s;
-  letter-spacing: 0.06em;
-}
-.typo-reset:hover { color: var(--accent); }
-
-/* Floating typo trigger button */
-.btn-typo-trigger {
-  position: fixed;
-  bottom: var(--s5);
-  right: var(--s4);
-  z-index: 899;
-  width: 40px; height: 40px;
-  background: var(--surface);
-  border: 1px solid var(--border-md);
-  border-radius: 50%;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-  cursor: pointer;
-  font-size: 1rem;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s;
-}
-.btn-typo-trigger:hover { background: var(--accent); border-color: var(--accent); }
-.btn-typo-trigger.visible { display: flex; }
-
-/* ══════════════════════════════════════════════════════
-   PWA INSTALL PROMPT
-══════════════════════════════════════════════════════ */
-.pwa-banner {
-  position: fixed;
-  bottom: var(--s4);
-  left: 50%;
-  transform: translateX(-50%) translateY(100px);
-  z-index: 1500;
-  background: var(--surface);
-  border: 1px solid var(--border-md);
-  border-radius: var(--r3);
-  padding: var(--s2) var(--s3);
-  display: flex;
-  align-items: center;
-  gap: var(--s2);
-  box-shadow: 0 16px 48px rgba(0,0,0,0.45);
-  transition: transform 0.45s cubic-bezier(.4,0,.2,1);
-  max-width: 380px;
-  width: calc(100vw - var(--s5));
-}
-.pwa-banner.visible { transform: translateX(-50%) translateY(0); }
-.pwa-banner-icon { font-size: 1.5rem; flex-shrink: 0; }
-.pwa-banner-body { flex: 1; min-width: 0; }
-.pwa-banner-title {
-  font-family: var(--font-display);
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--ink);
-  margin-bottom: 0.1rem;
-}
-.pwa-banner-desc {
-  font-size: 0.7rem;
-  color: var(--muted);
-  line-height: 1.4;
-}
-.pwa-banner-actions { display: flex; gap: var(--s1); flex-shrink: 0; }
-.btn-pwa-install {
-  padding: 0.38rem 0.85rem;
-  background: var(--accent);
-  color: #fff;
-  border: none;
-  border-radius: var(--r2);
-  font-size: 0.72rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background 0.18s;
-  white-space: nowrap;
-  font-family: var(--font-body);
-}
-.btn-pwa-install:hover { background: #a83a14; }
-.btn-pwa-dismiss {
-  padding: 0.38rem 0.5rem;
-  background: transparent;
-  border: none;
-  font-size: 0.8rem;
-  color: var(--muted);
-  cursor: pointer;
-  transition: color 0.15s;
-}
-.btn-pwa-dismiss:hover { color: var(--ink); }
-
 /* ═══════════════════════════════════════════════════════
    ANIMATIONS
 ═══════════════════════════════════════════════════════ */
@@ -5016,17 +4137,16 @@ footer {
 <header>
   <a href="#" class="logo">LE<span>E</span>R</a>
   <nav>
-    <button class="nav-link" onclick="scrollToBooks()" data-i18n="navBiblioteca">Biblioteca</button>
-    <button class="btn-sorpresa" onclick="sorprendeme()" data-i18n="navSorpresa">✦ Sorpréndeme</button>
-    <button class="nav-link" onclick="abrirStats()" data-i18n="navStats">Mis stats</button>
-    <button class="nav-link" onclick="abrirHistory()" data-i18n="navHistory">📅 Historial</button>
-    <button class="nav-link" onclick="abrirQuotes()" data-i18n="navCitas">💛 Citas</button>
-    <button class="nav-link" onclick="abrirNoteSearch()" data-i18n="navNotas">🔍 Mis notas</button>
-    <button class="nav-link" onclick="abrirReadlist()" data-i18n="navLista">📚 Lista</button>
-    <button class="nav-link" onclick="iniciarMaraton()" data-i18n="navMaraton">🏃 Maratón</button>
-    <button class="nav-link" onclick="abrirExport()" data-i18n="navExportar">📥 Exportar</button>
-    <button class="nav-link" onclick="iniciarCompare()" data-i18n="navComparar">⚖ Comparar</button>
-    <button class="nav-link" onclick="toggleIndice()" data-i18n="navIndice">Índice</button>
+    <button class="nav-link" onclick="scrollToBooks()">Biblioteca</button>
+    <button class="btn-sorpresa" onclick="sorprendeme()">✦ Sorpréndeme</button>
+    <button class="nav-link" onclick="abrirStats()">Mis stats</button>
+    <button class="nav-link" onclick="abrirHistory()">📅 Historial</button>
+    <button class="nav-link" onclick="abrirQuotes()">💛 Citas</button>
+    <button class="nav-link" onclick="abrirNoteSearch()">🔍 Mis notas</button>
+    <button class="nav-link" onclick="iniciarMaraton()">🏃 Maratón</button>
+    <button class="nav-link" onclick="abrirExport()">📥 Exportar</button>
+    <button class="nav-link" onclick="iniciarCompare()">⚖ Comparar</button>
+    <button class="nav-link" onclick="toggleIndice()">Índice</button>
     <button class="btn-darkmode" id="btn-dark" onclick="toggleDark()" title="Modo oscuro">🌙</button>
     <button class="btn-lang" id="btn-lang" onclick="toggleLang()" title="Switch language">EN</button>
   </nav>
@@ -5035,9 +4155,9 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow" data-i18n="heroEyebrow">Resúmenes de libros</div>
+    <div class="hero-eyebrow">Resúmenes de libros</div>
     <h1>Las ideas<br>que <em>cambian</em><br>tu mundo.</h1>
-    <p class="hero-desc" data-i18n="heroDesc">Resúmenes profundos de los libros más influyentes. Lee menos, comprende más. Cada resumen destila lo esencial.</p>
+    <p class="hero-desc">Resúmenes profundos de los libros más influyentes. Lee menos, comprende más. Cada resumen destila lo esencial.</p>
     <div class="stats-row">
       <div class="stat-item">
         <div class="stat-num" id="total-stat">51</div>
@@ -5071,12 +4191,12 @@ footer {
 <!-- LIBRO DEL MES -->
 <section class="libro-mes-section" id="libro-mes-section">
   <div class="libro-mes-left">
-    <div class="libro-mes-badge" data-i18n="libroMesBadge">✦ Libro del mes</div>
+    <div class="libro-mes-badge">✦ Libro del mes</div>
     <div class="libro-mes-titulo" id="lm-titulo">—</div>
     <div class="libro-mes-autor" id="lm-autor">—</div>
     <p class="libro-mes-desc" id="lm-desc">—</p>
     <div class="libro-mes-actions">
-      <button class="btn-mes-leer" id="lm-btn-leer" onclick="abrirLibroMes()" data-i18n="libroMesLeer">Leer resumen →</button>
+      <button class="btn-mes-leer" id="lm-btn-leer" onclick="abrirLibroMes()">Leer resumen →</button>
       <a class="btn-mes-amazon" id="lm-btn-amazon" href="#" target="_blank" rel="noopener sponsored" style="display:none">
         🛒 Comprar en Amazon
       </a>
@@ -5111,19 +4231,16 @@ footer {
 <!-- RECOMENDACIONES PERSONALIZADAS -->
 <section class="recomendaciones-section" id="recomendaciones-section">
   <div class="recomendaciones-header">
-    <span class="recomendaciones-title" data-i18n="recTitle">Para vos</span>
+    <span class="recomendaciones-title">Para vos</span>
     <span class="recomendaciones-sub" id="rec-sub">Basado en tus lecturas</span>
   </div>
   <div class="recomendaciones-grid" id="recomendaciones-grid"></div>
 </section>
 
-<!-- LECTURA DEL DÍA PLACEHOLDER (rendered by JS) -->
-<div id="daily-section-slot"></div>
-
 <!-- HEATMAP DE ACTIVIDAD -->
 <section class="heatmap-section" id="heatmap-section">
   <div class="heatmap-header">
-    <span class="heatmap-title" data-i18n="heatmapTitle">Actividad lectora</span>
+    <span class="heatmap-title">Actividad lectora</span>
     <div class="heatmap-year-nav">
       <button class="heatmap-year-btn" onclick="heatmapYear(-1)">←</button>
       <span class="heatmap-year-label" id="heatmap-year-label">2025</span>
@@ -5136,13 +4253,13 @@ footer {
   <div class="heatmap-footer">
     <div class="heatmap-stats" id="heatmap-stats"></div>
     <div class="heatmap-legend">
-      <span data-i18n="heatmapMenos">Menos</span>
+      Menos
       <div class="heatmap-legend-box" style="background:var(--card);border:1px solid var(--border)"></div>
       <div class="heatmap-legend-box" style="background:rgba(200,72,26,0.25)"></div>
       <div class="heatmap-legend-box" style="background:rgba(200,72,26,0.5)"></div>
       <div class="heatmap-legend-box" style="background:rgba(200,72,26,0.75)"></div>
       <div class="heatmap-legend-box" style="background:var(--accent)"></div>
-      <span data-i18n="heatmapMas">Más</span>
+      Más
     </div>
   </div>
 </section>
@@ -5152,14 +4269,14 @@ footer {
 <section class="frase-dia" id="frase-dia-section">
   <div class="frase-dia-icono">"</div>
   <div class="frase-dia-body">
-    <div class="frase-dia-tag" data-i18n="fraseDiaTag">✦ Frase del día</div>
+    <div class="frase-dia-tag">✦ Frase del día</div>
     <div class="frase-dia-texto" id="frase-dia-texto"></div>
     <button class="frase-dia-origen" id="frase-dia-origen" onclick="abrirFraseDia()">
       <span id="frase-dia-libro"></span> →
     </button>
   </div>
   <div class="frase-dia-copy">
-    <button class="btn-copy-frase" id="btn-copy-frase" onclick="copiarFraseDia()" data-i18n="copiarFrase">Copiar frase</button>
+    <button class="btn-copy-frase" id="btn-copy-frase" onclick="copiarFraseDia()">Copiar frase</button>
   </div>
 </section>
 
@@ -5184,25 +4301,25 @@ footer {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
-    <input class="search-input" type="text" placeholder="Buscar título, autor, tema..." data-i18n-placeholder="searchPlaceholder" id="buscador"
+    <input class="search-input" type="text" placeholder="Buscar título, autor, tema..." id="buscador"
       oninput="onSearchInput()" onkeydown="onSearchKey(event)" autocomplete="off">
     <div class="search-suggestions" id="search-suggestions"></div>
   </div>
   <div class="filtros">
-    <button class="filtro-btn active" onclick="setFiltro(this, 'todos')" data-i18n="filtroTodos">Todos</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'filosofia')" data-i18n="filtroFilosofia">Filosofía</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'negocios')" data-i18n="filtroNegocios">Negocios</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'psicologia')" data-i18n="filtroPsicologia">Psicología</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'ciencia')" data-i18n="filtroCiencia">Ciencia</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'historia')" data-i18n="filtroHistoria">Historia</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'autoayuda')" data-i18n="filtroAutoayuda">Autoayuda</button>
+    <button class="filtro-btn active" onclick="setFiltro(this, 'todos')">Todos</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'filosofia')">Filosofía</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'negocios')">Negocios</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'psicologia')">Psicología</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'ciencia')">Ciencia</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'historia')">Historia</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'autoayuda')">Autoayuda</button>
     <button class="filtro-btn fav-btn" id="btn-fav-filtro" onclick="setFiltro(this, 'favoritos')">⭐ Favoritos</button>
   </div>
 </section>
 
 <!-- BARRA MARATÓN -->
 <div class="marathon-bar" id="marathon-bar">
-  <span class="marathon-bar-label" data-i18n="marathonLabel">🏃 Maratón</span>
+  <span class="marathon-bar-label">🏃 Maratón</span>
   <div class="marathon-progress">
     <div class="marathon-track"><div class="marathon-fill" id="marathon-fill"></div></div>
     <span class="marathon-count" id="marathon-count">0 / 0</span>
@@ -5217,7 +4334,7 @@ footer {
 <!-- METAS DE LECTURA -->
 <section class="goals-section" id="goals-section">
   <div class="goals-header">
-    <span class="goals-title" data-i18n="goalsTitle">🎯 Mis metas de lectura</span>
+    <span class="goals-title">🎯 Mis metas de lectura</span>
     <button class="goals-edit-btn" onclick="abrirGoalsModal()">Editar metas ✏️</button>
   </div>
   <div class="goals-grid" id="goals-grid"></div>
@@ -5225,7 +4342,7 @@ footer {
 
 <!-- FILTRO DE TIEMPO -->
 <section class="time-filter-wrap" id="time-filter-wrap">
-  <span class="time-filter-label" data-i18n="timeLabel">⏱ Tiempo máximo</span>
+  <span class="time-filter-label">⏱ Tiempo máximo</span>
   <div class="time-filter-slider-wrap">
     <input class="time-slider" id="time-slider" type="range" min="1" max="20" value="20" step="1" oninput="onTimeSlider()">
     <span class="time-filter-val" id="time-filter-val">Todos</span>
@@ -5236,7 +4353,7 @@ footer {
 <!-- TAG CLOUD -->
 <section class="tag-cloud-section" id="tag-cloud-section">
   <div class="tag-cloud-header">
-    <span class="tag-cloud-title" data-i18n="tagsTitle">🏷 Explorar por tema</span>
+    <span class="tag-cloud-title">🏷 Explorar por tema</span>
     <button class="tag-cloud-clear" id="tag-cloud-clear" onclick="limpiarTag()">✕ Limpiar filtro</button>
   </div>
   <div class="tag-cloud" id="tag-cloud"></div>
@@ -5245,7 +4362,7 @@ footer {
 <!-- ÚLTIMOS VISITADOS -->
 <section class="recents-section" id="recents-section" style="display:none">
   <div class="recents-header">
-    <span class="recents-title" data-i18n="recentsTitle">⏱ Últimos visitados</span>
+    <span class="recents-title">⏱ Últimos visitados</span>
     <button class="recents-clear" onclick="limpiarRecientes()">Borrar historial</button>
   </div>
   <div class="recents-list" id="recents-list"></div>
@@ -5270,7 +4387,7 @@ footer {
 
   <!-- BANNER DE CATEGORÍA -->
   <div class="cat-page-banner" id="cat-page-banner">
-    <button class="cat-back-btn" onclick="volverTodas()" data-i18n="catBack">← Todas las categorías</button>
+    <button class="cat-back-btn" onclick="volverTodas()">← Todas las categorías</button>
     <div class="cat-page-eyebrow" id="cat-eyebrow">Categoría</div>
     <h2 class="cat-page-titulo" id="cat-titulo">—</h2>
     <p class="cat-page-desc"  id="cat-desc">—</p>
@@ -5278,12 +4395,12 @@ footer {
   </div>
 
   <div class="section-header">
-    <h2 class="section-title" data-i18n="libraryTitle">Biblioteca</h2>
+    <h2 class="section-title">Biblioteca</h2>
     <span class="count-label" id="count-label">36 resúmenes</span>
   </div>
   <div class="grid-controls">
     <div class="sort-wrap">
-      <span class="sort-label" data-i18n="sortLabel">Ordenar por</span>
+      <span class="sort-label">Ordenar por</span>
       <select class="sort-select" id="sort-select" onchange="filtrar()">
         <option value="default">Por defecto</option>
         <option value="rating-desc">Mayor rating</option>
@@ -5352,9 +4469,7 @@ footer {
         <li><button onclick="abrirStats()">📊 Mis estadísticas</button></li>
         <li><button onclick="iniciarMaraton()">🏃 Modo maratón</button></li>
         <li><button onclick="abrirGoalsModal()">🎯 Mis metas</button></li>
-        <li><button onclick="abrirReadlist()">📚 Lista de lectura</button></li>
         <li><button onclick="abrirExport()">📥 Exportar notas</button></li>
-        <li><button onclick="abrirSpotlight()">⌕ Búsqueda global</button></li>
         <li><button onclick="toggleIndice()">☰ Índice de libros</button></li>
       </ul>
     </div>
@@ -5509,124 +4624,6 @@ footer {
   </div>
 </div>
 
-<!-- SPOTLIGHT SEARCH (Cmd+K) -->
-<div class="spotlight-overlay" id="spotlight-overlay" onclick="cerrarSpotlight(event)">
-  <div class="spotlight-panel" id="spotlight-panel">
-    <div class="spotlight-input-row">
-      <span class="spotlight-search-icon">⌕</span>
-      <input class="spotlight-input" id="spotlight-input" type="text"
-        placeholder="Buscar libros, autores, temas, notas..." autocomplete="off"
-        oninput="onSpotlightInput()" onkeydown="onSpotlightKey(event)">
-      <span class="spotlight-kbd-close">Esc</span>
-    </div>
-    <div class="spotlight-results" id="spotlight-results"></div>
-    <div class="spotlight-footer">
-      <span class="spotlight-footer-hint"><kbd>↑↓</kbd> navegar</span>
-      <span class="spotlight-footer-hint"><kbd>↵</kbd> abrir</span>
-      <span class="spotlight-footer-hint"><kbd>Esc</kbd> cerrar</span>
-    </div>
-  </div>
-</div>
-
-<!-- LISTA DE LECTURA -->
-<div class="readlist-overlay" id="readlist-overlay" onclick="cerrarReadlist(event)">
-  <div class="readlist-panel">
-    <div class="readlist-header">
-      <div>
-        <h2>📚 Lista de lectura</h2>
-        <span class="readlist-count" id="readlist-count"></span>
-      </div>
-      <button class="modal-close" onclick="cerrarReadlist()">✕</button>
-    </div>
-    <div class="readlist-body" id="readlist-body"></div>
-  </div>
-</div>
-
-<!-- LECTURA DEL DÍA -->
-<div class="daily-section" id="daily-section">
-  <div class="daily-inner">
-    <div class="daily-left">
-      <div class="daily-eyebrow" id="daily-eyebrow">☀️ Lectura del día</div>
-      <div class="daily-titulo" id="daily-titulo" onclick="abrirLibroDiario()">—</div>
-      <div class="daily-autor"  id="daily-autor">—</div>
-      <div class="daily-fragmento" id="daily-fragmento">—</div>
-      <div class="daily-actions">
-        <button class="btn-daily-leer" onclick="abrirLibroDiario()" data-i18n="dailyReadBtn">Leer resumen →</button>
-        <button class="btn-daily-leer" style="background:var(--card);color:var(--sub);border:1px solid var(--border)" onclick="addToReadlist(libroDiario)" data-i18n="dailyAddList">+ Lista de lectura</button>
-      </div>
-    </div>
-    <div class="daily-right">
-      <div class="daily-day-num" id="daily-day-num">—</div>
-      <div class="daily-day-label" id="daily-day-label" data-i18n="dailyDayLabel">día del año</div>
-      <div class="daily-streak" id="daily-streak" style="display:none">🔥 <span id="daily-streak-num">0</span> días seguidos</div>
-    </div>
-  </div>
-</div>
-
-<!-- BADGE TOAST -->
-<div class="badge-toast" id="badge-toast">
-  <div class="badge-toast-icon" id="badge-toast-icon"></div>
-  <div class="badge-toast-body">
-    <div class="badge-toast-label">🏆 Nuevo logro</div>
-    <div class="badge-toast-title" id="badge-toast-title"></div>
-    <div class="badge-toast-desc"  id="badge-toast-desc"></div>
-  </div>
-</div>
-
-<!-- PANEL DE TIPOGRAFÍA -->
-<div class="typo-panel" id="typo-panel">
-  <div class="typo-panel-header">
-    <span class="typo-panel-title">Aa Apariencia</span>
-    <button class="typo-panel-close" onclick="cerrarTypoPanel()">✕</button>
-  </div>
-
-  <div class="typo-row">
-    <span class="typo-row-label">Tamaño de fuente <span class="typo-row-val" id="typo-size-val">100%</span></span>
-    <input class="typo-slider" id="typo-size" type="range" min="80" max="130" value="100" step="5"
-      oninput="aplicarTypo()">
-  </div>
-
-  <div class="typo-row">
-    <span class="typo-row-label">Espaciado de línea <span class="typo-row-val" id="typo-line-val">1.85</span></span>
-    <input class="typo-slider" id="typo-line" type="range" min="140" max="220" value="185" step="5"
-      oninput="aplicarTypo()">
-  </div>
-
-  <div class="typo-row">
-    <span class="typo-row-label">Ancho del texto</span>
-    <div class="typo-btn-row">
-      <button class="typo-btn active" id="typo-w-normal" onclick="setTypoWidth('normal')">Normal</button>
-      <button class="typo-btn"        id="typo-w-narrow" onclick="setTypoWidth('narrow')">Estrecho</button>
-      <button class="typo-btn"        id="typo-w-wide"   onclick="setTypoWidth('wide')">Ancho</button>
-    </div>
-  </div>
-
-  <div class="typo-row">
-    <span class="typo-row-label">Fuente de lectura</span>
-    <div class="typo-btn-row">
-      <button class="typo-btn active" id="typo-f-serif"  onclick="setTypoFont('serif')" style="font-family:var(--font-display)">Serif</button>
-      <button class="typo-btn"        id="typo-f-sans"   onclick="setTypoFont('sans')"  style="font-family:var(--font-body)">Sans</button>
-      <button class="typo-btn"        id="typo-f-mono"   onclick="setTypoFont('mono')"  style="font-family:var(--font-mono)">Mono</button>
-    </div>
-  </div>
-
-  <button class="typo-reset" onclick="resetTypo()">↺ Restablecer</button>
-</div>
-<button class="btn-typo-trigger" id="btn-typo-trigger" onclick="toggleTypoPanel()" title="Configurar tipografía">Aa</button>
-
-<!-- PWA INSTALL BANNER -->
-<div class="pwa-banner" id="pwa-banner">
-  <div class="pwa-banner-icon">📚</div>
-  <div class="pwa-banner-body">
-    <div class="pwa-banner-title" data-i18n="pwaInstall">Instalar LEER</div>
-    <div class="pwa-banner-desc" data-i18n="pwaDesc">Agrega la app a tu pantalla de inicio para leer sin conexión</div>
-  </div>
-  <div class="pwa-banner-actions">
-    <button class="btn-pwa-install"  id="btn-pwa-install" onclick="instalarPWA()" data-i18n="pwaBtn">Instalar</button>
-    <button class="btn-pwa-dismiss" onclick="descartarPWA()">✕</button>
-  </div>
-</div>
-
 <!-- PANEL ESTADÍSTICAS -->
 <div class="stats-overlay" id="stats-overlay" onclick="cerrarStatsOverlay(event)">
   <div class="stats-panel">
@@ -5677,8 +4674,6 @@ footer {
       </div>
       <div style="display:flex;align-items:center;gap:0.5rem;flex-shrink:0;">
         <span class="reading-time-badge" id="reading-time-badge">— min</span>
-        <button class="btn-focus" title="Agregar a lista de lectura" onclick="toggleReadlistLibro()">📚</button>
-        <button class="btn-focus" title="Imprimir / guardar PDF" onclick="imprimirResumen()">🖨</button>
         <button class="btn-focus" title="Fichas de repaso" onclick="abrirFlashcardsLibro()">🃏</button>
         <button class="btn-focus" title="Compartir como imagen" onclick="abrirShareImg()">🖼</button>
         <button class="btn-focus" id="btn-focus" onclick="toggleFocusMode()" title="Modo lectura">⛶</button>
@@ -5690,9 +4685,9 @@ footer {
       <div class="modal-tags" id="m-tags"></div>
 
       <div class="status-selector" id="m-status-selector">
-        <button class="status-btn" onclick="setStatus('pendiente')" id="sbtn-pendiente" data-i18n="modalStatusPendiente">📚 Pendiente</button>
-        <button class="status-btn" onclick="setStatus('leyendo')"   id="sbtn-leyendo" data-i18n="modalStatusLeyendo">📖 Leyendo</button>
-        <button class="status-btn" onclick="setStatus('leido')"     id="sbtn-leido" data-i18n="modalStatusLeido">✓ Leído</button>
+        <button class="status-btn" onclick="setStatus('pendiente')" id="sbtn-pendiente">📚 Pendiente</button>
+        <button class="status-btn" onclick="setStatus('leyendo')"   id="sbtn-leyendo">📖 Leyendo</button>
+        <button class="status-btn" onclick="setStatus('leido')"     id="sbtn-leido">✓ Leído</button>
       </div>
 
       <!-- AUDIO PLAYER -->
@@ -5748,27 +4743,6 @@ footer {
         <div class="toc-list" id="toc-list"></div>
       </div>
 
-      <!-- BOTÓN MODO SECCIONES -->
-      <div style="display:flex;align-items:center;justify-content:flex-end;margin-bottom:var(--s2)">
-        <button class="btn-section-mode" id="btn-section-mode" onclick="toggleSectionMode()">§ Leer por secciones</button>
-      </div>
-
-      <!-- LECTOR POR SECCIONES -->
-      <div class="section-reader" id="section-reader">
-        <div class="sr-progress-bar" id="sr-progress-bar"></div>
-        <div class="sr-section-label" id="sr-section-label"></div>
-        <div class="sr-section-title" id="sr-section-title"></div>
-        <div class="sr-content" id="sr-content"></div>
-        <div class="sr-nav">
-          <button class="sr-nav-btn" id="sr-prev" onclick="srNav(-1)" disabled>← Anterior</button>
-          <span class="sr-counter" id="sr-counter">1 / 9</span>
-          <button class="sr-nav-btn primary" id="sr-next" onclick="srNav(1)">Siguiente →</button>
-        </div>
-      </div>
-
-      <!-- CONTENIDO COMPLETO (oculto en modo secciones) -->
-      <div class="modal-full-content" id="modal-full-content">
-
       <div class="modal-section-title" id="toc-sec-sinopsis">¿De qué trata?</div>
       <p class="modal-text" id="m-sinopsis"></p>
 
@@ -5816,11 +4790,11 @@ footer {
         <div class="buy-section">
           <div class="buy-section-text">
             <strong>¿Te interesó este libro?</strong>
-            <span data-i18n-amazon-desc>Cómpralo en Amazon y apoya este proyecto de resúmenes.</span>
+            <span>Cómpralo en Amazon y apoya este proyecto de resúmenes.</span>
           </div>
           <a id="m-buy-link" href="#" target="_blank" rel="noopener sponsored" class="btn-comprar">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.59 13.18C17.38 16.38 14.32 18.59 10.71 18.59c-4.64 0-8.41-3.77-8.41-8.41 0-4.64 3.77-8.41 8.41-8.41 2.05 0 3.92.74 5.37 1.96l1.42-1.42C15.73 1.04 13.31 0 10.71 0 4.79 0 0 4.79 0 10.71S4.79 21.41 10.71 21.41c4.46 0 8.29-2.74 9.93-6.66l-2.05-1.57zM22 10h-2V8h-2v2h-2v2h2v2h2v-2h2v-2z"/></svg>
-            <span data-i18n="btnComprar">🛒 Comprar en Amazon</span>
+            Comprar en Amazon
           </a>
         </div>
       </div>
@@ -5836,8 +4810,6 @@ footer {
           <button class="btn-marathon-next" onclick="marathonNav(1)">Continuar →</button>
         </div>
       </div>
-
-      </div><!-- /modal-full-content -->
 
       <div class="notas-section">
         <div class="notas-label"><span>✏️</span> Mis notas personales</div>
@@ -5881,11 +4853,6 @@ footer {
   </div>
 </div>
 
-
-<!-- PRINT AREA (solo visible al imprimir) -->
-<div id="print-area"></div>
-
-<!-- LECTURA DEL DÍA (rendered by JS, inserted here) -->
 
 <script>
 let genreLabels = {
@@ -7572,7 +6539,6 @@ function setStatus(estado) {
   actualizarProgreso();
   renderRecomendaciones();
   renderGoals();
-  verificarLogros();
   if (estado === 'leido') {
     const now = new Date();
     const keyMes = `leidos_mes_${now.getFullYear()}_${now.getMonth()}`;
@@ -7674,7 +6640,7 @@ function renderGrid(lista) {
   const grid   = document.getElementById('grid');
   grid.innerHTML = '';
   document.getElementById('count-label').textContent =
-    sorted.length + ' ' + (langActivo === 'en' ? (sorted.length !== 1 ? 'summaries' : 'summary') : ('resumen' + (sorted.length !== 1 ? 'es' : '')));
+    sorted.length + ' resumen' + (sorted.length !== 1 ? 'es' : '');
 
   if (vistaActiva === 'list') grid.classList.add('list-view');
   else grid.classList.remove('list-view');
@@ -7849,21 +6815,6 @@ function abrirModal(libro) {
   if (typeof renderHeatmap === 'function') renderHeatmap(heatmapCurrentYear);
   // Actualizar botón de cita
   setTimeout(actualizarBtnCita, 50);
-  // Verificar logros (puede ser primer libro)
-  setTimeout(verificarLogros, 100);
-  // Actualizar estado botón de lista de lectura
-  setTimeout(actualizarBtnReadlist, 50);
-  // Mostrar botón tipografía
-  mostrarTypoTrigger(true);
-  applyTypoToDOM();
-  // Restaurar preferencia de modo secciones
-  if (localStorage.getItem('section_mode_pref') === '1' && !srActivo) {
-    srActivo = false; // reset so toggle works correctly
-    toggleSectionMode();
-  } else if (srActivo) {
-    srSecciones = buildSecciones(libro);
-    renderSrSection();
-  }
 
   // Inicializar tiempo restante
   const badge = document.getElementById('reading-time-badge');
@@ -7874,8 +6825,6 @@ function cerrarModal(id) {
   document.getElementById(id).classList.remove('open');
   document.body.style.overflow = '';
   if (id === 'modal-ver') {
-    mostrarTypoTrigger(false);
-    cerrarTypoPanel();
     Audio.detener();
     restaurarSEOGeneral();
     if (focusMode) {
@@ -7896,7 +6845,6 @@ document.addEventListener('keydown', e => {
     if (indiceAbierto) { indiceAbierto = false; document.getElementById('indice-overlay').classList.remove('open'); document.body.style.overflow = ''; }
     cerrarStats(); cerrarCompare(); cerrarHistory(); cerrarQuotes();
     cerrarNoteSearch(); cerrarFlashcards(); cerrarShareImg();
-    cerrarSpotlight(); cerrarReadlist();
     if (compareActivo) cancelarCompare();
   }
   if (modalAbierto && e.key === 'ArrowRight') navegarModal(1);
@@ -8010,7 +6958,6 @@ function toggleFav(e, titulo) {
   localStorage.setItem('fav_' + titulo, actual ? '0' : '1');
   filtrar();
   actualizarProgreso();
-  verificarLogros();
 }
 
 // --- NAVEGACIÓN MODAL ANTERIOR / SIGUIENTE ---
@@ -8177,9 +7124,6 @@ function renderStats() {
   } else {
     html += `<div class="empty-stat">Aún no tienes notas guardadas en ningún libro.</div>`;
   }
-
-  // Logros
-  html += renderLogros();
 
   document.getElementById('stats-body').innerHTML = html;
 }
@@ -9147,7 +8091,7 @@ function actualizarTiempoPendiente() {
   const tiempoStr = horas > 0
     ? `${horas}h ${mins > 0 ? mins + 'min' : ''}`
     : `${mins} min`;
-  el.innerHTML = `${langActivo === 'en' ? 'Estimated time to read all pending summaries' : 'Tiempo estimado para leer todos los resúmenes pendientes'}: <span>${tiempoStr}</span>`;
+  el.innerHTML = `Tiempo estimado para leer todos los resúmenes pendientes: <span>${tiempoStr}</span>`;
 }
 
 // --- SKELETON LOADING ---
@@ -9291,7 +8235,7 @@ function renderGoals() {
           <span class="goal-target">/ ${goals.mes} libros</span>
         </div>
         <div class="goal-track"><div class="goal-fill" style="width:${pct}%"></div></div>
-        <span class="goal-status ${done?'done':''}">${done ? t('goalsAchieved') : `${langActivo==='en' ? `${goals.mes - leidosMes} left` : `Faltan ${goals.mes - leidosMes} libros`}`}</span>
+        <span class="goal-status ${done?'done':''}">${done ? '✓ Meta alcanzada 🎉' : `Faltan ${goals.mes - leidosMes} libros`}</span>
       </div>`);
   }
 
@@ -9306,7 +8250,7 @@ function renderGoals() {
           <span class="goal-target">/ ${goals.anio} libros</span>
         </div>
         <div class="goal-track"><div class="goal-fill" style="width:${pct}%"></div></div>
-        <span class="goal-status ${done?'done':''}">${done ? t('goalsAchieved') : `${langActivo==='en' ? `${goals.anio - leidos} left` : `Faltan ${goals.anio - leidos} libros`}`}</span>
+        <span class="goal-status ${done?'done':''}">${done ? '✓ Meta alcanzada 🎉' : `Faltan ${goals.anio - leidos} libros`}</span>
       </div>`);
   }
 
@@ -9322,7 +8266,7 @@ function renderGoals() {
           <span class="goal-target">/ ${goals.minDia} min</span>
         </div>
         <div class="goal-track"><div class="goal-fill" style="width:${pct}%"></div></div>
-        <span class="goal-status ${done?'done':''}">${done ? t('goalsAchieved') : `${langActivo==='en' ? `${goals.minDia - minHoy} min left` : `Faltan ${goals.minDia - minHoy} min`}`}</span>
+        <span class="goal-status ${done?'done':''}">${done ? '✓ Meta alcanzada 🎉' : `Faltan ${goals.minDia - minHoy} min`}</span>
       </div>`);
   }
 
@@ -9497,7 +8441,7 @@ function abrirHistory() {
         </div>
       </div>`).join('');
   }
-  applyLang(); document.getElementById('history-overlay').classList.add('open');
+  document.getElementById('history-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
@@ -9671,7 +8615,7 @@ function renderRecomendaciones() {
   sub.textContent = `Basado en ${leidos.length} libro${leidos.length!==1?'s':''} que leíste`;
 
   if (!recs.length) {
-    grid.innerHTML = `<div class="rec-empty">${langActivo === 'en' ? 'You\'ve read everything! More summaries coming soon.' : '¡Leíste todo! Pronto agregaremos más resúmenes.'}</div>`;
+    grid.innerHTML = '<div class="rec-empty">¡Leíste todo! Pronto agregaremos más resúmenes.</div>';
     return;
   }
 
@@ -9817,10 +8761,10 @@ function activarCategoriaSEO(cat) {
   titulo.textContent  = info.nombre;
   desc.textContent    = info.desc;
   meta.innerHTML = `
-    <div class="cat-page-stat"><strong>${libCat.length}</strong> ${langActivo==='en'?'summaries':'resúmenes'}</div>
-    <div class="cat-page-stat"><strong>${leidos}</strong> ${langActivo==='en'?'read':'leídos'}</div>
-    <div class="cat-page-stat"><strong>~${minProm} min</strong> ${langActivo==='en'?'avg':'promedio'}</div>
-    <div class="cat-page-stat"><strong>${libCat.filter(l=>l.linkAfiliado).length}</strong> ${langActivo==='en'?'on Amazon':'en Amazon'}</div>
+    <div class="cat-page-stat"><strong>${libCat.length}</strong> resúmenes</div>
+    <div class="cat-page-stat"><strong>${leidos}</strong> leídos</div>
+    <div class="cat-page-stat"><strong>~${minProm} min</strong> promedio</div>
+    <div class="cat-page-stat"><strong>${libCat.filter(l=>l.linkAfiliado).length}</strong> en Amazon</div>
   `;
   banner.classList.add('visible');
 
@@ -9968,9 +8912,9 @@ function renderHeatmap(year) {
   // Stats
   const avgPerDay = totalDays > 0 ? (totalBooks / totalDays).toFixed(1) : 0;
   stats.innerHTML = `
-    <span class="heatmap-stat"><strong>${totalBooks}</strong> ${t('heatmapLibros')}</span>
-    <span class="heatmap-stat"><strong>${totalDays}</strong> ${t('heatmapDias')}</span>
-    <span class="heatmap-stat"><strong>${avgPerDay}</strong> ${t('heatmapAvg')}</span>
+    <span class="heatmap-stat"><strong>${totalBooks}</strong> libros abiertos</span>
+    <span class="heatmap-stat"><strong>${totalDays}</strong> días activos</span>
+    <span class="heatmap-stat"><strong>${avgPerDay}</strong> libros/día activo</span>
   `;
 }
 
@@ -10235,7 +9179,6 @@ const TRADUCCIONES = {
     navHistory: '📅 Historial',
     navCitas: '💛 Citas',
     navNotas: '🔍 Mis notas',
-    navLista: '📚 Lista',
     navMaraton: '🏃 Maratón',
     navExportar: '📥 Exportar',
     navComparar: '⚖ Comparar',
@@ -10381,23 +9324,6 @@ const TRADUCCIONES = {
     notas_searchPlaceholder: 'Buscar en tus notas...',
     emptyState: 'No se encontraron libros con ese filtro.',
     btnComprar: '🛒 Comprar en Amazon',
-    pwaInstall: 'Instalar LEER',
-    pwaDesc: 'Agrega la app a tu pantalla de inicio para leer sin conexión',
-    pwaBtn: 'Instalar',
-    dailyEyebrow: '☀️ Lectura del día',
-    dailyDayLabel: 'día del año',
-    dailyReadBtn: 'Leer resumen →',
-    dailyAddList: '+ Lista de lectura',
-    goalsMonthLabel: '📅 Meta mensual',
-    goalsYearLabel: '📆 Meta anual',
-    goalsDayLabel: '⏱ Meta diaria',
-    goalsAchieved: t('goalsAchieved'),
-    readlistEmpty: 'Tu lista de lectura está vacía.<br>Agrega libros desde el botón 📚 en cada resumen.',
-    readlistMaraton: '🏃 Maratonear lista',
-    readlistClear: 'Vaciar lista',
-    srSectionBtn: '§ Leer por secciones',
-    srFullBtn: '☰ Modo completo',
-    srCompleted: '✓ Completado',
   },
   en: {
     navBiblioteca: 'Library',
@@ -10406,7 +9332,6 @@ const TRADUCCIONES = {
     navHistory: '📅 History',
     navCitas: '💛 Quotes',
     navNotas: '🔍 My notes',
-    navLista: '📚 Reading list',
     navMaraton: '🏃 Marathon',
     navExportar: '📥 Export',
     navComparar: '⚖ Compare',
@@ -10535,23 +9460,6 @@ const TRADUCCIONES = {
     notas_searchPlaceholder: 'Search your notes...',
     emptyState: 'No books found for this filter.',
     btnComprar: '🛒 Buy on Amazon',
-    pwaInstall: 'Install LEER',
-    pwaDesc: 'Add the app to your home screen to read offline',
-    pwaBtn: 'Install',
-    dailyEyebrow: '☀️ Book of the day',
-    dailyDayLabel: 'day of the year',
-    dailyReadBtn: 'Read summary →',
-    dailyAddList: '+ Reading list',
-    goalsMonthLabel: '📅 Monthly goal',
-    goalsYearLabel: '📆 Yearly goal',
-    goalsDayLabel: '⏱ Daily goal',
-    goalsAchieved: '✓ Goal achieved 🎉',
-    readlistEmpty: "Your reading list is empty.<br>Add books using the 📚 button in each summary.",
-    readlistMaraton: '🏃 Marathon list',
-    readlistClear: 'Clear list',
-    srSectionBtn: '§ Read in sections',
-    srFullBtn: '☰ Full mode',
-    srCompleted: '✓ Completed',
   }
 };
 
@@ -10573,109 +9481,152 @@ function applyLang() {
     btn.title = langActivo === 'es' ? 'Switch to English' : 'Cambiar a Español';
   }
 
+  // Update <html lang>
   document.documentElement.lang = langActivo;
 
-  // ── 1. ATRIBUTOS data-i18n (textos estáticos) ──────────────────
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    const val = t(key);
-    if (val) el.textContent = val;
+  // Genre labels map (used by render functions)
+  genreLabels.filosofia = t('genreFilosofia');
+  genreLabels.negocios  = t('genreNegocios');
+  genreLabels.psicologia= t('genrePsicologia');
+  genreLabels.ciencia   = t('genreCiencia');
+  genreLabels.historia  = t('genreHistoria');
+  genreLabels.autoayuda = t('genreAutoayuda');
+
+  // Nav buttons
+  const navMap = [
+    ['nav-link:nth-of-type(1)', 'navBiblioteca'],
+  ];
+  document.querySelectorAll('.nav-link').forEach((btn, i) => {
+    const keys = ['navBiblioteca','navStats','navHistory','navCitas','navNotas','navMaraton','navExportar','navComparar','navIndice'];
+    if (keys[i]) btn.textContent = t(keys[i]);
   });
+  const sorpresaBtn = document.querySelector('.btn-sorpresa');
+  if (sorpresaBtn) sorpresaBtn.textContent = t('navSorpresa');
 
-  // ── 2. PLACEHOLDERS data-i18n-placeholder ──────────────────────
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    const val = t(key);
-    if (val) el.placeholder = val;
-  });
-
-  // ── 3. GÉNERO LABELS (actualizar antes de re-render) ──────────
-  genreLabels.filosofia  = t('genreFilosofia');
-  genreLabels.negocios   = t('genreNegocios');
-  genreLabels.psicologia = t('genrePsicologia');
-  genreLabels.ciencia    = t('genreCiencia');
-  genreLabels.historia   = t('genreHistoria');
-  genreLabels.autoayuda  = t('genreAutoayuda');
-
-  // ── 4. HERO H1 (innerHTML para el <em>) ───────────────────────
+  // Hero
+  const eyebrow = document.querySelector('.hero-eyebrow');
+  if (eyebrow) eyebrow.textContent = t('heroEyebrow');
   const heroH1 = document.querySelector('.hero-left h1');
   if (heroH1) heroH1.innerHTML = t('heroH1');
-
-  // ── 5. FEATURED CARD ─────────────────────────────────────────
+  const heroDesc = document.querySelector('.hero-desc');
+  if (heroDesc) heroDesc.textContent = t('heroDesc');
+  document.querySelectorAll('.stat-label').forEach((el, i) => {
+    const keys = ['heroLibros', 'heroCats', 'heroMin'];
+    if (keys[i]) el.textContent = t(keys[i]);
+  });
   const featTag = document.querySelector('.featured-tag');
   if (featTag) featTag.innerHTML = t('featuredTag') + '<span style="flex:1;height:1px;background:var(--border)"></span>';
   const featReadTime = document.querySelector('.read-time');
   if (featReadTime) featReadTime.textContent = t('featuredReadTime');
 
-  // ── 6. STAT LABELS EN HERO ───────────────────────────────────
-  const statLabels = document.querySelectorAll('.stat-label');
-  const slKeys = ['heroLibros', 'heroCats', 'heroMin'];
-  statLabels.forEach((el, i) => { if (slKeys[i]) el.textContent = t(slKeys[i]); });
-
-  // ── 7. LIBRO DEL MES ─────────────────────────────────────────
+  // Libro del mes
+  const lmBadge = document.querySelector('.libro-mes-badge');
+  if (lmBadge) lmBadge.textContent = t('libroMesBadge');
+  const lmLeer = document.getElementById('lm-btn-leer');
+  if (lmLeer) lmLeer.textContent = t('libroMesLeer');
   const lmAmazon = document.getElementById('lm-btn-amazon');
   if (lmAmazon) lmAmazon.textContent = t('libroMesAmazon');
+  const lmIdeas = document.querySelector('.lms-lbl:last-of-type');
   document.querySelectorAll('.lms-lbl').forEach((el, i) => {
-    const lmsKeys = [null, null, null, 'libroMesIdeas'];
-    if (lmsKeys[i]) el.textContent = t(lmsKeys[i]);
+    const keys = [null, null, null, 'libroMesIdeas'];
+    if (keys[i]) el.textContent = t(keys[i]);
   });
 
-  // ── 8. SORT SELECT OPTIONS ───────────────────────────────────
-  const sortSelect = document.getElementById('sort-select');
-  if (sortSelect) {
-    const sortKeys = ['sortDefault','sortRating','sortNew','sortOld','sortShort','sortAZ'];
-    Array.from(sortSelect.options).forEach((opt, i) => {
-      if (sortKeys[i]) opt.textContent = t(sortKeys[i]);
-    });
-  }
+  // Frase del día
+  const fraseDiaTag = document.querySelector('.frase-dia-tag');
+  if (fraseDiaTag) fraseDiaTag.textContent = t('fraseDiaTag');
+  const btnCopyFrase = document.getElementById('btn-copy-frase');
+  if (btnCopyFrase) btnCopyFrase.textContent = t('copiarFrase');
 
-  // ── 9. MARATHON CONTROLS ─────────────────────────────────────
+  // Search
+  const buscador = document.getElementById('buscador');
+  if (buscador) buscador.placeholder = t('searchPlaceholder');
+  const filterBtns = document.querySelectorAll('.filtro-btn');
+  const filterKeys = ['filtroTodos','filtroFilosofia','filtroNegocios','filtroPsicologia','filtroCiencia','filtroHistoria','filtroAutoayuda','filtroFavoritos'];
+  filterBtns.forEach((btn, i) => { if (filterKeys[i]) btn.textContent = t(filterKeys[i]); });
+
+  // Marathon bar
+  const mLabel = document.querySelector('.marathon-bar-label');
+  if (mLabel) mLabel.textContent = t('marathonLabel');
   const mPrev = document.getElementById('marathon-prev-btn');
-  const mNext = document.getElementById('marathon-next-btn');
-  const mExit = document.querySelector('.marathon-btn.stop');
   if (mPrev) mPrev.textContent = t('marathonPrev');
+  const mNext = document.getElementById('marathon-next-btn');
   if (mNext) mNext.textContent = t('marathonNext');
+  const mExit = document.querySelector('.marathon-btn.stop');
   if (mExit) mExit.textContent = t('marathonExit');
 
-  // ── 10. GOALS EDIT BUTTON ────────────────────────────────────
+  // Goals
+  const goalsTitle = document.querySelector('.goals-title');
+  if (goalsTitle) goalsTitle.textContent = t('goalsTitle');
   const goalsEdit = document.querySelector('.goals-edit-btn');
   if (goalsEdit) goalsEdit.textContent = t('goalsEdit');
 
-  // ── 11. TIME FILTER RESET ────────────────────────────────────
+  // Time filter
+  const timeLabel = document.querySelector('.time-filter-label');
+  if (timeLabel) timeLabel.textContent = t('timeLabel');
   const timeReset = document.getElementById('time-filter-reset');
   if (timeReset) timeReset.textContent = t('timeReset');
 
-  // ── 12. TAGS CLEAR ───────────────────────────────────────────
+  // Tags
+  const tagsTitle = document.querySelector('.tag-cloud-title');
+  if (tagsTitle) tagsTitle.textContent = t('tagsTitle');
   const tagsClear = document.getElementById('tag-cloud-clear');
   if (tagsClear) tagsClear.textContent = t('tagsClear');
 
-  // ── 13. RECENTS CLEAR ────────────────────────────────────────
+  // Recents
+  const recTitle = document.querySelector('.recents-title');
+  if (recTitle) recTitle.textContent = t('recentsTitle');
   const recClear = document.querySelector('.recents-clear');
   if (recClear) recClear.textContent = t('recentsClear');
 
-  // ── 14. CAT EYEBROW ──────────────────────────────────────────
-  const catEyebrow = document.getElementById('cat-eyebrow');
-  if (catEyebrow && catEyebrow.textContent === 'Categoría') catEyebrow.textContent = t('catEyebrow');
+  // Cat banner
+  const catBack = document.querySelector('.cat-back-btn');
+  if (catBack) catBack.textContent = t('catBack');
 
-  // ── 15. MODAL: secciones TOC ─────────────────────────────────
-  const secMap = {
-    'toc-sec-sinopsis':  'modalSec1',
-    'toc-sec-contexto':  'modalSec2',
-    'toc-sec-ideas':     'modalSec3',
-    'toc-sec-desarrollo':'modalSec4',
-    'toc-sec-lecciones': 'modalSec5',
-    'toc-sec-criticas':  'modalSec6',
-    'toc-sec-para':      'modalSec7',
-    'toc-sec-porque':    'modalSec8',
-  };
-  Object.entries(secMap).forEach(([id, key]) => {
+  // Library
+  const libTitle = document.querySelector('.section-title');
+  if (libTitle) libTitle.textContent = t('libraryTitle');
+  const sortLabel = document.querySelector('.sort-label');
+  if (sortLabel) sortLabel.textContent = t('sortLabel');
+  const sortSelect = document.getElementById('sort-select');
+  if (sortSelect) {
+    const opts = sortSelect.options;
+    const sortKeys = ['sortDefault','sortRating','sortNew','sortOld','sortShort','sortAZ'];
+    Array.from(opts).forEach((opt, i) => { if (sortKeys[i]) opt.textContent = t(sortKeys[i]); });
+  }
+
+  // Modal sections (static labels)
+  const secMap = [
+    ['toc-sec-sinopsis', 'modalSec1'],
+    ['toc-sec-contexto', 'modalSec2'],
+    ['toc-sec-ideas',    'modalSec3'],
+    ['toc-sec-desarrollo','modalSec4'],
+    ['toc-sec-lecciones','modalSec5'],
+    ['toc-sec-criticas', 'modalSec6'],
+    ['toc-sec-para',     'modalSec7'],
+    ['toc-sec-porque',   'modalSec8'],
+  ];
+  secMap.forEach(([id, key]) => {
     const el = document.getElementById(id);
     if (el) el.textContent = t(key);
   });
 
-  // ── 16. MODAL: audio, tldr, toc labels ───────────────────────
-  const audioLbl = document.querySelector('.audio-label');
-  if (audioLbl) audioLbl.textContent = t('modalAudioLabel');
+  // Modal status buttons
+  const sbtns = [
+    ['sbtn-pendiente', 'modalStatusPendiente'],
+    ['sbtn-leyendo',   'modalStatusLeyendo'],
+    ['sbtn-leido',     'modalStatusLeido'],
+  ];
+  sbtns.forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = t(key);
+  });
+
+  // Audio label
+  const audioLabel = document.querySelector('.audio-label');
+  if (audioLabel) audioLabel.textContent = t('modalAudioLabel');
+
+  // TL;DR label
   const tldrTag = document.querySelector('.tldr-tag');
   if (tldrTag) tldrTag.textContent = t('modalTldrTag');
   const tldrToggle = document.getElementById('tldr-toggle-label');
@@ -10683,798 +9634,76 @@ function applyLang() {
     const isOpen = document.getElementById('tldr-content')?.classList.contains('open');
     tldrToggle.textContent = isOpen ? t('modalTldrHide') : t('modalTldrShow');
   }
-  const tocLbl = document.querySelector('.toc-label');
-  if (tocLbl) tocLbl.textContent = t('modalTocLabel');
 
-  // ── 17. MODAL: notas, reseñas ────────────────────────────────
-  const notasLbl = document.querySelector('.notas-label');
-  if (notasLbl) notasLbl.innerHTML = `<span>✏️</span> ${t('modalNotasLabel').replace('✏️ ','')}`;
+  // TOC label
+  const tocLabel = document.querySelector('.toc-label');
+  if (tocLabel) tocLabel.textContent = t('modalTocLabel');
+
+  // Notes
+  const notasLabel = document.querySelector('.notas-label');
+  if (notasLabel) notasLabel.innerHTML = `<span>✏️</span> ${t('modalNotasLabel').replace('✏️ ','') }`;
   const notasTA = document.querySelector('.notas-textarea');
   if (notasTA) notasTA.placeholder = t('modalNotasPlaceholder');
   const notasSaved = document.getElementById('notas-saved');
   if (notasSaved) notasSaved.textContent = t('modalNotasSaved');
-  const resenasTtl = document.querySelector('.resenas-title');
-  if (resenasTtl) resenasTtl.textContent = t('modalResenasTitle');
+
+  // Reviews title
+  const resenasTitle = document.querySelector('.resenas-title');
+  if (resenasTitle) resenasTitle.textContent = t('modalResenasTitle');
   const resenaBtn = document.querySelector('.btn-resena-enviar');
   if (resenaBtn) resenaBtn.textContent = t('modalResenaBtn');
 
-  // ── 18. MODAL: marathon next, save quote ─────────────────────
-  const mNextLbl = document.querySelector('.marathon-next-label');
-  if (mNextLbl) mNextLbl.textContent = t('marathonNextLabel');
-  const mNextBtn2 = document.querySelector('.btn-marathon-next');
-  if (mNextBtn2) mNextBtn2.textContent = t('marathonNextBtn');
-  const sqBtn = document.getElementById('btn-save-quote');
-  if (sqBtn) sqBtn.innerHTML = sqBtn.classList.contains('saved') ? t('savedquote') : t('savequote');
+  // Marathon next
+  const mNextLabel = document.querySelector('.marathon-next-label');
+  if (mNextLabel) mNextLabel.textContent = t('marathonNextLabel');
+  const mNextBtn = document.querySelector('.btn-marathon-next');
+  if (mNextBtn) mNextBtn.textContent = t('marathonNextBtn');
 
-  // ── 19. RECOMENDACIONES sub ──────────────────────────────────
-  const recSub = document.getElementById('rec-sub');
-  if (recSub && !recSub.textContent.includes(libros.filter(l=>getStatus(l.titulo)==='leido').length)) {
-    recSub.textContent = t('recSub');
+  // Save quote button
+  const sqBtn = document.getElementById('btn-save-quote');
+  if (sqBtn) {
+    const isSaved = sqBtn.classList.contains('saved');
+    sqBtn.innerHTML = isSaved ? t('savedquote') : t('savequote');
   }
 
-  // ── 20. FOOTER ───────────────────────────────────────────────
-  const footerCopy = document.querySelector('.footer-copy');
-  if (footerCopy) footerCopy.textContent = t('footerCopy');
+  // Heatmap
+  const hmTitle = document.querySelector('.heatmap-title');
+  if (hmTitle) hmTitle.textContent = t('heatmapTitle');
+
+  // Recomendaciones
+  const recTitleEl = document.querySelector('.recomendaciones-title');
+  if (recTitleEl) recTitleEl.textContent = t('recTitle');
+
+  // Footer
   const fbDesc = document.querySelector('.footer-brand-desc');
   if (fbDesc) fbDesc.textContent = t('footerDesc');
+  const footerCopy = document.querySelector('.footer-copy');
+  if (footerCopy) footerCopy.textContent = t('footerCopy');
 
-  // Footer category links
-  const footerCatLinks = document.querySelectorAll('.footer-col:nth-child(2) .footer-links button');
-  const footerCatKeys = ['filtroFilosofia','filtroPsicologia','filtroNegocios','filtroCiencia','filtroHistoria','filtroAutoayuda'];
-  footerCatLinks.forEach((btn, i) => { if (footerCatKeys[i]) btn.textContent = t(footerCatKeys[i]); });
+  // Notesearch placeholder
+  const nsInput = document.getElementById('notesearch-input');
+  if (nsInput) nsInput.placeholder = t('notas_searchPlaceholder');
 
-  // ── 21. RE-RENDER dinámico (solo después de init completo) ───
-  if (!langIniciado) return; // durante la carga inicial, no re-renderizar
-
+  // Re-render grid to update genre labels, read-min text etc.
   filtrar();
   renderTagCloud();
   renderRecientes();
   renderRecomendaciones();
-  if (typeof renderGoals === 'function')   renderGoals();
+  if (typeof renderGoals === 'function') renderGoals();
   if (typeof renderHeatmap === 'function') renderHeatmap(heatmapCurrentYear);
-  if (typeof initLecturaDia === 'function') {
-    const dailyEyebrow = document.getElementById('daily-eyebrow');
-    if (dailyEyebrow) dailyEyebrow.textContent = langActivo === 'en' ? '☀️ Book of the day' : '☀️ Lectura del día';
-    const dailyDayLbl = document.getElementById('daily-day-label');
-    if (dailyDayLbl) dailyDayLbl.textContent = langActivo === 'en' ? 'day of the year' : 'día del año';
-  }
-  const spInput = document.getElementById('spotlight-input');
-  if (spInput) spInput.placeholder = langActivo === 'en'
-    ? 'Search books, authors, topics, notes…'
-    : 'Buscar libros, autores, temas, notas…';
-  if (document.getElementById('readlist-overlay')?.classList.contains('open')) renderReadlistPanel();
 }
-
-let langIniciado = false; // flag: true después del primer render completo
 
 function initLang() {
   langActivo = localStorage.getItem('lang') || 'es';
-  applyLang(); // solo traduce DOM estático, no llama renders
-}
-
-// --- SPOTLIGHT GLOBAL (Cmd+K / Ctrl+K) ---
-let spIndex = -1;
-let spItems = [];
-
-function abrirSpotlight() {
-  document.getElementById('spotlight-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-  setTimeout(() => {
-    const input = document.getElementById('spotlight-input');
-    input.focus();
-    input.value = '';
-    renderSpotlightDefault();
-  }, 60);
-}
-
-function cerrarSpotlight(e) {
-  if (e && e.target !== document.getElementById('spotlight-overlay')) return;
-  document.getElementById('spotlight-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-  spIndex = -1;
-}
-
-function renderSpotlightDefault() {
-  const res = document.getElementById('spotlight-results');
-  // Show recent + favorites as default state
-  const recientes = JSON.parse(localStorage.getItem('recientes') || '[]');
-  const favs      = libros.filter(l => getFav(l.titulo)).slice(0, 4);
-  let html = '';
-  if (recientes.length) {
-    html += `<div class="spotlight-section-label">Recientes</div>`;
-    recientes.slice(0, 4).forEach((titulo, i) => {
-      const l = libros.find(b => b.titulo === titulo);
-      if (!l) return;
-      html += renderSpotlightItem(l, i, '', 'reciente');
-    });
-  }
-  if (favs.length) {
-    html += `<div class="spotlight-section-label">Favoritos</div>`;
-    favs.forEach((l, i) => { html += renderSpotlightItem(l, i + 10, '', 'favorito'); });
-  }
-  if (!html) {
-    html = `<div class="spotlight-empty">Escribe para buscar en 51 libros, notas y citas</div>`;
-  }
-  res.innerHTML = html;
-  spItems = res.querySelectorAll('.spotlight-item');
-  spIndex = -1;
-}
-
-function renderSpotlightItem(libro, idx, q, tipo) {
-  const re = q ? new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi') : null;
-  const titulo = re ? libro.titulo.replace(re, '<mark>$1</mark>') : libro.titulo;
-  const icons = { reciente: '⏱', favorito: '⭐', libro: '📖', nota: '✏️', tag: '🏷', cita: '💛' };
-  const icon = icons[tipo] || '📖';
-  return `<div class="spotlight-item" data-titulo="${libro.titulo.replace(/"/g,'&quot;')}"
-    onclick="cerrarSpotlight();setTimeout(()=>abrirModal(libros.find(l=>l.titulo===${JSON.stringify(libro.titulo)})),80)">
-    <span class="spotlight-item-icon">${icon}</span>
-    <div class="spotlight-item-body">
-      <div class="spotlight-item-title">${titulo}</div>
-      <div class="spotlight-item-sub">${libro.autor} · ${genreLabels[libro.categoria] || ''}</div>
-    </div>
-    <span class="spotlight-item-right">${libro.tiempo} min</span>
-  </div>`;
-}
-
-function onSpotlightInput() {
-  const q   = document.getElementById('spotlight-input').value.trim().toLowerCase();
-  const res = document.getElementById('spotlight-results');
-  spIndex = -1;
-  if (!q) { renderSpotlightDefault(); return; }
-
-  const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
-  let html = '';
-  let count = 0;
-
-  // Books
-  const bookMatches = libros.filter(l =>
-    l.titulo.toLowerCase().includes(q) ||
-    l.autor.toLowerCase().includes(q) ||
-    (l.sinopsis||'').toLowerCase().includes(q) ||
-    (l.tags||[]).some(t => t.toLowerCase().includes(q))
-  ).slice(0, 8);
-
-  if (bookMatches.length) {
-    html += `<div class="spotlight-section-label">Libros (${bookMatches.length})</div>`;
-    bookMatches.forEach((l, i) => { html += renderSpotlightItem(l, i, q, 'libro'); count++; });
-  }
-
-  // Notes
-  const noteMatches = libros.filter(l => {
-    const n = getNota(l.titulo);
-    return n && n.toLowerCase().includes(q);
-  }).slice(0, 4);
-  if (noteMatches.length) {
-    html += `<div class="spotlight-section-label">En mis notas</div>`;
-    noteMatches.forEach(l => {
-      const nota = getNota(l.titulo);
-      const snip = nota.toLowerCase().indexOf(q);
-      const excerpt = nota.slice(Math.max(0, snip - 20), snip + 60).replace(re, '<mark>$1</mark>');
-      html += `<div class="spotlight-item" onclick="cerrarSpotlight();setTimeout(()=>abrirModal(libros.find(l=>l.titulo===${JSON.stringify(l.titulo)})),80)">
-        <span class="spotlight-item-icon">✏️</span>
-        <div class="spotlight-item-body">
-          <div class="spotlight-item-title">${l.titulo}</div>
-          <div class="spotlight-item-sub">…${excerpt}…</div>
-        </div>
-      </div>`; count++;
-    });
-  }
-
-  // Saved quotes
-  const quotes = getSavedQuotes().filter(q2 => q2.texto.toLowerCase().includes(q)).slice(0,3);
-  if (quotes.length) {
-    html += `<div class="spotlight-section-label">En mis citas</div>`;
-    quotes.forEach(q2 => {
-      const snip = q2.texto.slice(0,80).replace(re,'<mark>$1</mark>');
-      html += `<div class="spotlight-item" onclick="cerrarSpotlight();setTimeout(()=>abrirModal(libros.find(l=>l.titulo===${JSON.stringify(q2.titulo)})),80)">
-        <span class="spotlight-item-icon">💛</span>
-        <div class="spotlight-item-body">
-          <div class="spotlight-item-title">"${snip}…"</div>
-          <div class="spotlight-item-sub">${q2.titulo}</div>
-        </div>
-      </div>`; count++;
-    });
-  }
-
-  res.innerHTML = html || `<div class="spotlight-empty">Sin resultados para "${q}"</div>`;
-  spItems = res.querySelectorAll('.spotlight-item');
-}
-
-function onSpotlightKey(e) {
-  if (e.key === 'Escape') { cerrarSpotlight(); return; }
-  if (!spItems.length) return;
-  if (e.key === 'ArrowDown') {
-    e.preventDefault();
-    spIndex = Math.min(spIndex + 1, spItems.length - 1);
-  } else if (e.key === 'ArrowUp') {
-    e.preventDefault();
-    spIndex = Math.max(spIndex - 1, 0);
-  } else if (e.key === 'Enter') {
-    if (spIndex >= 0 && spItems[spIndex]) { spItems[spIndex].click(); return; }
-  }
-  spItems.forEach((el, i) => el.classList.toggle('sp-highlighted', i === spIndex));
-  if (spIndex >= 0) spItems[spIndex].scrollIntoView({ block: 'nearest' });
-}
-
-// Global keyboard shortcut
-document.addEventListener('keydown', e => {
-  if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-    e.preventDefault();
-    const overlay = document.getElementById('spotlight-overlay');
-    if (overlay.classList.contains('open')) cerrarSpotlight();
-    else abrirSpotlight();
-  }
-});
-
-// --- LISTA DE LECTURA ---
-function getReadlist() {
-  try { return JSON.parse(localStorage.getItem('readlist') || '[]'); } catch(e) { return []; }
-}
-function saveReadlist(arr) { localStorage.setItem('readlist', JSON.stringify(arr)); }
-
-function addToReadlist(libro) {
-  if (!libro) return;
-  const arr = getReadlist();
-  if (arr.find(t => t === libro.titulo)) {
-    showToast('Ya está en tu lista', libro.titulo, '📚');
-    return;
-  }
-  arr.push(libro.titulo);
-  saveReadlist(arr);
-  showReadlistBadge(libro.titulo, true);
-  showToast('Agregado a tu lista', libro.titulo, '📚');
-  verificarLogros();
-}
-
-function removeFromReadlist(titulo) {
-  const arr = getReadlist().filter(t => t !== titulo);
-  saveReadlist(arr);
-  showReadlistBadge(titulo, false);
-}
-
-function toggleReadlistLibro() {
-  if (!libroActual) return;
-  const arr = getReadlist();
-  if (arr.includes(libroActual.titulo)) {
-    removeFromReadlist(libroActual.titulo);
-    showToast('Quitado de tu lista', libroActual.titulo, '📚');
-  } else {
-    addToReadlist(libroActual);
-  }
-  actualizarBtnReadlist();
-}
-
-function actualizarBtnReadlist() {
-  const btn = document.querySelector('.btn-focus[title*="lista de lectura"]');
-  if (!btn || !libroActual) return;
-  const enLista = getReadlist().includes(libroActual.titulo);
-  btn.style.background = enLista ? 'var(--accent-2)' : '';
-  btn.style.color = enLista ? 'var(--bg)' : '';
-  btn.title = enLista ? 'Quitar de lista de lectura' : 'Agregar a lista de lectura';
-}
-
-function showReadlistBadge(titulo, show) {
-  document.querySelectorAll('.book-card').forEach(card => {
-    const h3 = card.querySelector('h3');
-    if (!h3 || h3.textContent !== titulo) return;
-    let badge = card.querySelector('.readlist-badge');
-    if (show && !badge) {
-      badge = document.createElement('span');
-      badge.className = 'readlist-badge';
-      badge.textContent = 'Lista';
-      card.style.position = 'relative';
-      card.appendChild(badge);
-    } else if (!show && badge) {
-      badge.remove();
-    }
-  });
-}
-
-function abrirReadlist() {
-  renderReadlistPanel();
-  document.getElementById('readlist-overlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-
-function cerrarReadlist(e) {
-  if (e && e.target !== document.getElementById('readlist-overlay')) return;
-  document.getElementById('readlist-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-
-function renderReadlistPanel() {
-  const arr  = getReadlist();
-  const body = document.getElementById('readlist-body');
-  const cnt  = document.getElementById('readlist-count');
-  cnt.textContent = arr.length ? `${arr.length} libro${arr.length !== 1 ? 's' : ''} en cola` : '';
-
-  if (!arr.length) {
-    body.innerHTML = `<div class="readlist-empty">Tu lista de lectura está vacía.<br>Agrega libros desde el botón 📚 en cada resumen.</div>`;
-    return;
-  }
-
-  let html = arr.map((titulo, i) => {
-    const l = libros.find(b => b.titulo === titulo);
-    if (!l) return '';
-    return `<div class="readlist-item" draggable="true" data-index="${i}"
-      ondragstart="rlDragStart(event,${i})" ondragover="rlDragOver(event,${i})"
-      ondrop="rlDrop(event,${i})" ondragleave="rlDragLeave(event)">
-      <span class="readlist-drag-handle">⠿</span>
-      <div class="readlist-item-info">
-        <div class="readlist-item-titulo" onclick="cerrarReadlist();setTimeout(()=>abrirModal(libros.find(l=>l.titulo===${JSON.stringify(l.titulo)})),100)">${l.titulo}</div>
-        <div class="readlist-item-autor">${l.autor} · ${l.tiempo} min</div>
-      </div>
-      <span class="readlist-item-cat genre-${l.categoria}">${genreLabels[l.categoria]||''}</span>
-      <div class="readlist-item-actions">
-        <button class="readlist-action-btn" onclick="cerrarReadlist();setTimeout(()=>abrirModal(libros.find(l=>l.titulo===${JSON.stringify(l.titulo)})),100)" title="Leer">→</button>
-        <button class="readlist-action-btn del" onclick="removeFromReadlist(${JSON.stringify(l.titulo)});renderReadlistPanel()" title="Quitar">✕</button>
-      </div>
-    </div>`;
-  }).join('');
-
-  html += `<div class="readlist-footer">
-    <button class="btn-readlist-clear" onclick="saveReadlist([]);renderReadlistPanel()" data-i18n="readlistClear">Vaciar lista</button>
-    <button class="btn-readlist-maratonear" onclick="cerrarReadlist();setTimeout(()=>{marathonList=[...getReadlist().map(t=>libros.find(l=>l.titulo===t)).filter(Boolean)];if(marathonList.length){marathonActivo=true;marathonIdx=0;actualizarMarathonBar();document.getElementById('marathon-bar').classList.add('active');abrirModal(marathonList[0]);}},150)" data-i18n-marathon-list>🏃 Maratonear lista</button>
-  </div>`;
-  body.innerHTML = html;
-}
-
-// Drag & drop para reordenar la lista
-let rlDragSrc = -1;
-function rlDragStart(e, i) { rlDragSrc = i; e.currentTarget.classList.add('dragging'); }
-function rlDragOver(e, i) { e.preventDefault(); e.currentTarget.classList.add('drag-over'); }
-function rlDragLeave(e)    { e.currentTarget.classList.remove('drag-over'); }
-function rlDrop(e, i) {
-  e.preventDefault();
-  e.currentTarget.classList.remove('drag-over');
-  if (rlDragSrc === i) return;
-  const arr = getReadlist();
-  const [item] = arr.splice(rlDragSrc, 1);
-  arr.splice(i, 0, item);
-  saveReadlist(arr);
-  renderReadlistPanel();
-}
-
-// --- LECTURA DEL DÍA ---
-let libroDiario = null;
-
-function initLecturaDia() {
-  const doy = Math.floor((Date.now() - new Date(new Date().getFullYear(),0,0)) / 86400000);
-  const idx  = doy % libros.length;
-  libroDiario = libros[idx];
-  if (!libroDiario) return;
-
-  // Insert the daily section after recomendaciones
-  const slot = document.getElementById('daily-section-slot');
-  const daily = document.getElementById('daily-section');
-  if (slot && daily) slot.replaceWith(daily);
-  daily.classList.add('visible');
-
-  const now  = new Date();
-  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
-
-  document.getElementById('daily-titulo').textContent    = libroDiario.titulo;
-  document.getElementById('daily-autor').textContent     = '— ' + libroDiario.autor;
-  document.getElementById('daily-day-num').textContent   = doy;
-  document.getElementById('daily-day-label').textContent = `${now.getDate()} ${meses[now.getMonth()]}`;
-
-  // Fragmento: primeras 200 chars del desarrollo
-  const frag = (libroDiario.desarrollo || libroDiario.sinopsis || '').slice(0, 200).trim();
-  document.getElementById('daily-fragmento').textContent = frag + (frag.length >= 200 ? '…' : '');
-
-  // Streak
-  const streakKey  = 'daily_streak';
-  const lastKey    = 'daily_last_doy';
-  const lastDoy    = parseInt(localStorage.getItem(lastKey) || '0');
-  let   streak     = parseInt(localStorage.getItem(streakKey) || '0');
-
-  if (lastDoy === doy - 1) { streak++; }
-  else if (lastDoy !== doy) { streak = 1; }
-  localStorage.setItem(streakKey, streak);
-  localStorage.setItem(lastKey, doy);
-
-  if (streak > 1) {
-    const streakEl = document.getElementById('daily-streak');
-    document.getElementById('daily-streak-num').textContent = streak;
-    streakEl.style.display = 'flex';
-  }
-}
-
-function abrirLibroDiario() {
-  if (libroDiario) abrirModal(libroDiario);
-}
-
-// --- SISTEMA DE LOGROS ---
-const LOGROS = [
-  { id: 'primer_libro',   icon: '📖', nombre: 'Primer resumen',       desc: 'Abriste tu primer resumen',         check: (l,f) => l >= 1  },
-  { id: 'cinco_libros',   icon: '🌱', nombre: 'Lector en crecimiento', desc: 'Marcaste 5 libros como leídos',     check: (l,f) => l >= 5  },
-  { id: 'diez_libros',    icon: '🔥', nombre: 'Lector constante',      desc: 'Completaste 10 resúmenes',          check: (l,f) => l >= 10 },
-  { id: 'veinte_libros',  icon: '🏆', nombre: 'Gran lector',           desc: 'Completaste 20 resúmenes',          check: (l,f) => l >= 20 },
-  { id: 'primer_fav',     icon: '⭐', nombre: 'Primera estrella',      desc: 'Marcaste tu primer favorito',       check: (l,f) => f >= 1  },
-  { id: 'cinco_favs',     icon: '💫', nombre: 'Coleccionista',         desc: 'Tienes 5 libros favoritos',          check: (l,f) => f >= 5  },
-  { id: 'filosofo',       icon: '🧠', nombre: 'El filósofo',           desc: 'Leíste 3 libros de Filosofía',      check: (l,f,cats) => (cats['filosofia']||0) >= 3 },
-  { id: 'empresario',     icon: '💼', nombre: 'Mentalidad de negocios', desc: 'Leíste 3 libros de Negocios',      check: (l,f,cats) => (cats['negocios']||0) >= 3  },
-  { id: 'cientifico',     icon: '🔬', nombre: 'El científico',         desc: 'Leíste 3 libros de Ciencia',        check: (l,f,cats) => (cats['ciencia']||0) >= 3   },
-  { id: 'categoria_completa', icon: '🎯', nombre: 'Categoría completa', desc: 'Leíste todos los libros de una categoría', check: (l,f,cats) => {
-    const cats2 = ['filosofia','negocios','psicologia','ciencia','historia','autoayuda'];
-    return cats2.some(c => {
-      const total = libros.filter(b => b.categoria === c).length;
-      return (cats[c]||0) >= total;
-    });
-  }},
-  { id: 'madrugador',     icon: '☀️', nombre: 'El madrugador',         desc: 'Abriste un resumen antes de las 7am', check: () => {
-    const h = new Date().getHours(); return h < 7;
-  }},
-  { id: 'notas_escritor', icon: '✍️', nombre: 'El anotador',           desc: 'Guardaste notas en 5 libros',       check: (l,f,c,notas) => notas >= 5 },
-  { id: 'cita_guardada',  icon: '💛', nombre: 'Colector de frases',     desc: 'Guardaste tu primera cita',         check: (l,f,c,notas,citas) => citas >= 1 },
-];
-
-function verificarLogros() {
-  const leidos   = libros.filter(l => getStatus(l.titulo) === 'leido');
-  const favs     = libros.filter(l => getFav(l.titulo));
-  const cats     = {};
-  leidos.forEach(l => { cats[l.categoria] = (cats[l.categoria]||0) + 1; });
-  const notas    = libros.filter(l => getNota(l.titulo).trim().length > 0).length;
-  const citas    = getSavedQuotes().length;
-  const ganados  = JSON.parse(localStorage.getItem('logros_ganados') || '[]');
-
-  LOGROS.forEach(logro => {
-    if (ganados.includes(logro.id)) return;
-    const ok = logro.check(leidos.length, favs.length, cats, notas, citas);
-    if (ok) {
-      ganados.push(logro.id);
-      localStorage.setItem('logros_ganados', JSON.stringify(ganados));
-      mostrarBadgeToast(logro);
-    }
-  });
-}
-
-function mostrarBadgeToast(logro) {
-  const toast = document.getElementById('badge-toast');
-  document.getElementById('badge-toast-icon').textContent  = logro.icon;
-  document.getElementById('badge-toast-title').textContent = logro.nombre;
-  document.getElementById('badge-toast-desc').textContent  = logro.desc;
-  toast.classList.add('visible');
-  setTimeout(() => toast.classList.remove('visible'), 4500);
-}
-
-function showToast(titulo, desc, icon) {
-  const toast = document.getElementById('badge-toast');
-  document.getElementById('badge-toast-icon').textContent  = icon || '✓';
-  document.getElementById('badge-toast-title').textContent = titulo;
-  document.getElementById('badge-toast-desc').textContent  = desc || '';
-  const lbl = toast.querySelector('.badge-toast-label');
-  if (lbl) lbl.textContent = '';
-  toast.classList.add('visible');
-  setTimeout(() => { toast.classList.remove('visible'); if (lbl) lbl.textContent = '🏆 Nuevo logro'; }, 2500);
-}
-
-function renderLogros() {
-  const ganados = JSON.parse(localStorage.getItem('logros_ganados') || '[]');
-  return `<div class="stats-section-title">🏆 Logros (${ganados.length}/${LOGROS.length})</div>
-    <div class="badges-grid">
-      ${LOGROS.map(l => `
-        <div class="badge-item ${ganados.includes(l.id)?'earned':''}">
-          <div class="badge-item-icon">${l.icon}</div>
-          <div class="badge-item-name">${l.nombre}</div>
-          <div class="badge-item-desc">${l.desc}</div>
-        </div>`).join('')}
-    </div>`;
-}
-
-// --- IMPRIMIR RESUMEN ---
-function imprimirResumen() {
-  if (!libroActual) return;
-  const l = libroActual;
-  const printArea = document.getElementById('print-area');
-
-  const ideasHtml = (l.ideas||[]).map(i => `<li>${i}</li>`).join('');
-  const leccionesHtml = (l.lecciones||[]).map(i => `<li>${i}</li>`).join('');
-
-  printArea.innerHTML = `
-    <h1>${l.titulo}</h1>
-    <div class="print-meta">${l.autor} · ${l.anio} · ${l.paginas || '—'} páginas · ${l.tiempo} min de lectura · ${genreLabels[l.categoria]||''} · resumenya.com</div>
-
-    <h2>¿De qué trata?</h2>
-    <p>${l.sinopsis}</p>
-
-    <h2>Contexto e historia</h2>
-    <p>${l.contexto}</p>
-
-    <h2>Frase destacada</h2>
-    <blockquote>"${l.frase}" — ${l.autor}</blockquote>
-
-    <h2>Ideas principales</h2>
-    <ul>${ideasHtml}</ul>
-
-    <h2>Desarrollo profundo</h2>
-    <p>${l.desarrollo}</p>
-
-    <h2>Lecciones aplicables</h2>
-    <ul>${leccionesHtml}</ul>
-
-    <h2>Críticas y limitaciones</h2>
-    <p>${l.criticas}</p>
-
-    <h2>¿Para quién es?</h2>
-    <p>${l.paraQuien}</p>
-
-    <h2>¿Por qué leerlo?</h2>
-    <p>${l.porque}</p>
-
-    <div class="print-footer">Resumen generado por LEER — resumenya.com · ${new Date().toLocaleDateString('es-ES',{day:'numeric',month:'long',year:'numeric'})}</div>
-  `;
-
-  window.print();
-}
-
-// --- LECTOR POR SECCIONES ---
-let srActivo = false;
-let srIdx    = 0;
-let srSecciones = [];
-
-function buildSecciones(libro) {
-  if (!libro) return [];
-  const s = [
-    { label: '1 — ¿De qué trata?',        title: libro.titulo,  html: `<p>${libro.sinopsis}</p>` },
-    { label: '2 — Contexto e historia',    title: 'Contexto',    html: `<p>${libro.contexto}</p>` },
-    { label: '3 — Frase destacada',        title: 'Cita',        html: `<blockquote>"${libro.frase}"<br><small>— ${libro.autor}</small></blockquote>` },
-    { label: '4 — Ideas principales',      title: 'Ideas',       html: `<ul>${(libro.ideas||[]).map(i=>`<li>${i}</li>`).join('')}</ul>` },
-    { label: '5 — Desarrollo profundo',    title: 'Desarrollo',  html: `<p>${libro.desarrollo}</p>` },
-    { label: '6 — Lecciones aplicables',   title: 'Lecciones',   html: `<ul>${(libro.lecciones||[]).map(i=>`<li>${i}</li>`).join('')}</ul>` },
-    { label: '7 — Críticas',               title: 'Críticas',    html: `<p>${libro.criticas}</p>` },
-    { label: '8 — ¿Para quién es?',        title: 'Para quién',  html: `<p>${libro.paraQuien}</p>` },
-    { label: '9 — ¿Por qué leerlo?',       title: '¿Por qué?',   html: `<p>${libro.porque}</p>` },
-  ];
-  return s;
-}
-
-function toggleSectionMode() {
-  const modal  = document.getElementById('modal-ver-content');
-  const btn    = document.getElementById('btn-section-mode');
-  const reader = document.getElementById('section-reader');
-  const full   = document.getElementById('modal-full-content');
-  srActivo = !srActivo;
-  modal.classList.toggle('section-mode', srActivo);
-  btn.classList.toggle('active', srActivo);
-  btn.textContent = srActivo ? t('srFullBtn') : t('srSectionBtn');
-  if (srActivo) {
-    srIdx = 0;
-    srSecciones = buildSecciones(libroActual);
-    renderSrSection();
-    document.getElementById('modal-ver').scrollTop = 0;
-  }
-  localStorage.setItem('section_mode_pref', srActivo ? '1' : '0');
-}
-
-function renderSrSection() {
-  if (!srSecciones.length) return;
-  const s   = srSecciones[srIdx];
-  const tot = srSecciones.length;
-
-  // Progress pips
-  const pips = srSecciones.map((_, i) =>
-    `<div class="sr-progress-pip ${i < srIdx ? 'done' : i === srIdx ? 'current' : ''}"></div>`
-  ).join('');
-  document.getElementById('sr-progress-bar').innerHTML = pips;
-  document.getElementById('sr-section-label').textContent = s.label;
-  document.getElementById('sr-section-title').textContent = s.title;
-  document.getElementById('sr-content').innerHTML = s.html;
-  document.getElementById('sr-counter').textContent = `${srIdx + 1} / ${tot}`;
-  document.getElementById('sr-prev').disabled = srIdx === 0;
-
-  const nextBtn = document.getElementById('sr-next');
-  if (srIdx === tot - 1) {
-    nextBtn.textContent = t('srCompleted');
-    nextBtn.classList.add('primary');
-  } else {
-    nextBtn.textContent = 'Siguiente →';
-    nextBtn.classList.add('primary');
-  }
-
-  // Scroll reader to top
-  document.getElementById('modal-ver').scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function srNav(dir) {
-  const newIdx = srIdx + dir;
-  if (newIdx < 0) return;
-  if (newIdx >= srSecciones.length) {
-    // Completed all sections — mark as read
-    setStatus('leido');
-    toggleSectionMode();
-    return;
-  }
-  srIdx = newIdx;
-  renderSrSection();
-}
-
-// Swipe support for mobile
-let srTouchStartX = 0;
-document.addEventListener('touchstart', e => { srTouchStartX = e.touches[0].clientX; }, { passive: true });
-document.addEventListener('touchend', e => {
-  if (!srActivo) return;
-  const dx = e.changedTouches[0].clientX - srTouchStartX;
-  if (Math.abs(dx) > 60) srNav(dx < 0 ? 1 : -1);
-}, { passive: true });
-
-// --- TIPOGRAFÍA Y APARIENCIA ---
-const TYPO_DEFAULTS = { size: 100, line: 185, width: 'normal', font: 'serif' };
-let typoConfig = { ...TYPO_DEFAULTS };
-
-function loadTypo() {
-  try {
-    const saved = JSON.parse(localStorage.getItem('typo_config') || 'null');
-    if (saved) typoConfig = { ...TYPO_DEFAULTS, ...saved };
-  } catch(e) {}
-}
-
-function saveTypo() {
-  localStorage.setItem('typo_config', JSON.stringify(typoConfig));
-}
-
-function aplicarTypo() {
-  typoConfig.size = parseInt(document.getElementById('typo-size').value);
-  typoConfig.line = parseInt(document.getElementById('typo-line').value);
-  document.getElementById('typo-size-val').textContent = typoConfig.size + '%';
-  document.getElementById('typo-line-val').textContent = (typoConfig.line / 100).toFixed(2);
-  applyTypoToDOM();
-  saveTypo();
-}
-
-function applyTypoToDOM() {
-  const root = document.documentElement;
-  root.style.setProperty('--typo-size', (typoConfig.size / 100).toFixed(2));
-  root.style.setProperty('--typo-line', (typoConfig.line / 100).toFixed(2));
-
-  const modal = document.getElementById('modal-ver-content');
-  if (modal) {
-    // Width
-    modal.classList.remove('typo-w-narrow', 'typo-w-wide');
-    if (typoConfig.width === 'narrow') modal.classList.add('typo-w-narrow');
-    if (typoConfig.width === 'wide')   modal.classList.add('typo-w-wide');
-    // Font
-    modal.classList.remove('typo-f-sans', 'typo-f-mono');
-    if (typoConfig.font === 'sans') modal.classList.add('typo-f-sans');
-    if (typoConfig.font === 'mono') modal.classList.add('typo-f-mono');
-  }
-
-  // Update slider UI
-  const szSlider = document.getElementById('typo-size');
-  const lnSlider = document.getElementById('typo-line');
-  if (szSlider) { szSlider.value = typoConfig.size; document.getElementById('typo-size-val').textContent = typoConfig.size + '%'; }
-  if (lnSlider) { lnSlider.value = typoConfig.line; document.getElementById('typo-line-val').textContent = (typoConfig.line/100).toFixed(2); }
-
-  // Active buttons
-  ['normal','narrow','wide'].forEach(w => {
-    const b = document.getElementById(`typo-w-${w}`);
-    if (b) b.classList.toggle('active', typoConfig.width === w);
-  });
-  ['serif','sans','mono'].forEach(f => {
-    const b = document.getElementById(`typo-f-${f}`);
-    if (b) b.classList.toggle('active', typoConfig.font === f);
-  });
-}
-
-function setTypoWidth(w) {
-  typoConfig.width = w;
-  applyTypoToDOM();
-  saveTypo();
-}
-function setTypoFont(f) {
-  typoConfig.font = f;
-  applyTypoToDOM();
-  saveTypo();
-}
-function resetTypo() {
-  typoConfig = { ...TYPO_DEFAULTS };
-  applyTypoToDOM();
-  saveTypo();
-}
-function toggleTypoPanel() {
-  document.getElementById('typo-panel').classList.toggle('open');
-}
-function cerrarTypoPanel() {
-  document.getElementById('typo-panel').classList.remove('open');
-}
-
-function initTypo() {
-  loadTypo();
-  applyTypoToDOM();
-  // Inject CSS variables for typo into :root via style tag
-  let typoStyle = document.getElementById('typo-style');
-  if (!typoStyle) {
-    typoStyle = document.createElement('style');
-    typoStyle.id = 'typo-style';
-    document.head.appendChild(typoStyle);
-  }
-  typoStyle.textContent = `
-    .modal-text, .sr-content { font-size: calc(0.92rem * var(--typo-size, 1)) !important; line-height: var(--typo-line, 1.85) !important; }
-    .ideas-list li           { font-size: calc(0.88rem * var(--typo-size, 1)) !important; line-height: var(--typo-line, 1.85) !important; }
-    .typo-w-narrow .modal-body { max-width: 580px; margin: 0 auto; }
-    .typo-w-wide   .modal-body { max-width: 100%; }
-    .typo-f-sans  .modal-text, .typo-f-sans  .ideas-list li, .typo-f-sans  .sr-content { font-family: var(--font-body) !important; }
-    .typo-f-mono  .modal-text, .typo-f-mono  .ideas-list li, .typo-f-mono  .sr-content { font-family: var(--font-mono) !important; font-size: calc(0.82rem * var(--typo-size, 1)) !important; }
-  `;
-}
-
-// Show/hide typo trigger when modal opens
-function mostrarTypoTrigger(show) {
-  document.getElementById('btn-typo-trigger').classList.toggle('visible', show);
-}
-
-// --- PWA ---
-let pwaPromptEvent = null;
-
-window.addEventListener('beforeinstallprompt', e => {
-  e.preventDefault();
-  pwaPromptEvent = e;
-  const dismissed = localStorage.getItem('pwa_dismissed');
-  if (!dismissed) {
-    setTimeout(() => {
-      document.getElementById('pwa-banner').classList.add('visible');
-    }, 8000);
-  }
-});
-
-function instalarPWA() {
-  if (!pwaPromptEvent) return;
-  pwaPromptEvent.prompt();
-  pwaPromptEvent.userChoice.then(result => {
-    if (result.outcome === 'accepted') {
-      localStorage.setItem('pwa_installed', '1');
-    }
-    document.getElementById('pwa-banner').classList.remove('visible');
-    pwaPromptEvent = null;
-  });
-}
-
-function descartarPWA() {
-  document.getElementById('pwa-banner').classList.remove('visible');
-  localStorage.setItem('pwa_dismissed', '1');
-}
-
-window.addEventListener('appinstalled', () => {
-  document.getElementById('pwa-banner').classList.remove('visible');
-  showToast('¡LEER instalado!', 'Ya podés leer sin conexión', '📚');
-});
-
-function registrarServiceWorker() {
-  if ('serviceWorker' in navigator) {
-    // Inline service worker as a blob for single-file setup
-    const swCode = `
-const CACHE = 'leer-v1';
-const ASSETS = ['/'];
-self.addEventListener('install',  e => { e.waitUntil(caches.open(CACHE).then(c => c.addAll(ASSETS))); });
-self.addEventListener('activate', e => { e.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k=>k!==CACHE).map(k=>caches.delete(k))))); });
-self.addEventListener('fetch', e => {
-  if (e.request.method !== 'GET') return;
-  e.respondWith(
-    caches.match(e.request).then(cached => {
-      const net = fetch(e.request).then(res => {
-        if (res.ok) caches.open(CACHE).then(c => c.put(e.request, res.clone()));
-        return res;
-      }).catch(() => cached);
-      return cached || net;
-    })
-  );
-});`;
-    const blob = new Blob([swCode], { type: 'application/javascript' });
-    const swUrl = URL.createObjectURL(blob);
-    navigator.serviceWorker.register(swUrl)
-      .then(() => console.log('LEER SW registered'))
-      .catch(() => {}); // Silent fail in dev
-  }
+  applyLang();
 }
 
 // Init
 initDark();
 initLang();
-initTypo();
 initFraseDia();
 initReadingBar();
 initScrollTop();
-registrarServiceWorker();
 mostrarSkeleton();
 setTimeout(() => {
   initLibroMes();
@@ -11488,22 +9717,6 @@ setTimeout(() => {
   renderRecomendaciones();
   renderHeatmap(new Date().getFullYear());
   checkHashOnLoad();
-  initLecturaDia();
-  verificarLogros();
-  getReadlist().forEach(titulo => showReadlistBadge(titulo, true));
-  // Marcar init completo y re-aplicar idioma sobre contenido dinámico
-  langIniciado = true;
-  applyLang(); // ahora sí traduce el contenido generado dinámicamente
-  // Spotlight hint in search bar
-  const searchWrap = document.querySelector('.search-wrap');
-  if (searchWrap && !searchWrap.querySelector('.spotlight-hint')) {
-    const hint = document.createElement('button');
-    hint.className = 'spotlight-hint';
-    hint.innerHTML = '<kbd>⌘K</kbd>';
-    hint.title = 'Búsqueda global (Cmd+K)';
-    hint.onclick = abrirSpotlight;
-    searchWrap.appendChild(hint);
-  }
 }, 350);
 </script>
 </body>
