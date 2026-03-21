@@ -4991,17 +4991,17 @@ footer {
 <header>
   <a href="#" class="logo">LE<span>E</span>R</a>
   <nav>
-    <button class="nav-link" onclick="scrollToBooks()">Biblioteca</button>
-    <button class="btn-sorpresa" onclick="sorprendeme()">✦ Sorpréndeme</button>
-    <button class="nav-link" onclick="abrirStats()">Mis stats</button>
-    <button class="nav-link" onclick="abrirHistory()">📅 Historial</button>
-    <button class="nav-link" onclick="abrirQuotes()">💛 Citas</button>
-    <button class="nav-link" onclick="abrirNoteSearch()">🔍 Mis notas</button>
-    <button class="nav-link" onclick="abrirReadlist()">📚 Lista</button>
-    <button class="nav-link" onclick="iniciarMaraton()">🏃 Maratón</button>
-    <button class="nav-link" onclick="abrirExport()">📥 Exportar</button>
-    <button class="nav-link" onclick="iniciarCompare()">⚖ Comparar</button>
-    <button class="nav-link" onclick="toggleIndice()">Índice</button>
+    <button class="nav-link" onclick="scrollToBooks()" data-i18n="navBiblioteca">Biblioteca</button>
+    <button class="btn-sorpresa" onclick="sorprendeme()" data-i18n="navSorpresa">✦ Sorpréndeme</button>
+    <button class="nav-link" onclick="abrirStats()" data-i18n="navStats">Mis stats</button>
+    <button class="nav-link" onclick="abrirHistory()" data-i18n="navHistory">📅 Historial</button>
+    <button class="nav-link" onclick="abrirQuotes()" data-i18n="navCitas">💛 Citas</button>
+    <button class="nav-link" onclick="abrirNoteSearch()" data-i18n="navNotas">🔍 Mis notas</button>
+    <button class="nav-link" onclick="abrirReadlist()" data-i18n="navLista">📚 Lista</button>
+    <button class="nav-link" onclick="iniciarMaraton()" data-i18n="navMaraton">🏃 Maratón</button>
+    <button class="nav-link" onclick="abrirExport()" data-i18n="navExportar">📥 Exportar</button>
+    <button class="nav-link" onclick="iniciarCompare()" data-i18n="navComparar">⚖ Comparar</button>
+    <button class="nav-link" onclick="toggleIndice()" data-i18n="navIndice">Índice</button>
     <button class="btn-darkmode" id="btn-dark" onclick="toggleDark()" title="Modo oscuro">🌙</button>
     <button class="btn-lang" id="btn-lang" onclick="toggleLang()" title="Switch language">EN</button>
   </nav>
@@ -5010,9 +5010,9 @@ footer {
 <!-- HERO -->
 <section class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Resúmenes de libros</div>
+    <div class="hero-eyebrow" data-i18n="heroEyebrow">Resúmenes de libros</div>
     <h1>Las ideas<br>que <em>cambian</em><br>tu mundo.</h1>
-    <p class="hero-desc">Resúmenes profundos de los libros más influyentes. Lee menos, comprende más. Cada resumen destila lo esencial.</p>
+    <p class="hero-desc" data-i18n="heroDesc">Resúmenes profundos de los libros más influyentes. Lee menos, comprende más. Cada resumen destila lo esencial.</p>
     <div class="stats-row">
       <div class="stat-item">
         <div class="stat-num" id="total-stat">51</div>
@@ -5046,12 +5046,12 @@ footer {
 <!-- LIBRO DEL MES -->
 <section class="libro-mes-section" id="libro-mes-section">
   <div class="libro-mes-left">
-    <div class="libro-mes-badge">✦ Libro del mes</div>
+    <div class="libro-mes-badge" data-i18n="libroMesBadge">✦ Libro del mes</div>
     <div class="libro-mes-titulo" id="lm-titulo">—</div>
     <div class="libro-mes-autor" id="lm-autor">—</div>
     <p class="libro-mes-desc" id="lm-desc">—</p>
     <div class="libro-mes-actions">
-      <button class="btn-mes-leer" id="lm-btn-leer" onclick="abrirLibroMes()">Leer resumen →</button>
+      <button class="btn-mes-leer" id="lm-btn-leer" onclick="abrirLibroMes()" data-i18n="libroMesLeer">Leer resumen →</button>
       <a class="btn-mes-amazon" id="lm-btn-amazon" href="#" target="_blank" rel="noopener sponsored" style="display:none">
         🛒 Comprar en Amazon
       </a>
@@ -5086,7 +5086,7 @@ footer {
 <!-- RECOMENDACIONES PERSONALIZADAS -->
 <section class="recomendaciones-section" id="recomendaciones-section">
   <div class="recomendaciones-header">
-    <span class="recomendaciones-title">Para vos</span>
+    <span class="recomendaciones-title" data-i18n="recTitle">Para vos</span>
     <span class="recomendaciones-sub" id="rec-sub">Basado en tus lecturas</span>
   </div>
   <div class="recomendaciones-grid" id="recomendaciones-grid"></div>
@@ -5098,7 +5098,7 @@ footer {
 <!-- HEATMAP DE ACTIVIDAD -->
 <section class="heatmap-section" id="heatmap-section">
   <div class="heatmap-header">
-    <span class="heatmap-title">Actividad lectora</span>
+    <span class="heatmap-title" data-i18n="heatmapTitle">Actividad lectora</span>
     <div class="heatmap-year-nav">
       <button class="heatmap-year-btn" onclick="heatmapYear(-1)">←</button>
       <span class="heatmap-year-label" id="heatmap-year-label">2025</span>
@@ -5111,13 +5111,13 @@ footer {
   <div class="heatmap-footer">
     <div class="heatmap-stats" id="heatmap-stats"></div>
     <div class="heatmap-legend">
-      Menos
+      <span data-i18n="heatmapMenos">Menos</span>
       <div class="heatmap-legend-box" style="background:var(--card);border:1px solid var(--border)"></div>
       <div class="heatmap-legend-box" style="background:rgba(200,72,26,0.25)"></div>
       <div class="heatmap-legend-box" style="background:rgba(200,72,26,0.5)"></div>
       <div class="heatmap-legend-box" style="background:rgba(200,72,26,0.75)"></div>
       <div class="heatmap-legend-box" style="background:var(--accent)"></div>
-      Más
+      <span data-i18n="heatmapMas">Más</span>
     </div>
   </div>
 </section>
@@ -5127,14 +5127,14 @@ footer {
 <section class="frase-dia" id="frase-dia-section">
   <div class="frase-dia-icono">"</div>
   <div class="frase-dia-body">
-    <div class="frase-dia-tag">✦ Frase del día</div>
+    <div class="frase-dia-tag" data-i18n="fraseDiaTag">✦ Frase del día</div>
     <div class="frase-dia-texto" id="frase-dia-texto"></div>
     <button class="frase-dia-origen" id="frase-dia-origen" onclick="abrirFraseDia()">
       <span id="frase-dia-libro"></span> →
     </button>
   </div>
   <div class="frase-dia-copy">
-    <button class="btn-copy-frase" id="btn-copy-frase" onclick="copiarFraseDia()">Copiar frase</button>
+    <button class="btn-copy-frase" id="btn-copy-frase" onclick="copiarFraseDia()" data-i18n="copiarFrase">Copiar frase</button>
   </div>
 </section>
 
@@ -5159,25 +5159,25 @@ footer {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
-    <input class="search-input" type="text" placeholder="Buscar título, autor, tema..." id="buscador"
+    <input class="search-input" type="text" placeholder="Buscar título, autor, tema..." data-i18n-placeholder="searchPlaceholder" id="buscador"
       oninput="onSearchInput()" onkeydown="onSearchKey(event)" autocomplete="off">
     <div class="search-suggestions" id="search-suggestions"></div>
   </div>
   <div class="filtros">
-    <button class="filtro-btn active" onclick="setFiltro(this, 'todos')">Todos</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'filosofia')">Filosofía</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'negocios')">Negocios</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'psicologia')">Psicología</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'ciencia')">Ciencia</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'historia')">Historia</button>
-    <button class="filtro-btn" onclick="setFiltro(this, 'autoayuda')">Autoayuda</button>
+    <button class="filtro-btn active" onclick="setFiltro(this, 'todos')" data-i18n="filtroTodos">Todos</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'filosofia')" data-i18n="filtroFilosofia">Filosofía</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'negocios')" data-i18n="filtroNegocios">Negocios</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'psicologia')" data-i18n="filtroPsicologia">Psicología</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'ciencia')" data-i18n="filtroCiencia">Ciencia</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'historia')" data-i18n="filtroHistoria">Historia</button>
+    <button class="filtro-btn" onclick="setFiltro(this, 'autoayuda')" data-i18n="filtroAutoayuda">Autoayuda</button>
     <button class="filtro-btn fav-btn" id="btn-fav-filtro" onclick="setFiltro(this, 'favoritos')">⭐ Favoritos</button>
   </div>
 </section>
 
 <!-- BARRA MARATÓN -->
 <div class="marathon-bar" id="marathon-bar">
-  <span class="marathon-bar-label">🏃 Maratón</span>
+  <span class="marathon-bar-label" data-i18n="marathonLabel">🏃 Maratón</span>
   <div class="marathon-progress">
     <div class="marathon-track"><div class="marathon-fill" id="marathon-fill"></div></div>
     <span class="marathon-count" id="marathon-count">0 / 0</span>
@@ -5192,7 +5192,7 @@ footer {
 <!-- METAS DE LECTURA -->
 <section class="goals-section" id="goals-section">
   <div class="goals-header">
-    <span class="goals-title">🎯 Mis metas de lectura</span>
+    <span class="goals-title" data-i18n="goalsTitle">🎯 Mis metas de lectura</span>
     <button class="goals-edit-btn" onclick="abrirGoalsModal()">Editar metas ✏️</button>
   </div>
   <div class="goals-grid" id="goals-grid"></div>
@@ -5200,7 +5200,7 @@ footer {
 
 <!-- FILTRO DE TIEMPO -->
 <section class="time-filter-wrap" id="time-filter-wrap">
-  <span class="time-filter-label">⏱ Tiempo máximo</span>
+  <span class="time-filter-label" data-i18n="timeLabel">⏱ Tiempo máximo</span>
   <div class="time-filter-slider-wrap">
     <input class="time-slider" id="time-slider" type="range" min="1" max="20" value="20" step="1" oninput="onTimeSlider()">
     <span class="time-filter-val" id="time-filter-val">Todos</span>
@@ -5211,7 +5211,7 @@ footer {
 <!-- TAG CLOUD -->
 <section class="tag-cloud-section" id="tag-cloud-section">
   <div class="tag-cloud-header">
-    <span class="tag-cloud-title">🏷 Explorar por tema</span>
+    <span class="tag-cloud-title" data-i18n="tagsTitle">🏷 Explorar por tema</span>
     <button class="tag-cloud-clear" id="tag-cloud-clear" onclick="limpiarTag()">✕ Limpiar filtro</button>
   </div>
   <div class="tag-cloud" id="tag-cloud"></div>
@@ -5220,7 +5220,7 @@ footer {
 <!-- ÚLTIMOS VISITADOS -->
 <section class="recents-section" id="recents-section" style="display:none">
   <div class="recents-header">
-    <span class="recents-title">⏱ Últimos visitados</span>
+    <span class="recents-title" data-i18n="recentsTitle">⏱ Últimos visitados</span>
     <button class="recents-clear" onclick="limpiarRecientes()">Borrar historial</button>
   </div>
   <div class="recents-list" id="recents-list"></div>
@@ -5245,7 +5245,7 @@ footer {
 
   <!-- BANNER DE CATEGORÍA -->
   <div class="cat-page-banner" id="cat-page-banner">
-    <button class="cat-back-btn" onclick="volverTodas()">← Todas las categorías</button>
+    <button class="cat-back-btn" onclick="volverTodas()" data-i18n="catBack">← Todas las categorías</button>
     <div class="cat-page-eyebrow" id="cat-eyebrow">Categoría</div>
     <h2 class="cat-page-titulo" id="cat-titulo">—</h2>
     <p class="cat-page-desc"  id="cat-desc">—</p>
@@ -5253,12 +5253,12 @@ footer {
   </div>
 
   <div class="section-header">
-    <h2 class="section-title">Biblioteca</h2>
+    <h2 class="section-title" data-i18n="libraryTitle">Biblioteca</h2>
     <span class="count-label" id="count-label">36 resúmenes</span>
   </div>
   <div class="grid-controls">
     <div class="sort-wrap">
-      <span class="sort-label">Ordenar por</span>
+      <span class="sort-label" data-i18n="sortLabel">Ordenar por</span>
       <select class="sort-select" id="sort-select" onchange="filtrar()">
         <option value="default">Por defecto</option>
         <option value="rating-desc">Mayor rating</option>
@@ -5526,13 +5526,13 @@ footer {
       <div class="daily-autor"  id="daily-autor">—</div>
       <div class="daily-fragmento" id="daily-fragmento">—</div>
       <div class="daily-actions">
-        <button class="btn-daily-leer" onclick="abrirLibroDiario()">Leer resumen →</button>
-        <button class="btn-daily-leer" style="background:var(--card);color:var(--sub);border:1px solid var(--border)" onclick="addToReadlist(libroDiario)">+ Lista de lectura</button>
+        <button class="btn-daily-leer" onclick="abrirLibroDiario()" data-i18n="dailyReadBtn">Leer resumen →</button>
+        <button class="btn-daily-leer" style="background:var(--card);color:var(--sub);border:1px solid var(--border)" onclick="addToReadlist(libroDiario)" data-i18n="dailyAddList">+ Lista de lectura</button>
       </div>
     </div>
     <div class="daily-right">
       <div class="daily-day-num" id="daily-day-num">—</div>
-      <div class="daily-day-label" id="daily-day-label">día del año</div>
+      <div class="daily-day-label" id="daily-day-label" data-i18n="dailyDayLabel">día del año</div>
       <div class="daily-streak" id="daily-streak" style="display:none">🔥 <span id="daily-streak-num">0</span> días seguidos</div>
     </div>
   </div>
@@ -5593,11 +5593,11 @@ footer {
 <div class="pwa-banner" id="pwa-banner">
   <div class="pwa-banner-icon">📚</div>
   <div class="pwa-banner-body">
-    <div class="pwa-banner-title">Instalar LEER</div>
-    <div class="pwa-banner-desc">Agrega la app a tu pantalla de inicio para leer sin conexión</div>
+    <div class="pwa-banner-title" data-i18n="pwaInstall">Instalar LEER</div>
+    <div class="pwa-banner-desc" data-i18n="pwaDesc">Agrega la app a tu pantalla de inicio para leer sin conexión</div>
   </div>
   <div class="pwa-banner-actions">
-    <button class="btn-pwa-install"  id="btn-pwa-install"  onclick="instalarPWA()">Instalar</button>
+    <button class="btn-pwa-install"  id="btn-pwa-install" onclick="instalarPWA()" data-i18n="pwaBtn">Instalar</button>
     <button class="btn-pwa-dismiss" onclick="descartarPWA()">✕</button>
   </div>
 </div>
@@ -5665,9 +5665,9 @@ footer {
       <div class="modal-tags" id="m-tags"></div>
 
       <div class="status-selector" id="m-status-selector">
-        <button class="status-btn" onclick="setStatus('pendiente')" id="sbtn-pendiente">📚 Pendiente</button>
-        <button class="status-btn" onclick="setStatus('leyendo')"   id="sbtn-leyendo">📖 Leyendo</button>
-        <button class="status-btn" onclick="setStatus('leido')"     id="sbtn-leido">✓ Leído</button>
+        <button class="status-btn" onclick="setStatus('pendiente')" id="sbtn-pendiente" data-i18n="modalStatusPendiente">📚 Pendiente</button>
+        <button class="status-btn" onclick="setStatus('leyendo')"   id="sbtn-leyendo" data-i18n="modalStatusLeyendo">📖 Leyendo</button>
+        <button class="status-btn" onclick="setStatus('leido')"     id="sbtn-leido" data-i18n="modalStatusLeido">✓ Leído</button>
       </div>
 
       <!-- AUDIO PLAYER -->
@@ -5791,11 +5791,11 @@ footer {
         <div class="buy-section">
           <div class="buy-section-text">
             <strong>¿Te interesó este libro?</strong>
-            <span>Cómpralo en Amazon y apoya este proyecto de resúmenes.</span>
+            <span data-i18n-amazon-desc>Cómpralo en Amazon y apoya este proyecto de resúmenes.</span>
           </div>
           <a id="m-buy-link" href="#" target="_blank" rel="noopener sponsored" class="btn-comprar">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M18.59 13.18C17.38 16.38 14.32 18.59 10.71 18.59c-4.64 0-8.41-3.77-8.41-8.41 0-4.64 3.77-8.41 8.41-8.41 2.05 0 3.92.74 5.37 1.96l1.42-1.42C15.73 1.04 13.31 0 10.71 0 4.79 0 0 4.79 0 10.71S4.79 21.41 10.71 21.41c4.46 0 8.29-2.74 9.93-6.66l-2.05-1.57zM22 10h-2V8h-2v2h-2v2h2v2h2v-2h2v-2z"/></svg>
-            Comprar en Amazon
+            <span data-i18n="btnComprar">🛒 Comprar en Amazon</span>
           </a>
         </div>
       </div>
@@ -7649,7 +7649,7 @@ function renderGrid(lista) {
   const grid   = document.getElementById('grid');
   grid.innerHTML = '';
   document.getElementById('count-label').textContent =
-    sorted.length + ' resumen' + (sorted.length !== 1 ? 'es' : '');
+    sorted.length + ' ' + (langActivo === 'en' ? (sorted.length !== 1 ? 'summaries' : 'summary') : ('resumen' + (sorted.length !== 1 ? 'es' : '')));
 
   if (vistaActiva === 'list') grid.classList.add('list-view');
   else grid.classList.remove('list-view');
@@ -9122,7 +9122,7 @@ function actualizarTiempoPendiente() {
   const tiempoStr = horas > 0
     ? `${horas}h ${mins > 0 ? mins + 'min' : ''}`
     : `${mins} min`;
-  el.innerHTML = `Tiempo estimado para leer todos los resúmenes pendientes: <span>${tiempoStr}</span>`;
+  el.innerHTML = `${langActivo === 'en' ? 'Estimated time to read all pending summaries' : 'Tiempo estimado para leer todos los resúmenes pendientes'}: <span>${tiempoStr}</span>`;
 }
 
 // --- SKELETON LOADING ---
@@ -9266,7 +9266,7 @@ function renderGoals() {
           <span class="goal-target">/ ${goals.mes} libros</span>
         </div>
         <div class="goal-track"><div class="goal-fill" style="width:${pct}%"></div></div>
-        <span class="goal-status ${done?'done':''}">${done ? '✓ Meta alcanzada 🎉' : `Faltan ${goals.mes - leidosMes} libros`}</span>
+        <span class="goal-status ${done?'done':''}">${done ? t('goalsAchieved') : `${langActivo==='en' ? `${goals.mes - leidosMes} left` : `Faltan ${goals.mes - leidosMes} libros`}`}</span>
       </div>`);
   }
 
@@ -9281,7 +9281,7 @@ function renderGoals() {
           <span class="goal-target">/ ${goals.anio} libros</span>
         </div>
         <div class="goal-track"><div class="goal-fill" style="width:${pct}%"></div></div>
-        <span class="goal-status ${done?'done':''}">${done ? '✓ Meta alcanzada 🎉' : `Faltan ${goals.anio - leidos} libros`}</span>
+        <span class="goal-status ${done?'done':''}">${done ? t('goalsAchieved') : `${langActivo==='en' ? `${goals.anio - leidos} left` : `Faltan ${goals.anio - leidos} libros`}`}</span>
       </div>`);
   }
 
@@ -9297,7 +9297,7 @@ function renderGoals() {
           <span class="goal-target">/ ${goals.minDia} min</span>
         </div>
         <div class="goal-track"><div class="goal-fill" style="width:${pct}%"></div></div>
-        <span class="goal-status ${done?'done':''}">${done ? '✓ Meta alcanzada 🎉' : `Faltan ${goals.minDia - minHoy} min`}</span>
+        <span class="goal-status ${done?'done':''}">${done ? t('goalsAchieved') : `${langActivo==='en' ? `${goals.minDia - minHoy} min left` : `Faltan ${goals.minDia - minHoy} min`}`}</span>
       </div>`);
   }
 
@@ -9472,7 +9472,7 @@ function abrirHistory() {
         </div>
       </div>`).join('');
   }
-  document.getElementById('history-overlay').classList.add('open');
+  applyLang(); document.getElementById('history-overlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
 
@@ -9646,7 +9646,7 @@ function renderRecomendaciones() {
   sub.textContent = `Basado en ${leidos.length} libro${leidos.length!==1?'s':''} que leíste`;
 
   if (!recs.length) {
-    grid.innerHTML = '<div class="rec-empty">¡Leíste todo! Pronto agregaremos más resúmenes.</div>';
+    grid.innerHTML = `<div class="rec-empty">${langActivo === 'en' ? 'You\'ve read everything! More summaries coming soon.' : '¡Leíste todo! Pronto agregaremos más resúmenes.'}</div>`;
     return;
   }
 
@@ -9792,10 +9792,10 @@ function activarCategoriaSEO(cat) {
   titulo.textContent  = info.nombre;
   desc.textContent    = info.desc;
   meta.innerHTML = `
-    <div class="cat-page-stat"><strong>${libCat.length}</strong> resúmenes</div>
-    <div class="cat-page-stat"><strong>${leidos}</strong> leídos</div>
-    <div class="cat-page-stat"><strong>~${minProm} min</strong> promedio</div>
-    <div class="cat-page-stat"><strong>${libCat.filter(l=>l.linkAfiliado).length}</strong> en Amazon</div>
+    <div class="cat-page-stat"><strong>${libCat.length}</strong> ${langActivo==='en'?'summaries':'resúmenes'}</div>
+    <div class="cat-page-stat"><strong>${leidos}</strong> ${langActivo==='en'?'read':'leídos'}</div>
+    <div class="cat-page-stat"><strong>~${minProm} min</strong> ${langActivo==='en'?'avg':'promedio'}</div>
+    <div class="cat-page-stat"><strong>${libCat.filter(l=>l.linkAfiliado).length}</strong> ${langActivo==='en'?'on Amazon':'en Amazon'}</div>
   `;
   banner.classList.add('visible');
 
@@ -9943,9 +9943,9 @@ function renderHeatmap(year) {
   // Stats
   const avgPerDay = totalDays > 0 ? (totalBooks / totalDays).toFixed(1) : 0;
   stats.innerHTML = `
-    <span class="heatmap-stat"><strong>${totalBooks}</strong> libros abiertos</span>
-    <span class="heatmap-stat"><strong>${totalDays}</strong> días activos</span>
-    <span class="heatmap-stat"><strong>${avgPerDay}</strong> libros/día activo</span>
+    <span class="heatmap-stat"><strong>${totalBooks}</strong> ${t('heatmapLibros')}</span>
+    <span class="heatmap-stat"><strong>${totalDays}</strong> ${t('heatmapDias')}</span>
+    <span class="heatmap-stat"><strong>${avgPerDay}</strong> ${t('heatmapAvg')}</span>
   `;
 }
 
@@ -10356,6 +10356,23 @@ const TRADUCCIONES = {
     notas_searchPlaceholder: 'Buscar en tus notas...',
     emptyState: 'No se encontraron libros con ese filtro.',
     btnComprar: '🛒 Comprar en Amazon',
+    pwaInstall: 'Instalar LEER',
+    pwaDesc: 'Agrega la app a tu pantalla de inicio para leer sin conexión',
+    pwaBtn: 'Instalar',
+    dailyEyebrow: '☀️ Lectura del día',
+    dailyDayLabel: 'día del año',
+    dailyReadBtn: 'Leer resumen →',
+    dailyAddList: '+ Lista de lectura',
+    goalsMonthLabel: '📅 Meta mensual',
+    goalsYearLabel: '📆 Meta anual',
+    goalsDayLabel: '⏱ Meta diaria',
+    goalsAchieved: t('goalsAchieved'),
+    readlistEmpty: 'Tu lista de lectura está vacía.<br>Agrega libros desde el botón 📚 en cada resumen.',
+    readlistMaraton: '🏃 Maratonear lista',
+    readlistClear: 'Vaciar lista',
+    srSectionBtn: '§ Leer por secciones',
+    srFullBtn: '☰ Modo completo',
+    srCompleted: '✓ Completado',
   },
   en: {
     navBiblioteca: 'Library',
@@ -10493,6 +10510,23 @@ const TRADUCCIONES = {
     notas_searchPlaceholder: 'Search your notes...',
     emptyState: 'No books found for this filter.',
     btnComprar: '🛒 Buy on Amazon',
+    pwaInstall: 'Install LEER',
+    pwaDesc: 'Add the app to your home screen to read offline',
+    pwaBtn: 'Install',
+    dailyEyebrow: '☀️ Book of the day',
+    dailyDayLabel: 'day of the year',
+    dailyReadBtn: 'Read summary →',
+    dailyAddList: '+ Reading list',
+    goalsMonthLabel: '📅 Monthly goal',
+    goalsYearLabel: '📆 Yearly goal',
+    goalsDayLabel: '⏱ Daily goal',
+    goalsAchieved: '✓ Goal achieved 🎉',
+    readlistEmpty: "Your reading list is empty.<br>Add books using the 📚 button in each summary.",
+    readlistMaraton: '🏃 Marathon list',
+    readlistClear: 'Clear list',
+    srSectionBtn: '§ Read in sections',
+    srFullBtn: '☰ Full mode',
+    srCompleted: '✓ Completed',
   }
 };
 
@@ -10514,152 +10548,109 @@ function applyLang() {
     btn.title = langActivo === 'es' ? 'Switch to English' : 'Cambiar a Español';
   }
 
-  // Update <html lang>
   document.documentElement.lang = langActivo;
 
-  // Genre labels map (used by render functions)
-  genreLabels.filosofia = t('genreFilosofia');
-  genreLabels.negocios  = t('genreNegocios');
-  genreLabels.psicologia= t('genrePsicologia');
-  genreLabels.ciencia   = t('genreCiencia');
-  genreLabels.historia  = t('genreHistoria');
-  genreLabels.autoayuda = t('genreAutoayuda');
-
-  // Nav buttons
-  const navMap = [
-    ['nav-link:nth-of-type(1)', 'navBiblioteca'],
-  ];
-  document.querySelectorAll('.nav-link').forEach((btn, i) => {
-    const keys = ['navBiblioteca','navStats','navHistory','navCitas','navNotas','navLista','navMaraton','navExportar','navComparar','navIndice'];
-    if (keys[i]) btn.textContent = t(keys[i]);
+  // ── 1. ATRIBUTOS data-i18n (textos estáticos) ──────────────────
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    const val = t(key);
+    if (val) el.textContent = val;
   });
-  const sorpresaBtn = document.querySelector('.btn-sorpresa');
-  if (sorpresaBtn) sorpresaBtn.textContent = t('navSorpresa');
 
-  // Hero
-  const eyebrow = document.querySelector('.hero-eyebrow');
-  if (eyebrow) eyebrow.textContent = t('heroEyebrow');
+  // ── 2. PLACEHOLDERS data-i18n-placeholder ──────────────────────
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const val = t(key);
+    if (val) el.placeholder = val;
+  });
+
+  // ── 3. GÉNERO LABELS (actualizar antes de re-render) ──────────
+  genreLabels.filosofia  = t('genreFilosofia');
+  genreLabels.negocios   = t('genreNegocios');
+  genreLabels.psicologia = t('genrePsicologia');
+  genreLabels.ciencia    = t('genreCiencia');
+  genreLabels.historia   = t('genreHistoria');
+  genreLabels.autoayuda  = t('genreAutoayuda');
+
+  // ── 4. HERO H1 (innerHTML para el <em>) ───────────────────────
   const heroH1 = document.querySelector('.hero-left h1');
   if (heroH1) heroH1.innerHTML = t('heroH1');
-  const heroDesc = document.querySelector('.hero-desc');
-  if (heroDesc) heroDesc.textContent = t('heroDesc');
-  document.querySelectorAll('.stat-label').forEach((el, i) => {
-    const keys = ['heroLibros', 'heroCats', 'heroMin'];
-    if (keys[i]) el.textContent = t(keys[i]);
-  });
+
+  // ── 5. FEATURED CARD ─────────────────────────────────────────
   const featTag = document.querySelector('.featured-tag');
   if (featTag) featTag.innerHTML = t('featuredTag') + '<span style="flex:1;height:1px;background:var(--border)"></span>';
   const featReadTime = document.querySelector('.read-time');
   if (featReadTime) featReadTime.textContent = t('featuredReadTime');
 
-  // Libro del mes
-  const lmBadge = document.querySelector('.libro-mes-badge');
-  if (lmBadge) lmBadge.textContent = t('libroMesBadge');
-  const lmLeer = document.getElementById('lm-btn-leer');
-  if (lmLeer) lmLeer.textContent = t('libroMesLeer');
+  // ── 6. STAT LABELS EN HERO ───────────────────────────────────
+  const statLabels = document.querySelectorAll('.stat-label');
+  const slKeys = ['heroLibros', 'heroCats', 'heroMin'];
+  statLabels.forEach((el, i) => { if (slKeys[i]) el.textContent = t(slKeys[i]); });
+
+  // ── 7. LIBRO DEL MES ─────────────────────────────────────────
   const lmAmazon = document.getElementById('lm-btn-amazon');
   if (lmAmazon) lmAmazon.textContent = t('libroMesAmazon');
-  const lmIdeas = document.querySelector('.lms-lbl:last-of-type');
   document.querySelectorAll('.lms-lbl').forEach((el, i) => {
-    const keys = [null, null, null, 'libroMesIdeas'];
-    if (keys[i]) el.textContent = t(keys[i]);
+    const lmsKeys = [null, null, null, 'libroMesIdeas'];
+    if (lmsKeys[i]) el.textContent = t(lmsKeys[i]);
   });
 
-  // Frase del día
-  const fraseDiaTag = document.querySelector('.frase-dia-tag');
-  if (fraseDiaTag) fraseDiaTag.textContent = t('fraseDiaTag');
-  const btnCopyFrase = document.getElementById('btn-copy-frase');
-  if (btnCopyFrase) btnCopyFrase.textContent = t('copiarFrase');
+  // ── 8. SORT SELECT OPTIONS ───────────────────────────────────
+  const sortSelect = document.getElementById('sort-select');
+  if (sortSelect) {
+    const sortKeys = ['sortDefault','sortRating','sortNew','sortOld','sortShort','sortAZ'];
+    Array.from(sortSelect.options).forEach((opt, i) => {
+      if (sortKeys[i]) opt.textContent = t(sortKeys[i]);
+    });
+  }
 
-  // Search
-  const buscador = document.getElementById('buscador');
-  if (buscador) buscador.placeholder = t('searchPlaceholder');
-  const filterBtns = document.querySelectorAll('.filtro-btn');
-  const filterKeys = ['filtroTodos','filtroFilosofia','filtroNegocios','filtroPsicologia','filtroCiencia','filtroHistoria','filtroAutoayuda','filtroFavoritos'];
-  filterBtns.forEach((btn, i) => { if (filterKeys[i]) btn.textContent = t(filterKeys[i]); });
-
-  // Marathon bar
-  const mLabel = document.querySelector('.marathon-bar-label');
-  if (mLabel) mLabel.textContent = t('marathonLabel');
+  // ── 9. MARATHON CONTROLS ─────────────────────────────────────
   const mPrev = document.getElementById('marathon-prev-btn');
-  if (mPrev) mPrev.textContent = t('marathonPrev');
   const mNext = document.getElementById('marathon-next-btn');
-  if (mNext) mNext.textContent = t('marathonNext');
   const mExit = document.querySelector('.marathon-btn.stop');
+  if (mPrev) mPrev.textContent = t('marathonPrev');
+  if (mNext) mNext.textContent = t('marathonNext');
   if (mExit) mExit.textContent = t('marathonExit');
 
-  // Goals
-  const goalsTitle = document.querySelector('.goals-title');
-  if (goalsTitle) goalsTitle.textContent = t('goalsTitle');
+  // ── 10. GOALS EDIT BUTTON ────────────────────────────────────
   const goalsEdit = document.querySelector('.goals-edit-btn');
   if (goalsEdit) goalsEdit.textContent = t('goalsEdit');
 
-  // Time filter
-  const timeLabel = document.querySelector('.time-filter-label');
-  if (timeLabel) timeLabel.textContent = t('timeLabel');
+  // ── 11. TIME FILTER RESET ────────────────────────────────────
   const timeReset = document.getElementById('time-filter-reset');
   if (timeReset) timeReset.textContent = t('timeReset');
 
-  // Tags
-  const tagsTitle = document.querySelector('.tag-cloud-title');
-  if (tagsTitle) tagsTitle.textContent = t('tagsTitle');
+  // ── 12. TAGS CLEAR ───────────────────────────────────────────
   const tagsClear = document.getElementById('tag-cloud-clear');
   if (tagsClear) tagsClear.textContent = t('tagsClear');
 
-  // Recents
-  const recTitle = document.querySelector('.recents-title');
-  if (recTitle) recTitle.textContent = t('recentsTitle');
+  // ── 13. RECENTS CLEAR ────────────────────────────────────────
   const recClear = document.querySelector('.recents-clear');
   if (recClear) recClear.textContent = t('recentsClear');
 
-  // Cat banner
-  const catBack = document.querySelector('.cat-back-btn');
-  if (catBack) catBack.textContent = t('catBack');
+  // ── 14. CAT EYEBROW ──────────────────────────────────────────
+  const catEyebrow = document.getElementById('cat-eyebrow');
+  if (catEyebrow && catEyebrow.textContent === 'Categoría') catEyebrow.textContent = t('catEyebrow');
 
-  // Library
-  const libTitle = document.querySelector('.section-title');
-  if (libTitle) libTitle.textContent = t('libraryTitle');
-  const sortLabel = document.querySelector('.sort-label');
-  if (sortLabel) sortLabel.textContent = t('sortLabel');
-  const sortSelect = document.getElementById('sort-select');
-  if (sortSelect) {
-    const opts = sortSelect.options;
-    const sortKeys = ['sortDefault','sortRating','sortNew','sortOld','sortShort','sortAZ'];
-    Array.from(opts).forEach((opt, i) => { if (sortKeys[i]) opt.textContent = t(sortKeys[i]); });
-  }
-
-  // Modal sections (static labels)
-  const secMap = [
-    ['toc-sec-sinopsis', 'modalSec1'],
-    ['toc-sec-contexto', 'modalSec2'],
-    ['toc-sec-ideas',    'modalSec3'],
-    ['toc-sec-desarrollo','modalSec4'],
-    ['toc-sec-lecciones','modalSec5'],
-    ['toc-sec-criticas', 'modalSec6'],
-    ['toc-sec-para',     'modalSec7'],
-    ['toc-sec-porque',   'modalSec8'],
-  ];
-  secMap.forEach(([id, key]) => {
+  // ── 15. MODAL: secciones TOC ─────────────────────────────────
+  const secMap = {
+    'toc-sec-sinopsis':  'modalSec1',
+    'toc-sec-contexto':  'modalSec2',
+    'toc-sec-ideas':     'modalSec3',
+    'toc-sec-desarrollo':'modalSec4',
+    'toc-sec-lecciones': 'modalSec5',
+    'toc-sec-criticas':  'modalSec6',
+    'toc-sec-para':      'modalSec7',
+    'toc-sec-porque':    'modalSec8',
+  };
+  Object.entries(secMap).forEach(([id, key]) => {
     const el = document.getElementById(id);
     if (el) el.textContent = t(key);
   });
 
-  // Modal status buttons
-  const sbtns = [
-    ['sbtn-pendiente', 'modalStatusPendiente'],
-    ['sbtn-leyendo',   'modalStatusLeyendo'],
-    ['sbtn-leido',     'modalStatusLeido'],
-  ];
-  sbtns.forEach(([id, key]) => {
-    const el = document.getElementById(id);
-    if (el) el.textContent = t(key);
-  });
-
-  // Audio label
-  const audioLabel = document.querySelector('.audio-label');
-  if (audioLabel) audioLabel.textContent = t('modalAudioLabel');
-
-  // TL;DR label
+  // ── 16. MODAL: audio, tldr, toc labels ───────────────────────
+  const audioLbl = document.querySelector('.audio-label');
+  if (audioLbl) audioLbl.textContent = t('modalAudioLabel');
   const tldrTag = document.querySelector('.tldr-tag');
   if (tldrTag) tldrTag.textContent = t('modalTldrTag');
   const tldrToggle = document.getElementById('tldr-toggle-label');
@@ -10667,63 +10658,68 @@ function applyLang() {
     const isOpen = document.getElementById('tldr-content')?.classList.contains('open');
     tldrToggle.textContent = isOpen ? t('modalTldrHide') : t('modalTldrShow');
   }
+  const tocLbl = document.querySelector('.toc-label');
+  if (tocLbl) tocLbl.textContent = t('modalTocLabel');
 
-  // TOC label
-  const tocLabel = document.querySelector('.toc-label');
-  if (tocLabel) tocLabel.textContent = t('modalTocLabel');
-
-  // Notes
-  const notasLabel = document.querySelector('.notas-label');
-  if (notasLabel) notasLabel.innerHTML = `<span>✏️</span> ${t('modalNotasLabel').replace('✏️ ','') }`;
+  // ── 17. MODAL: notas, reseñas ────────────────────────────────
+  const notasLbl = document.querySelector('.notas-label');
+  if (notasLbl) notasLbl.innerHTML = `<span>✏️</span> ${t('modalNotasLabel').replace('✏️ ','')}`;
   const notasTA = document.querySelector('.notas-textarea');
   if (notasTA) notasTA.placeholder = t('modalNotasPlaceholder');
   const notasSaved = document.getElementById('notas-saved');
   if (notasSaved) notasSaved.textContent = t('modalNotasSaved');
-
-  // Reviews title
-  const resenasTitle = document.querySelector('.resenas-title');
-  if (resenasTitle) resenasTitle.textContent = t('modalResenasTitle');
+  const resenasTtl = document.querySelector('.resenas-title');
+  if (resenasTtl) resenasTtl.textContent = t('modalResenasTitle');
   const resenaBtn = document.querySelector('.btn-resena-enviar');
   if (resenaBtn) resenaBtn.textContent = t('modalResenaBtn');
 
-  // Marathon next
-  const mNextLabel = document.querySelector('.marathon-next-label');
-  if (mNextLabel) mNextLabel.textContent = t('marathonNextLabel');
-  const mNextBtn = document.querySelector('.btn-marathon-next');
-  if (mNextBtn) mNextBtn.textContent = t('marathonNextBtn');
-
-  // Save quote button
+  // ── 18. MODAL: marathon next, save quote ─────────────────────
+  const mNextLbl = document.querySelector('.marathon-next-label');
+  if (mNextLbl) mNextLbl.textContent = t('marathonNextLabel');
+  const mNextBtn2 = document.querySelector('.btn-marathon-next');
+  if (mNextBtn2) mNextBtn2.textContent = t('marathonNextBtn');
   const sqBtn = document.getElementById('btn-save-quote');
-  if (sqBtn) {
-    const isSaved = sqBtn.classList.contains('saved');
-    sqBtn.innerHTML = isSaved ? t('savedquote') : t('savequote');
+  if (sqBtn) sqBtn.innerHTML = sqBtn.classList.contains('saved') ? t('savedquote') : t('savequote');
+
+  // ── 19. RECOMENDACIONES sub ──────────────────────────────────
+  const recSub = document.getElementById('rec-sub');
+  if (recSub && !recSub.textContent.includes(libros.filter(l=>getStatus(l.titulo)==='leido').length)) {
+    recSub.textContent = t('recSub');
   }
 
-  // Heatmap
-  const hmTitle = document.querySelector('.heatmap-title');
-  if (hmTitle) hmTitle.textContent = t('heatmapTitle');
-
-  // Recomendaciones
-  const recTitleEl = document.querySelector('.recomendaciones-title');
-  if (recTitleEl) recTitleEl.textContent = t('recTitle');
-
-  // Footer
-  const fbDesc = document.querySelector('.footer-brand-desc');
-  if (fbDesc) fbDesc.textContent = t('footerDesc');
+  // ── 20. FOOTER ───────────────────────────────────────────────
   const footerCopy = document.querySelector('.footer-copy');
   if (footerCopy) footerCopy.textContent = t('footerCopy');
+  const fbDesc = document.querySelector('.footer-brand-desc');
+  if (fbDesc) fbDesc.textContent = t('footerDesc');
 
-  // Notesearch placeholder
-  const nsInput = document.getElementById('notesearch-input');
-  if (nsInput) nsInput.placeholder = t('notas_searchPlaceholder');
+  // Footer category links
+  const footerCatLinks = document.querySelectorAll('.footer-col:nth-child(2) .footer-links button');
+  const footerCatKeys = ['filtroFilosofia','filtroPsicologia','filtroNegocios','filtroCiencia','filtroHistoria','filtroAutoayuda'];
+  footerCatLinks.forEach((btn, i) => { if (footerCatKeys[i]) btn.textContent = t(footerCatKeys[i]); });
 
-  // Re-render grid to update genre labels, read-min text etc.
+  // ── 21. RE-RENDER dinámico ────────────────────────────────────
+  // Todos los elementos generados por JS necesitan re-renderizarse
   filtrar();
   renderTagCloud();
   renderRecientes();
   renderRecomendaciones();
-  if (typeof renderGoals === 'function') renderGoals();
+  if (typeof renderGoals === 'function')   renderGoals();
   if (typeof renderHeatmap === 'function') renderHeatmap(heatmapCurrentYear);
+  if (typeof initLecturaDia === 'function') {
+    // Retranslate daily section labels
+    const dailyEyebrow = document.getElementById('daily-eyebrow');
+    if (dailyEyebrow) dailyEyebrow.textContent = langActivo === 'en' ? '☀️ Book of the day' : '☀️ Lectura del día';
+    const dailyDayLbl = document.getElementById('daily-day-label');
+    if (dailyDayLbl) dailyDayLbl.textContent = langActivo === 'en' ? 'day of the year' : 'día del año';
+  }
+  // Spotlight placeholder
+  const spInput = document.getElementById('spotlight-input');
+  if (spInput) spInput.placeholder = langActivo === 'en'
+    ? 'Search books, authors, topics, notes…'
+    : 'Buscar libros, autores, temas, notas…';
+  // Readlist panel if open
+  if (document.getElementById('readlist-overlay')?.classList.contains('open')) renderReadlistPanel();
 }
 
 function initLang() {
@@ -10992,8 +10988,8 @@ function renderReadlistPanel() {
   }).join('');
 
   html += `<div class="readlist-footer">
-    <button class="btn-readlist-clear" onclick="saveReadlist([]);renderReadlistPanel()">Vaciar lista</button>
-    <button class="btn-readlist-maratonear" onclick="cerrarReadlist();setTimeout(()=>{marathonList=[...getReadlist().map(t=>libros.find(l=>l.titulo===t)).filter(Boolean)];if(marathonList.length){marathonActivo=true;marathonIdx=0;actualizarMarathonBar();document.getElementById('marathon-bar').classList.add('active');abrirModal(marathonList[0]);}},150)">🏃 Maratonear lista</button>
+    <button class="btn-readlist-clear" onclick="saveReadlist([]);renderReadlistPanel()" data-i18n="readlistClear">Vaciar lista</button>
+    <button class="btn-readlist-maratonear" onclick="cerrarReadlist();setTimeout(()=>{marathonList=[...getReadlist().map(t=>libros.find(l=>l.titulo===t)).filter(Boolean)];if(marathonList.length){marathonActivo=true;marathonIdx=0;actualizarMarathonBar();document.getElementById('marathon-bar').classList.add('active');abrirModal(marathonList[0]);}},150)" data-i18n-marathon-list>🏃 Maratonear lista</button>
   </div>`;
   body.innerHTML = html;
 }
@@ -11216,7 +11212,7 @@ function toggleSectionMode() {
   srActivo = !srActivo;
   modal.classList.toggle('section-mode', srActivo);
   btn.classList.toggle('active', srActivo);
-  btn.textContent = srActivo ? '☰ Modo completo' : '§ Leer por secciones';
+  btn.textContent = srActivo ? t('srFullBtn') : t('srSectionBtn');
   if (srActivo) {
     srIdx = 0;
     srSecciones = buildSecciones(libroActual);
@@ -11244,7 +11240,7 @@ function renderSrSection() {
 
   const nextBtn = document.getElementById('sr-next');
   if (srIdx === tot - 1) {
-    nextBtn.textContent = '✓ Completado';
+    nextBtn.textContent = t('srCompleted');
     nextBtn.classList.add('primary');
   } else {
     nextBtn.textContent = 'Siguiente →';
