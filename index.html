@@ -277,6 +277,24 @@ nav {
 }
 .btn-darkmode:hover { border-color: var(--ink); color: var(--ink); }
 
+  .btn-lang {
+    height: 32px;
+    padding: 0 0.65rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: var(--r2);
+    cursor: pointer;
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .btn-lang:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-lang.en-active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
 /* ═══════════════════════════════════════════════════════
    HERO
 ═══════════════════════════════════════════════════════ */
@@ -3997,6 +4015,7 @@ footer {
     <button class="nav-link" onclick="iniciarCompare()">⚖ Comparar</button>
     <button class="nav-link" onclick="toggleIndice()">Índice</button>
     <button class="btn-darkmode" id="btn-dark" onclick="toggleDark()" title="Modo oscuro">🌙</button>
+    <button class="btn-lang" id="btn-lang" onclick="toggleLang()" title="Switch language">EN</button>
   </nav>
 </header>
 
@@ -4703,7 +4722,7 @@ footer {
 
 
 <script>
-const genreLabels = {
+let genreLabels = {
   filosofia: 'Filosofía',
   negocios: 'Negocios',
   psicologia: 'Psicología',
@@ -6412,9 +6431,9 @@ function actualizarProgreso() {
   document.getElementById('progress-fill').style.width  = pct + '%';
   document.getElementById('progress-label').textContent = leidos + ' / ' + total + ' leídos';
   document.getElementById('progress-pct').textContent   = pct + '%';
-  document.getElementById('pstat-leido').textContent    = leidos + ' leído' + (leidos !== 1 ? 's' : '');
-  document.getElementById('pstat-leyendo').textContent  = leyendo + ' leyendo';
-  document.getElementById('pstat-pendiente').textContent= pendient + ' pendiente' + (pendient !== 1 ? 's' : '');
+  document.getElementById('pstat-leido').textContent    = leidos + ' ' + (typeof t === 'function' ? t('pstatLeido') : 'leídos');
+  document.getElementById('pstat-leyendo').textContent  = leyendo + ' ' + (typeof t === 'function' ? t('pstatLeyendo') : 'leyendo');
+  document.getElementById('pstat-pendiente').textContent= pendient + ' ' + (typeof t === 'function' ? t('pstatPendiente') : 'pendientes');
   actualizarTiempoPendiente();
 }
 
@@ -8998,8 +9017,540 @@ function copiarShareImg() {
   });
 }
 
+// --- SISTEMA DE IDIOMA (ES / EN) ---
+let langActivo = localStorage.getItem('lang') || 'es';
+
+const TRADUCCIONES = {
+  es: {
+    // Nav
+    navBiblioteca: 'Biblioteca',
+    navSorpresa: '✦ Sorpréndeme',
+    navStats: 'Mis stats',
+    navHistory: '📅 Historial',
+    navCitas: '💛 Citas',
+    navNotas: '🔍 Mis notas',
+    navMaraton: '🏃 Maratón',
+    navExportar: '📥 Exportar',
+    navComparar: '⚖ Comparar',
+    navIndice: 'Índice',
+    // Hero
+    heroEyebrow: 'Resúmenes de libros',
+    heroH1: 'Las ideas<br>que <em>cambian</em><br>tu mundo.',
+    heroDesc: 'Resúmenes profundos de los libros más influyentes. Lee menos, comprende más. Cada resumen destila lo esencial.',
+    heroLibros: 'Libros',
+    heroCats: 'Categorías',
+    heroMin: 'Min. promedio',
+    featuredTag: '✦ Destacado esta semana',
+    featuredReadTime: '5 min de lectura',
+    // Secciones
+    libroMesBadge: '✦ Libro del mes',
+    libroMesLeer: 'Leer resumen →',
+    libroMesAmazon: '🛒 Comprar en Amazon',
+    libroMesIdeas: 'Ideas clave',
+    fraseDiaTag: '✦ Frase del día',
+    copiarFrase: 'Copiar frase',
+    // Progreso
+    pstatLeido: 'leídos',
+    pstatLeyendo: 'leyendo',
+    pstatPendiente: 'pendientes',
+    // Búsqueda
+    searchPlaceholder: 'Buscar título, autor, tema...',
+    filtroTodos: 'Todos',
+    filtroFilosofia: 'Filosofía',
+    filtroNegocios: 'Negocios',
+    filtroPsicologia: 'Psicología',
+    filtroCiencia: 'Ciencia',
+    filtroHistoria: 'Historia',
+    filtroAutoayuda: 'Autoayuda',
+    filtroFavoritos: '⭐ Favoritos',
+    // Marathon bar
+    marathonLabel: '🏃 Maratón',
+    marathonPrev: '← Anterior',
+    marathonNext: 'Siguiente →',
+    marathonExit: '✕ Salir',
+    // Goals
+    goalsTitle: '🎯 Mis metas de lectura',
+    goalsEdit: 'Editar metas ✏️',
+    // Time filter
+    timeLabel: '⏱ Tiempo máximo',
+    timeReset: '✕ Quitar filtro',
+    timeAll: 'Todos',
+    // Tags
+    tagsTitle: '🏷 Explorar por tema',
+    tagsClear: '✕ Limpiar filtro',
+    // Recents
+    recentsTitle: '⏱ Últimos visitados',
+    recentsClear: 'Borrar historial',
+    // Cat banner
+    catBack: '← Todas las categorías',
+    catEyebrow: 'Categoría',
+    // Library
+    libraryTitle: 'Biblioteca',
+    sortLabel: 'Ordenar por',
+    sortDefault: 'Por defecto',
+    sortRating: 'Mayor rating',
+    sortNew: 'Más reciente',
+    sortOld: 'Más antiguo',
+    sortShort: 'Más corto',
+    sortAZ: 'A → Z',
+    // Footer
+    footerDesc: 'Resúmenes profundos de los libros más influyentes. Lee menos, comprende más.',
+    footerLibros: 'Libros',
+    footerCats: 'Categorías',
+    footerEnAmazon: 'En Amazon',
+    footerColCats: 'Categorías',
+    footerColLib: 'Biblioteca',
+    footerColAbout: 'Acerca de',
+    footerVerTodos: 'Ver todos los libros',
+    footerFavs: '⭐ Mis favoritos',
+    footerSorpresa: '✦ Sorpréndeme',
+    footerStats: '📊 Mis estadísticas',
+    footerMaraton: '🏃 Modo maratón',
+    footerMetas: '🎯 Mis metas',
+    footerExport: '📥 Exportar notas',
+    footerIndice: '☰ Índice de libros',
+    footerTema: '🌙 Cambiar tema',
+    footerAfiliado: 'Este sitio contiene enlaces de afiliado de Amazon. Si compras a través de ellos, recibimos una pequeña comisión sin coste adicional para ti.',
+    footerCopy: '© 2025 LEER — Resúmenes de Libros · resumenya.com',
+    // Modal
+    modalStatusPendiente: '📚 Pendiente',
+    modalStatusLeyendo: '📖 Leyendo',
+    modalStatusLeido: '✓ Leído',
+    modalAudioLabel: '🎧 Escuchar resumen',
+    modalTldrTag: '⚡ TL;DR — En 3 puntos',
+    modalTldrShow: 'Mostrar →',
+    modalTldrHide: 'Ocultar ↑',
+    modalTocLabel: '📋 Tabla de contenidos',
+    modalSec1: '¿De qué trata?',
+    modalSec2: 'Contexto e historia del libro',
+    modalSec3: 'Ideas y argumentos principales',
+    modalSec4: 'Desarrollo profundo',
+    modalSec5: 'Lecciones aplicables',
+    modalSec6: 'Críticas y limitaciones',
+    modalSec7: '¿Para quién es este libro?',
+    modalSec8: '¿Por qué leerlo?',
+    modalSec9: 'Si te gustó, también lee',
+    modalBuyTitle: 'Conseguir este libro',
+    modalBuyDesc: 'Disponible en Amazon',
+    modalBuyBtn: '🛒 Comprar en Amazon',
+    modalNotasLabel: '✏️ Mis notas personales',
+    modalNotasPlaceholder: 'Escribe aquí tus reflexiones, ideas que quieres recordar...',
+    modalNotasSaved: '✓ Guardado',
+    modalResenasTitle: '💬 Reseñas de lectores',
+    modalResenaBtn: 'Publicar reseña',
+    modalShare: 'Compartir',
+    modalShareCopy: '📋 Copiar frase',
+    marathonNextLabel: '▶ Siguiente en la lista',
+    marathonNextBtn: 'Continuar →',
+    // Genre labels
+    genreFilosofia: 'Filosofía',
+    genreNegocios: 'Negocios',
+    genrePsicologia: 'Psicología',
+    genreCiencia: 'Ciencia',
+    genreHistoria: 'Historia',
+    genreAutoayuda: 'Autoayuda',
+    // Recomenaciones
+    recTitle: 'Para vos',
+    recSub: 'Basado en tus lecturas',
+    // Heatmap
+    heatmapTitle: 'Actividad lectora',
+    heatmapLibros: 'libros abiertos',
+    heatmapDias: 'días activos',
+    heatmapAvg: 'libros/día activo',
+    heatmapMenos: 'Menos',
+    heatmapMas: 'Más',
+    // Misc
+    savequote: '♡ Guardar cita',
+    savedquote: '♥ Cita guardada',
+    focusExit: 'Salir del modo lectura',
+    focusEnter: 'Modo lectura',
+    readingMin: 'min restante',
+    readingDone: '✓ Completado',
+    historyTitle: '📅 Historial de lectura',
+    quotesTitle: '💛 Mis citas guardadas',
+    exportTitle: '📥 Exportar mis notas',
+    compareClose: '✕ Cerrar comparación',
+    flashcardClose: '✕ Salir',
+    notas_searchPlaceholder: 'Buscar en tus notas...',
+    emptyState: 'No se encontraron libros con ese filtro.',
+    btnComprar: '🛒 Comprar en Amazon',
+  },
+  en: {
+    navBiblioteca: 'Library',
+    navSorpresa: '✦ Surprise me',
+    navStats: 'My stats',
+    navHistory: '📅 History',
+    navCitas: '💛 Quotes',
+    navNotas: '🔍 My notes',
+    navMaraton: '🏃 Marathon',
+    navExportar: '📥 Export',
+    navComparar: '⚖ Compare',
+    navIndice: 'Index',
+    heroEyebrow: 'Book summaries',
+    heroH1: 'The ideas<br>that <em>change</em><br>your world.',
+    heroDesc: 'Deep summaries of the most influential books. Read less, understand more. Each summary distills the essential.',
+    heroLibros: 'Books',
+    heroCats: 'Categories',
+    heroMin: 'Avg. minutes',
+    featuredTag: '✦ Featured this week',
+    featuredReadTime: '5 min read',
+    libroMesBadge: '✦ Book of the month',
+    libroMesLeer: 'Read summary →',
+    libroMesAmazon: '🛒 Buy on Amazon',
+    libroMesIdeas: 'Key ideas',
+    fraseDiaTag: '✦ Quote of the day',
+    copiarFrase: 'Copy quote',
+    pstatLeido: 'read',
+    pstatLeyendo: 'reading',
+    pstatPendiente: 'pending',
+    searchPlaceholder: 'Search title, author, topic...',
+    filtroTodos: 'All',
+    filtroFilosofia: 'Philosophy',
+    filtroNegocios: 'Business',
+    filtroPsicologia: 'Psychology',
+    filtroCiencia: 'Science',
+    filtroHistoria: 'History',
+    filtroAutoayuda: 'Self-help',
+    filtroFavoritos: '⭐ Favorites',
+    marathonLabel: '🏃 Marathon',
+    marathonPrev: '← Previous',
+    marathonNext: 'Next →',
+    marathonExit: '✕ Exit',
+    goalsTitle: '🎯 My reading goals',
+    goalsEdit: 'Edit goals ✏️',
+    timeLabel: '⏱ Max time',
+    timeReset: '✕ Clear filter',
+    timeAll: 'All',
+    tagsTitle: '🏷 Browse by topic',
+    tagsClear: '✕ Clear filter',
+    recentsTitle: '⏱ Recently viewed',
+    recentsClear: 'Clear history',
+    catBack: '← All categories',
+    catEyebrow: 'Category',
+    libraryTitle: 'Library',
+    sortLabel: 'Sort by',
+    sortDefault: 'Default',
+    sortRating: 'Highest rated',
+    sortNew: 'Most recent',
+    sortOld: 'Oldest',
+    sortShort: 'Shortest',
+    sortAZ: 'A → Z',
+    footerDesc: 'Deep summaries of the most influential books. Read less, understand more.',
+    footerLibros: 'Books',
+    footerCats: 'Categories',
+    footerEnAmazon: 'On Amazon',
+    footerColCats: 'Categories',
+    footerColLib: 'Library',
+    footerColAbout: 'About',
+    footerVerTodos: 'View all books',
+    footerFavs: '⭐ My favorites',
+    footerSorpresa: '✦ Surprise me',
+    footerStats: '📊 My statistics',
+    footerMaraton: '🏃 Marathon mode',
+    footerMetas: '🎯 My goals',
+    footerExport: '📥 Export notes',
+    footerIndice: '☰ Book index',
+    footerTema: '🌙 Toggle theme',
+    footerAfiliado: 'This site contains Amazon affiliate links. If you purchase through them, we receive a small commission at no extra cost to you.',
+    footerCopy: '© 2025 LEER — Book Summaries · resumenya.com',
+    modalStatusPendiente: '📚 To read',
+    modalStatusLeyendo: '📖 Reading',
+    modalStatusLeido: '✓ Read',
+    modalAudioLabel: '🎧 Listen to summary',
+    modalTldrTag: '⚡ TL;DR — In 3 points',
+    modalTldrShow: 'Show →',
+    modalTldrHide: 'Hide ↑',
+    modalTocLabel: '📋 Table of contents',
+    modalSec1: 'What is it about?',
+    modalSec2: 'Context and history',
+    modalSec3: 'Main ideas and arguments',
+    modalSec4: 'Deep dive',
+    modalSec5: 'Actionable lessons',
+    modalSec6: 'Criticisms and limitations',
+    modalSec7: 'Who is this book for?',
+    modalSec8: 'Why read it?',
+    modalSec9: 'If you liked this, also read',
+    modalBuyTitle: 'Get this book',
+    modalBuyDesc: 'Available on Amazon',
+    modalBuyBtn: '🛒 Buy on Amazon',
+    modalNotasLabel: '✏️ My personal notes',
+    modalNotasPlaceholder: 'Write your reflections, ideas you want to remember...',
+    modalNotasSaved: '✓ Saved',
+    modalResenasTitle: '💬 Reader reviews',
+    modalResenaBtn: 'Post review',
+    modalShare: 'Share',
+    modalShareCopy: '📋 Copy quote',
+    marathonNextLabel: '▶ Next in the list',
+    marathonNextBtn: 'Continue →',
+    genreFilosofia: 'Philosophy',
+    genreNegocios: 'Business',
+    genrePsicologia: 'Psychology',
+    genreCiencia: 'Science',
+    genreHistoria: 'History',
+    genreAutoayuda: 'Self-help',
+    recTitle: 'For you',
+    recSub: 'Based on your reading',
+    heatmapTitle: 'Reading activity',
+    heatmapLibros: 'books opened',
+    heatmapDias: 'active days',
+    heatmapAvg: 'books/active day',
+    heatmapMenos: 'Less',
+    heatmapMas: 'More',
+    savequote: '♡ Save quote',
+    savedquote: '♥ Quote saved',
+    focusExit: 'Exit focus mode',
+    focusEnter: 'Focus mode',
+    readingMin: 'min remaining',
+    readingDone: '✓ Completed',
+    historyTitle: '📅 Reading history',
+    quotesTitle: '💛 My saved quotes',
+    exportTitle: '📥 Export my notes',
+    compareClose: '✕ Close comparison',
+    flashcardClose: '✕ Exit',
+    notas_searchPlaceholder: 'Search your notes...',
+    emptyState: 'No books found for this filter.',
+    btnComprar: '🛒 Buy on Amazon',
+  }
+};
+
+function t(key) {
+  return TRADUCCIONES[langActivo][key] || TRADUCCIONES['es'][key] || key;
+}
+
+function toggleLang() {
+  langActivo = langActivo === 'es' ? 'en' : 'es';
+  localStorage.setItem('lang', langActivo);
+  applyLang();
+}
+
+function applyLang() {
+  const btn = document.getElementById('btn-lang');
+  if (btn) {
+    btn.textContent = langActivo === 'es' ? 'EN' : 'ES';
+    btn.classList.toggle('en-active', langActivo === 'en');
+    btn.title = langActivo === 'es' ? 'Switch to English' : 'Cambiar a Español';
+  }
+
+  // Update <html lang>
+  document.documentElement.lang = langActivo;
+
+  // Genre labels map (used by render functions)
+  genreLabels.filosofia = t('genreFilosofia');
+  genreLabels.negocios  = t('genreNegocios');
+  genreLabels.psicologia= t('genrePsicologia');
+  genreLabels.ciencia   = t('genreCiencia');
+  genreLabels.historia  = t('genreHistoria');
+  genreLabels.autoayuda = t('genreAutoayuda');
+
+  // Nav buttons
+  const navMap = [
+    ['nav-link:nth-of-type(1)', 'navBiblioteca'],
+  ];
+  document.querySelectorAll('.nav-link').forEach((btn, i) => {
+    const keys = ['navBiblioteca','navStats','navHistory','navCitas','navNotas','navMaraton','navExportar','navComparar','navIndice'];
+    if (keys[i]) btn.textContent = t(keys[i]);
+  });
+  const sorpresaBtn = document.querySelector('.btn-sorpresa');
+  if (sorpresaBtn) sorpresaBtn.textContent = t('navSorpresa');
+
+  // Hero
+  const eyebrow = document.querySelector('.hero-eyebrow');
+  if (eyebrow) eyebrow.textContent = t('heroEyebrow');
+  const heroH1 = document.querySelector('.hero-left h1');
+  if (heroH1) heroH1.innerHTML = t('heroH1');
+  const heroDesc = document.querySelector('.hero-desc');
+  if (heroDesc) heroDesc.textContent = t('heroDesc');
+  document.querySelectorAll('.stat-label').forEach((el, i) => {
+    const keys = ['heroLibros', 'heroCats', 'heroMin'];
+    if (keys[i]) el.textContent = t(keys[i]);
+  });
+  const featTag = document.querySelector('.featured-tag');
+  if (featTag) featTag.innerHTML = t('featuredTag') + '<span style="flex:1;height:1px;background:var(--border)"></span>';
+  const featReadTime = document.querySelector('.read-time');
+  if (featReadTime) featReadTime.textContent = t('featuredReadTime');
+
+  // Libro del mes
+  const lmBadge = document.querySelector('.libro-mes-badge');
+  if (lmBadge) lmBadge.textContent = t('libroMesBadge');
+  const lmLeer = document.getElementById('lm-btn-leer');
+  if (lmLeer) lmLeer.textContent = t('libroMesLeer');
+  const lmAmazon = document.getElementById('lm-btn-amazon');
+  if (lmAmazon) lmAmazon.textContent = t('libroMesAmazon');
+  const lmIdeas = document.querySelector('.lms-lbl:last-of-type');
+  document.querySelectorAll('.lms-lbl').forEach((el, i) => {
+    const keys = [null, null, null, 'libroMesIdeas'];
+    if (keys[i]) el.textContent = t(keys[i]);
+  });
+
+  // Frase del día
+  const fraseDiaTag = document.querySelector('.frase-dia-tag');
+  if (fraseDiaTag) fraseDiaTag.textContent = t('fraseDiaTag');
+  const btnCopyFrase = document.getElementById('btn-copy-frase');
+  if (btnCopyFrase) btnCopyFrase.textContent = t('copiarFrase');
+
+  // Search
+  const buscador = document.getElementById('buscador');
+  if (buscador) buscador.placeholder = t('searchPlaceholder');
+  const filterBtns = document.querySelectorAll('.filtro-btn');
+  const filterKeys = ['filtroTodos','filtroFilosofia','filtroNegocios','filtroPsicologia','filtroCiencia','filtroHistoria','filtroAutoayuda','filtroFavoritos'];
+  filterBtns.forEach((btn, i) => { if (filterKeys[i]) btn.textContent = t(filterKeys[i]); });
+
+  // Marathon bar
+  const mLabel = document.querySelector('.marathon-bar-label');
+  if (mLabel) mLabel.textContent = t('marathonLabel');
+  const mPrev = document.getElementById('marathon-prev-btn');
+  if (mPrev) mPrev.textContent = t('marathonPrev');
+  const mNext = document.getElementById('marathon-next-btn');
+  if (mNext) mNext.textContent = t('marathonNext');
+  const mExit = document.querySelector('.marathon-btn.stop');
+  if (mExit) mExit.textContent = t('marathonExit');
+
+  // Goals
+  const goalsTitle = document.querySelector('.goals-title');
+  if (goalsTitle) goalsTitle.textContent = t('goalsTitle');
+  const goalsEdit = document.querySelector('.goals-edit-btn');
+  if (goalsEdit) goalsEdit.textContent = t('goalsEdit');
+
+  // Time filter
+  const timeLabel = document.querySelector('.time-filter-label');
+  if (timeLabel) timeLabel.textContent = t('timeLabel');
+  const timeReset = document.getElementById('time-filter-reset');
+  if (timeReset) timeReset.textContent = t('timeReset');
+
+  // Tags
+  const tagsTitle = document.querySelector('.tag-cloud-title');
+  if (tagsTitle) tagsTitle.textContent = t('tagsTitle');
+  const tagsClear = document.getElementById('tag-cloud-clear');
+  if (tagsClear) tagsClear.textContent = t('tagsClear');
+
+  // Recents
+  const recTitle = document.querySelector('.recents-title');
+  if (recTitle) recTitle.textContent = t('recentsTitle');
+  const recClear = document.querySelector('.recents-clear');
+  if (recClear) recClear.textContent = t('recentsClear');
+
+  // Cat banner
+  const catBack = document.querySelector('.cat-back-btn');
+  if (catBack) catBack.textContent = t('catBack');
+
+  // Library
+  const libTitle = document.querySelector('.section-title');
+  if (libTitle) libTitle.textContent = t('libraryTitle');
+  const sortLabel = document.querySelector('.sort-label');
+  if (sortLabel) sortLabel.textContent = t('sortLabel');
+  const sortSelect = document.getElementById('sort-select');
+  if (sortSelect) {
+    const opts = sortSelect.options;
+    const sortKeys = ['sortDefault','sortRating','sortNew','sortOld','sortShort','sortAZ'];
+    Array.from(opts).forEach((opt, i) => { if (sortKeys[i]) opt.textContent = t(sortKeys[i]); });
+  }
+
+  // Modal sections (static labels)
+  const secMap = [
+    ['toc-sec-sinopsis', 'modalSec1'],
+    ['toc-sec-contexto', 'modalSec2'],
+    ['toc-sec-ideas',    'modalSec3'],
+    ['toc-sec-desarrollo','modalSec4'],
+    ['toc-sec-lecciones','modalSec5'],
+    ['toc-sec-criticas', 'modalSec6'],
+    ['toc-sec-para',     'modalSec7'],
+    ['toc-sec-porque',   'modalSec8'],
+  ];
+  secMap.forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = t(key);
+  });
+
+  // Modal status buttons
+  const sbtns = [
+    ['sbtn-pendiente', 'modalStatusPendiente'],
+    ['sbtn-leyendo',   'modalStatusLeyendo'],
+    ['sbtn-leido',     'modalStatusLeido'],
+  ];
+  sbtns.forEach(([id, key]) => {
+    const el = document.getElementById(id);
+    if (el) el.textContent = t(key);
+  });
+
+  // Audio label
+  const audioLabel = document.querySelector('.audio-label');
+  if (audioLabel) audioLabel.textContent = t('modalAudioLabel');
+
+  // TL;DR label
+  const tldrTag = document.querySelector('.tldr-tag');
+  if (tldrTag) tldrTag.textContent = t('modalTldrTag');
+  const tldrToggle = document.getElementById('tldr-toggle-label');
+  if (tldrToggle) {
+    const isOpen = document.getElementById('tldr-content')?.classList.contains('open');
+    tldrToggle.textContent = isOpen ? t('modalTldrHide') : t('modalTldrShow');
+  }
+
+  // TOC label
+  const tocLabel = document.querySelector('.toc-label');
+  if (tocLabel) tocLabel.textContent = t('modalTocLabel');
+
+  // Notes
+  const notasLabel = document.querySelector('.notas-label');
+  if (notasLabel) notasLabel.innerHTML = `<span>✏️</span> ${t('modalNotasLabel').replace('✏️ ','') }`;
+  const notasTA = document.querySelector('.notas-textarea');
+  if (notasTA) notasTA.placeholder = t('modalNotasPlaceholder');
+  const notasSaved = document.getElementById('notas-saved');
+  if (notasSaved) notasSaved.textContent = t('modalNotasSaved');
+
+  // Reviews title
+  const resenasTitle = document.querySelector('.resenas-title');
+  if (resenasTitle) resenasTitle.textContent = t('modalResenasTitle');
+  const resenaBtn = document.querySelector('.btn-resena-enviar');
+  if (resenaBtn) resenaBtn.textContent = t('modalResenaBtn');
+
+  // Marathon next
+  const mNextLabel = document.querySelector('.marathon-next-label');
+  if (mNextLabel) mNextLabel.textContent = t('marathonNextLabel');
+  const mNextBtn = document.querySelector('.btn-marathon-next');
+  if (mNextBtn) mNextBtn.textContent = t('marathonNextBtn');
+
+  // Save quote button
+  const sqBtn = document.getElementById('btn-save-quote');
+  if (sqBtn) {
+    const isSaved = sqBtn.classList.contains('saved');
+    sqBtn.innerHTML = isSaved ? t('savedquote') : t('savequote');
+  }
+
+  // Heatmap
+  const hmTitle = document.querySelector('.heatmap-title');
+  if (hmTitle) hmTitle.textContent = t('heatmapTitle');
+
+  // Recomendaciones
+  const recTitleEl = document.querySelector('.recomendaciones-title');
+  if (recTitleEl) recTitleEl.textContent = t('recTitle');
+
+  // Footer
+  const fbDesc = document.querySelector('.footer-brand-desc');
+  if (fbDesc) fbDesc.textContent = t('footerDesc');
+  const footerCopy = document.querySelector('.footer-copy');
+  if (footerCopy) footerCopy.textContent = t('footerCopy');
+
+  // Notesearch placeholder
+  const nsInput = document.getElementById('notesearch-input');
+  if (nsInput) nsInput.placeholder = t('notas_searchPlaceholder');
+
+  // Re-render grid to update genre labels, read-min text etc.
+  filtrar();
+  renderTagCloud();
+  renderRecientes();
+  renderRecomendaciones();
+  if (typeof renderGoals === 'function') renderGoals();
+  if (typeof renderHeatmap === 'function') renderHeatmap(heatmapCurrentYear);
+}
+
+function initLang() {
+  langActivo = localStorage.getItem('lang') || 'es';
+  applyLang();
+}
+
 // Init
 initDark();
+initLang();
 initFraseDia();
 initReadingBar();
 initScrollTop();
