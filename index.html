@@ -1538,8 +1538,231 @@ body.focus-mode .ideas-list li { font-size: 0.95rem; line-height: 1.88; }
 .empty-stat { font-size: 0.8rem; color: var(--muted); font-style: italic; padding: 0.4rem 0; }
 
 /* ═══════════════════════════════════════════════════════
-   FOOTER
+   TAGS SYSTEM
 ═══════════════════════════════════════════════════════ */
+
+/* Tag pills in cards */
+.card-tags {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--s2);
+}
+.card-tag {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: rgba(240,232,218,0.05);
+  border: 1px solid var(--border);
+  border-radius: var(--r1);
+  padding: 0.12rem 0.45rem;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+}
+.card-tag:hover {
+  background: rgba(200,72,26,0.1);
+  border-color: rgba(200,72,26,0.3);
+  color: var(--accent);
+}
+
+/* Tag pills in modal */
+.modal-tags {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+  margin-bottom: var(--s3);
+}
+.modal-tag {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r1);
+  padding: 0.18rem 0.6rem;
+  cursor: pointer;
+  transition: all 0.18s;
+}
+.modal-tag:hover {
+  border-color: rgba(200,72,26,0.4);
+  color: var(--accent);
+  background: rgba(200,72,26,0.06);
+}
+
+/* Tag cloud section */
+.tag-cloud-section {
+  padding: var(--s3) var(--page-pad);
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+}
+.tag-cloud-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--s2);
+}
+.tag-cloud-title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.tag-cloud-clear {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--accent);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: opacity 0.2s;
+  display: none;
+}
+.tag-cloud-clear.visible { display: block; }
+.tag-cloud-clear:hover { opacity: 0.7; }
+.tag-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.tag-cloud-item {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  padding: 0.28rem 0.75rem;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--pill);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+  user-select: none;
+}
+.tag-cloud-item:hover {
+  border-color: rgba(200,72,26,0.4);
+  color: var(--sub);
+}
+.tag-cloud-item.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════════
+   AUTOCOMPLETE SEARCH
+═══════════════════════════════════════════════════════ */
+.search-wrap { position: relative; }
+
+.search-suggestions {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0; right: 0;
+  background: var(--surface);
+  border: 1px solid var(--border-md);
+  border-radius: var(--r2);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+  z-index: 200;
+  overflow: hidden;
+  display: none;
+  max-height: 340px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+.search-suggestions.open { display: block; }
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 0.65rem var(--s2);
+  cursor: pointer;
+  transition: background 0.15s;
+  border-bottom: 1px solid var(--border);
+}
+.suggestion-item:last-child { border-bottom: none; }
+.suggestion-item:hover,
+.suggestion-item.highlighted { background: var(--card); }
+
+.suggestion-genre {
+  font-family: var(--font-mono);
+  font-size: 0.52rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.12rem 0.4rem;
+  border-radius: var(--r1);
+  flex-shrink: 0;
+}
+.suggestion-info { flex: 1; min-width: 0; }
+.suggestion-titulo {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.suggestion-titulo mark {
+  background: rgba(200,72,26,0.2);
+  color: var(--accent);
+  border-radius: 2px;
+  font-style: normal;
+}
+.suggestion-autor {
+  font-size: 0.68rem;
+  color: var(--muted);
+  font-style: italic;
+  margin-top: 0.1rem;
+}
+.suggestion-tag-match {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--accent);
+  background: rgba(200,72,26,0.08);
+  border: 1px solid rgba(200,72,26,0.2);
+  border-radius: var(--r1);
+  padding: 0.1rem 0.4rem;
+  flex-shrink: 0;
+}
+.suggestion-rating {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--muted);
+  flex-shrink: 0;
+}
+.suggestions-empty {
+  padding: var(--s3) var(--s2);
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+  text-align: center;
+}
+.suggestions-footer {
+  padding: 0.45rem var(--s2);
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--muted);
+  display: flex;
+  gap: var(--s2);
+}
+.suggestions-footer kbd {
+  background: var(--surface);
+  border: 1px solid var(--border-md);
+  border-radius: 3px;
+  padding: 0.08rem 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--sub);
+}
+
+/* ── FOOTER ──────────────────────────────────────── */
 footer {
   border-top: 1px solid var(--border);
   padding: var(--s5) var(--page-pad);
@@ -1705,7 +1928,9 @@ footer {
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
     </svg>
-    <input class="search-input" type="text" placeholder="Buscar por título, autor o tema..." id="buscador" oninput="filtrar()">
+    <input class="search-input" type="text" placeholder="Buscar título, autor, tema..." id="buscador"
+      oninput="onSearchInput()" onkeydown="onSearchKey(event)" autocomplete="off">
+    <div class="search-suggestions" id="search-suggestions"></div>
   </div>
   <div class="filtros">
     <button class="filtro-btn active" onclick="setFiltro(this, 'todos')">Todos</button>
@@ -1717,6 +1942,15 @@ footer {
     <button class="filtro-btn" onclick="setFiltro(this, 'autoayuda')">Autoayuda</button>
     <button class="filtro-btn fav-btn" id="btn-fav-filtro" onclick="setFiltro(this, 'favoritos')">⭐ Favoritos</button>
   </div>
+</section>
+
+<!-- TAG CLOUD -->
+<section class="tag-cloud-section" id="tag-cloud-section">
+  <div class="tag-cloud-header">
+    <span class="tag-cloud-title">🏷 Explorar por tema</span>
+    <button class="tag-cloud-clear" id="tag-cloud-clear" onclick="limpiarTag()">✕ Limpiar filtro</button>
+  </div>
+  <div class="tag-cloud" id="tag-cloud"></div>
 </section>
 
 <!-- ÚLTIMOS VISITADOS -->
@@ -1807,6 +2041,7 @@ footer {
     </div>
     <div class="modal-body">
       <div class="modal-meta-row" id="m-meta"></div>
+      <div class="modal-tags" id="m-tags"></div>
 
       <div class="status-selector" id="m-status-selector">
         <button class="status-btn" onclick="setStatus('pendiente')" id="sbtn-pendiente">📚 Pendiente</button>
@@ -1979,6 +2214,7 @@ let libros = [
     porque: 'Es el libro de filosofía más accesible y honesto jamás escrito. No es teoría abstracta: es un hombre real, con poder absoluto sobre millones, recordándose a sí mismo que debe ser mejor. Leerlo es como encontrar un diario de alguien que vivió hace dos milenios y darte cuenta de que lucha exactamente con los mismos demonios que tú. Esa humanidad compartida lo convierte en algo inmortal.',
     relacionados: ['Enchiridión — Epicteto', 'Cartas a Lucilio — Séneca', 'El obstáculo es el camino — Ryan Holiday'],
     linkAfiliado: 'https://amzn.to/47JK2Ti',
+    tags: ['estoicismo','control','resiliencia','virtud','meditación','diario','Roma'],
   },
   {
     titulo: 'El mundo y sus demonios',
@@ -2012,6 +2248,7 @@ let libros = [
     porque: 'Nunca ha sido más relevante. En la era de las redes sociales, los algoritmos de desinformación y la post-verdad, la caja de herramientas que propone Sagan es una armadura cognitiva esencial. Es también uno de los libros más bien escritos de la divulgación científica: Sagan tiene la rara capacidad de hacer que el cosmos se sienta personal.',
     relacionados: ['El gen egoísta — Richard Dawkins', 'Pensar rápido, pensar despacio — Kahneman', 'Una breve historia del tiempo — Stephen Hawking'],
     linkAfiliado: 'https://amzn.to/4rJx4vU',
+    tags: ['pensamiento crítico','ciencia','escepticismo','pseudociencia','democracia','racionalidad'],
   },
   {
     titulo: 'Pensar rápido, pensar despacio',
@@ -2046,6 +2283,7 @@ let libros = [
     porque: 'Transforma permanentemente cómo te ves tomando decisiones. Es imposible leerlo sin empezar a notar sesgos en tiempo real —en ti mismo y en los demás— lo cual es incómodo, pero es la base de la mejora. Es también uno de los pocos libros de ciencia que es genuinamente entretenido de leer.',
     relacionados: ['Nudge — Thaler y Sunstein', 'Predictably Irrational — Dan Ariely', 'El arte de pensar — Rolf Dobelli'],
     linkAfiliado: 'https://amzn.to/4t2qcer',
+    tags: ['sesgos cognitivos','toma de decisiones','intuición','memoria','economía conductual','mente'],
   },
   {
     titulo: 'Sobre la brevedad de la vida',
@@ -2079,6 +2317,7 @@ let libros = [
     porque: 'Séneca escribe con una urgencia que atraviesa dos milenios. En 40 páginas te da más para pensar que la mayoría de los libros de autoayuda modernos juntos. Es el libro que te hace revisar tu agenda con ojos completamente diferentes.',
     relacionados: ['Meditaciones — Marco Aurelio', 'Cuando el tiempo se acaba — Paul Kalanithi', 'El poder del ahora — Eckhart Tolle'],
     linkAfiliado: 'https://amzn.to/4rJIsYQ',
+    tags: ['tiempo','estoicismo','muerte','brevedad','vida','propósito','Séneca'],
   },
   {
     titulo: 'El juego infinito',
@@ -2112,6 +2351,7 @@ let libros = [
     porque: 'Cambia el marco con que evalúas el éxito y las decisiones estratégicas. Una vez que internalizas la distinción finito/infinito, empiezas a verla en todas partes: en políticas, empresas, relaciones. Es el libro que te ayuda a dejar de competir y empezar a construir.',
     relacionados: ['Empieza con el porqué — Simon Sinek', 'Good to Great — Jim Collins', 'Juegos finitos e infinitos — James Carse'],
     linkAfiliado: 'https://amzn.to/4dwEAa3',
+    tags: ['liderazgo','estrategia','largo plazo','negocios','propósito','competencia'],
   },
   {
     titulo: 'Sapiens',
@@ -2144,6 +2384,7 @@ let libros = [
     porque: 'Te da perspectiva radical sobre cualquier problema moderno. Después de leer Sapiens, es difícil tomarse demasiado en serio las urgencias del día a día. Es también una vacuna contra el provincianismo temporal: la ilusión de que nuestro momento histórico es el centro de todo.',
     relacionados: ['Homo Deus — Yuval Noah Harari', '21 lecciones para el siglo XXI — Harari', 'Armas, gérmenes y acero — Jared Diamond'],
     linkAfiliado: 'https://amzn.to/4cWaJHZ',
+    tags: ['historia','evolución','civilización','homo sapiens','lenguaje','dinero','cooperación'],
   },
   {
     titulo: 'El hombre en busca de sentido',
@@ -2177,6 +2418,7 @@ let libros = [
     porque: 'Es el libro que más personas señalan como el que cambió su vida en un momento de crisis. No ofrece soluciones fáciles ni promete la felicidad. Ofrece algo más valioso: la convicción de que incluso en el peor escenario posible, tienes la capacidad de decidir quién vas a ser.',
     relacionados: ['Cuando Nietzsche lloró — Irvin Yalom', 'La llamada de lo salvaje — London (para el contraste)', 'Man\'s Search for Ultimate Meaning — Frankl'],
     linkAfiliado: 'https://amzn.to/47JfqRU',
+    tags: ['sentido','sufrimiento','logoterapia','Viktor Frankl','Auschwitz','propósito','resiliencia'],
   },
   {
     titulo: 'Atomic Habits',
@@ -2211,6 +2453,7 @@ let libros = [
     porque: 'Es el libro de desarrollo personal más práctico y riguroso de los últimos años. A diferencia de la mayoría del género, no te pide fuerza de voluntad: te enseña a diseñar sistemas que hagan el buen comportamiento inevitable. Una vez que internalizas sus marcos, los aplicas automáticamente a cualquier área de tu vida.',
     relacionados: ['El poder de los hábitos — Charles Duhigg', 'Tiny Habits — BJ Fogg', 'Deep Work — Cal Newport'],
     linkAfiliado: 'https://amzn.to/40K1Dqy',
+    tags: ['hábitos','identidad','productividad','rutinas','cambio','sistemas','comportamiento'],
   },
   {
     titulo: 'El poder del ahora',
@@ -2243,6 +2486,7 @@ let libros = [
     porque: 'Independientemente de sus limitaciones filosóficas, el libro señala algo genuinamente importante que la mayoría de las personas no ha considerado: que gran parte de su sufrimiento es autoinfligido por una mente que no puede dejar de generar narrativas sobre el pasado y el futuro. Esa sola observación, si la interiorizas, cambia algo.',
     relacionados: ['La nueva tierra — Eckhart Tolle', 'Dondequiera que vayas, ahí estás — Jon Kabat-Zinn', 'Meditaciones — Marco Aurelio'],
     linkAfiliado: 'https://amzn.to/47MdjwF',
+    tags: ['presente','mindfulness','conciencia','ego','dolor','espiritualidad','meditación'],
   },
   {
     titulo: 'Deep Work',
@@ -2276,6 +2520,7 @@ let libros = [
     porque: 'En un mundo que premia la velocidad de respuesta y la presencia constante, Newport defiende con rigor algo que muchos intuyen pero pocos articulan: que la concentración profunda es la fuente real del trabajo valioso, y que protegerla es una decisión estratégica, no un capricho.',
     relacionados: ['Minimalismo digital — Cal Newport', 'Atomic Habits — James Clear', 'El mundo y sus demonios — Carl Sagan'],
     linkAfiliado: 'https://amzn.to/4uyjCOa',
+    tags: ['concentración','productividad','distracción','trabajo','conocimiento','foco','tecnología'],
   },
   {
     titulo: 'Armas, gérmenes y acero',
@@ -2307,6 +2552,7 @@ let libros = [
     porque: 'Es uno de los pocos libros que genuinamente cambia cómo ves la historia y la geopolítica. La respuesta que da Diamond —que la desigualdad global es consecuencia de la geografía, no de la biología— tiene implicaciones morales y políticas enormes que vale la pena explorar.',
     relacionados: ['Sapiens — Yuval Noah Harari', 'El colapso de las civilizaciones — Jared Diamond', 'Factfulness — Hans Rosling'],
     linkAfiliado: 'https://amzn.to/480dYdY',
+    tags: ['geografía','civilización','conquista','historia','evolución','dominación','recursos'],
   },
   {
     titulo: 'La inteligencia emocional',
@@ -2339,6 +2585,7 @@ let libros = [
     porque: 'Aunque la ciencia detrás de algunas afirmaciones es más débil de lo que el libro sugiere, el marco conceptual es genuinamente útil. Ponerle nombre a los cinco componentes de la IE te da una estructura práctica para trabajar sobre tu vida emocional.',
     relacionados: ['Pensar rápido, pensar despacio — Kahneman', 'El hombre en busca de sentido — Frankl', 'Los líderes comen al final — Simon Sinek'],
     linkAfiliado: 'https://amzn.to/4ss6YyX',
+    tags: ['empatía','liderazgo','inteligencia emocional','relaciones','autocontrol','emociones'],
   },
   {
     titulo: 'El príncipe',
@@ -2371,6 +2618,7 @@ let libros = [
     porque: 'Es el libro más citado en los pasillos del poder y uno de los menos leídos directamente. Leerlo en el original es diferente a conocerlo a través de citas descontextualizadas: Maquiavelo es más matizado, más humano y más lúcido de lo que su reputación sugiere.',
     relacionados: ['El arte de la guerra — Sun Tzu', 'Las 48 leyes del poder — Robert Greene', 'Sobre la tiranía — Timothy Snyder'],
     linkAfiliado: 'https://amzn.to/4bVDMdA',
+    tags: ['poder','política','liderazgo','Renacimiento','estrategia','Maquiavelo','realismo'],
   },
   {
     titulo: 'El gen egoísta',
@@ -2401,6 +2649,7 @@ let libros = [
     porque: 'Es uno de los libros científicos más importantes del siglo XX para el público general. Introduce el concepto de meme que resultó extraordinariamente fértil para entender la cultura digital, y ofrece una visión del ser humano que es simultáneamente humillante (somos vehículos de genes) y liberadora (podemos rebelarnos contra esa programación).',
     relacionados: ['El mundo y sus demonios — Carl Sagan', 'Sapiens — Yuval Noah Harari', 'El cerebro de Broca — Carl Sagan'],
     linkAfiliado: 'https://amzn.to/47YvGOZ',
+    tags: ['evolución','genes','biología','altruismo','selección natural','egoísmo','memes'],
   },
   {
     titulo: 'Cómo ganar amigos e influir sobre las personas',
@@ -2433,6 +2682,7 @@ let libros = [
     porque: 'Sigue siendo relevante 90 años después porque trata sobre necesidades psicológicas humanas que no cambian: querer sentirse importantes, escuchados y valorados. La persona que genuinamente aprende a satisfacer esas necesidades en los demás tiene una ventaja social extraordinaria.',
     relacionados: ['La inteligencia emocional — Goleman', 'Influencia — Robert Cialdini', 'Nunca dividas la diferencia — Chris Voss'],
     linkAfiliado: 'https://amzn.to/4rIGt7a',
+    tags: ['relaciones','influencia','comunicación','amigos','Dale Carnegie','empatía','persuasión'],
   },
   {
     titulo: 'El arte de la guerra',
@@ -2464,6 +2714,7 @@ let libros = [
     paraQuien: 'Para cualquier persona interesada en estrategia, liderazgo o competencia. Para directores, negociadores, emprendedores y deportistas. Para lectores que disfrutan de textos condensados con densidad de ideas.',
     porque: 'En menos de dos horas de lectura obtienes un marco estratégico que ha sido validado por 2.500 años de aplicación en los contextos más variados. No hay otro libro con esa relación entre páginas e influencia en la historia del pensamiento estratégico.',
     relacionados: ['El príncipe — Maquiavelo', 'Las 48 leyes del poder — Robert Greene', 'Good Strategy Bad Strategy — Richard Rumelt'],
+    tags: ['estrategia','guerra','Sun Tzu','poder','engaño','liderazgo','táctica'],
   },
   {
     titulo: 'Una breve historia del tiempo',
@@ -2494,6 +2745,7 @@ let libros = [
     paraQuien: 'Para cualquier persona curiosa sobre el universo que quiera ir más allá de las explicaciones superficiales. Para quienes se preguntan qué son realmente el tiempo, el espacio y la materia. Para lectores dispuestos a hacer el esfuerzo de releer párrafos dos o tres veces.',
     porque: 'Es el punto de entrada más accesible y poético a las ideas más grandes de la física moderna. Leerlo produce una sensación de vértigo intelectual —la misma que Hawking describe como su motivación: el asombro ante lo que el universo realmente es, tan diferente de lo que parece.',
     relacionados: ['El mundo y sus demonios — Carl Sagan', 'El universo elegante — Brian Greene', 'Siete breves lecciones de física — Carlo Rovelli'],
+    tags: ['física','cosmos','tiempo','agujeros negros','Hawking','universo','relatividad'],
   },
   {
     titulo: 'Factfulness',
@@ -2525,6 +2777,7 @@ let libros = [
     paraQuien: 'Para cualquier persona que sienta que el mundo está yendo a peor y quiera saber si eso es verdad. Para periodistas, educadores y comunicadores que trabajan con datos. Para quienes quieren tomar decisiones —personales, profesionales, políticas— basadas en una comprensión precisa de la realidad.',
     porque: 'Es el antídoto más riguroso y accesible contra el catastrofismo. No te pide que ignores los problemas reales, sino que los veas con precisión, sin distorsión evolutiva. Después de leerlo, inevitablemente cambias cómo consumes y evalúas las noticias.',
     relacionados: ['Sapiens — Yuval Noah Harari', 'El mundo y sus demonios — Carl Sagan', 'Enlightenment Now — Steven Pinker'],
+    tags: ['datos','progreso','optimismo','estadísticas','mundo','Hans Rosling','pobreza'],
   },
   {
     titulo: 'Padre rico, padre pobre',
@@ -2556,6 +2809,7 @@ let libros = [
     paraQuien: 'Para personas que nunca han pensado seriamente sobre educación financiera y necesitan un punto de partida conceptual que les motive a seguir aprendiendo. Debe leerse con espíritu crítico y complementarse con fuentes más rigurosas antes de tomar cualquier decisión financiera real.',
     porque: 'A pesar de sus inexactitudes, el libro cumple una función importante: planta la semilla de la conciencia financiera en personas que de otra forma nunca habrían considerado la diferencia entre activos y pasivos, o la posibilidad de construir ingresos pasivos. Es un punto de partida, no un manual definitivo.',
     relacionados: ['El inversor inteligente — Benjamin Graham', 'Un paseo aleatorio por Wall Street — Burton Malkiel', 'La psicología del dinero — Morgan Housel'],
+    tags: ['dinero','inversión','activos','educación financiera','Kiyosaki','riqueza','pasivos'],
   },
   {
     titulo: 'El poder de los hábitos',
@@ -2587,6 +2841,7 @@ let libros = [
     paraQuien: 'Para cualquier persona que quiera entender por qué hace lo que hace y cómo puede cambiarlo. Para managers y líderes que quieren transformar la cultura de sus equipos. Para quienes prefieren el contexto histórico y narrativo al estilo más prescriptivo de Atomic Habits.',
     porque: 'La fortaleza del libro frente a otros del género es la amplitud de su mirada: no solo el individuo, sino las organizaciones y las sociedades. Esto lo convierte en una lectura más rica y provocadora, aunque menos práctica que Atomic Habits.',
     relacionados: ['Atomic Habits — James Clear', 'Pensar rápido, pensar despacio — Kahneman', 'La inteligencia emocional — Goleman'],
+    tags: ['hábitos','neurociencia','comportamiento','cambio','Duhigg','rutinas','organizaciones'],
   },
   {
     titulo: 'Siddhartha',
@@ -2618,6 +2873,7 @@ let libros = [
     paraQuien: 'Para cualquier persona en un período de búsqueda espiritual o de sentido. Para quienes sienten que las respuestas que han encontrado no son suficientes. Para lectores que aprecian la prosa lírica y la novela de ideas. Para quienes tienen poco tiempo: es un libro que puede leerse en una tarde y releerse durante años.',
     porque: 'Es una de esas raras obras que diferentes lectores encuentran en momentos diferentes de su vida y cada vez les dice algo distinto. Su brevedad es engañosa: en 150 páginas contiene más pensamiento sobre cómo vivir que la mayoría de los libros de filosofía de diez veces ese tamaño.',
     relacionados: ['El lobo estepario — Hermann Hesse', 'El profeta — Kahlil Gibran', 'El poder del ahora — Eckhart Tolle'],
+    tags: ['budismo','espiritualidad','sabiduría','India','búsqueda','Hesse','iluminación'],
   },
   {
     titulo: 'Los juegos del hambre',
@@ -2648,6 +2904,7 @@ let libros = [
     paraQuien: 'Para lectores jóvenes y adultos que disfrutan la ciencia ficción y las distopías. Para quienes quieren una narrativa de acción que plantee preguntas políticas reales. Para educadores que buscan textos que generen conversaciones sobre poder, desigualdad y medios de comunicación.',
     porque: 'Es uno de los pocos libros de entretenimiento masivo que funciona simultáneamente como crítica cultural. Su impacto en una generación de lectores jóvenes que crecieron con estas ideas sobre el espectáculo, la desigualdad y la resistencia no debe subestimarse.',
     relacionados: ['1984 — George Orwell', 'Un mundo feliz — Aldous Huxley', 'El cuento de la criada — Margaret Atwood'],
+    tags: ['distopía','Collins','poder','desigualdad','entretenimiento','rebelión','política'],
   },
   {
     titulo: '1984',
@@ -2679,6 +2936,7 @@ let libros = [
     paraQuien: 'Para cualquier persona que quiera entender el totalitarismo y sus mecanismos psicológicos. Para quienes se preocupan por la vigilancia digital, la manipulación de información y la erosión de la verdad en el discurso público contemporáneo. Para todos: es una de las novelas más importantes del siglo XX.',
     porque: 'No es solo una gran novela de ciencia ficción política: es un manual para reconocer los mecanismos del autoritarismo antes de que se vuelvan irreversibles. En la era de las "noticias falsas", la vigilancia masiva y la manipulación algorítmica, su relevancia es mayor que cuando fue escrita.',
     relacionados: ['Un mundo feliz — Aldous Huxley', 'El cuento de la criada — Margaret Atwood', 'Sobre la tiranía — Timothy Snyder'],
+    tags: ['totalitarismo','Orwell','control','libertad','vigilancia','verdad','distopía'],
   },
   {
     titulo: 'La psicología del dinero',
@@ -2710,6 +2968,7 @@ let libros = [
     paraQuien: 'Para cualquier persona que quiera mejorar su relación con el dinero más allá de las estrategias técnicas. Para quienes sufren de ansiedad financiera. Para jóvenes que están comenzando a construir su vida económica y quieren evitar los errores más comunes.',
     porque: 'Es el libro de finanzas personales más honesto y psicológicamente sofisticado de los últimos años. No te promete hacerte rico; te ayuda a entender por qué no logras serlo aunque técnicamente sepas lo que hay que hacer. Esa es la pregunta correcta.',
     relacionados: ['Padre rico, padre pobre — Kiyosaki', 'El inversor inteligente — Benjamin Graham', 'Factfulness — Hans Rosling'],
+    tags: ['dinero','psicología','inversión','ahorro','Housel','paciencia','riqueza'],
   },
   {
     titulo: 'Crimen y castigo',
@@ -2741,6 +3000,7 @@ let libros = [
     paraQuien: 'Para lectores que disfrutan de la literatura que trabaja ideas filosóficas a través de personajes y situaciones. Para quienes se interesan por la psicología del crimen, la moral y la redención. Para cualquiera dispuesto a invertir tiempo en una de las novelas más densas y recompensantes de la literatura mundial.',
     porque: 'Dostoyevski hace algo que muy pocos novelistas logran: convertir una discusión filosófica sobre el bien y el mal en una experiencia emocional visceral. No terminas el libro con una posición intelectual; terminas con algo más parecido a la sabiduría.',
     relacionados: ['Los hermanos Karamázov — Dostoyevski', 'El proceso — Franz Kafka', 'Camus: El extranjero'],
+    tags: ['crimen','moral','culpa','psicología','Dostoyevski','redención','filosofía'],
   },
   {
     titulo: 'El alquimista',
@@ -2772,6 +3032,7 @@ let libros = [
     paraQuien: 'Para personas en momentos de transición o duda sobre el camino a seguir. Para quienes buscan motivación para perseguir algo que han postergado. Para lectores que disfrutan de la fábula y la parábola como forma literaria. Mejor leído con espíritu abierto y pensamiento crítico activo.',
     porque: 'Independientemente de sus limitaciones literarias y filosóficas, el libro toca algo real en millones de lectores: el deseo de que la vida tenga un propósito y de que atreverse a buscarlo valga la pena. A veces, en el momento adecuado, ese mensaje simple es exactamente lo que se necesita.',
     relacionados: ['El poder del ahora — Eckhart Tolle', 'Siddhartha — Hermann Hesse', 'El profeta — Kahlil Gibran'],
+    tags: ['propósito','espiritualidad','viaje','Coelho','leyenda personal','destino','búsqueda'],
   },
   {
     titulo: 'Thinking, Fast and Slow',
@@ -2800,6 +3061,7 @@ let libros = [
     paraQuien: 'Para lectores en inglés que busquen el texto original.',
     porque: 'One of the most important books written about human judgment and decision-making in the 20th century.',
     relacionados: ['Pensar rápido, pensar despacio — Kahneman', 'Nudge — Thaler & Sunstein', 'Predictably Irrational — Dan Ariely'],
+    tags: ['sesgos','decisiones','Kahneman','conducta','irracionalidad','economía','mente'],
   },
   {
     titulo: 'Estoicismo: El arte de vivir',
@@ -2831,6 +3093,7 @@ let libros = [
     paraQuien: 'Para cualquier persona que quiera profundizar en el estoicismo más allá de Marco Aurelio y Séneca. Para quienes practican meditación o terapia cognitivo-conductual y quieren encontrar sus raíces filosóficas. Para lecturas rápidas de alto impacto: se puede leer en dos horas.',
     porque: 'Es el texto estoico más directo y radical que existe. Mientras Marco Aurelio y Séneca son reflexivos y matizados, Epicteto golpea sin anestesia. Después de leerlo, resulta difícil quejarse de nada que no esté en tu control sin sentir que te estás traicionando.',
     relacionados: ['Meditaciones — Marco Aurelio', 'Sobre la brevedad de la vida — Séneca', 'El obstáculo es el camino — Ryan Holiday'],
+    tags: ['estoicismo','Epicteto','control','libertad','esclavitud','virtud','filosofía'],
   },
   {
     titulo: 'Educated',
@@ -2862,6 +3125,7 @@ let libros = [
     paraQuien: 'Para cualquier persona que haya tenido que redefinirse a sí misma en tensión con su familia de origen. Para quienes se interesan por las memorias literarias de alta calidad. Para educadores que quieren entender el poder transformador y disruptivo de la educación. Para lectores que aprecian la escritura honesta sobre temas difíciles.',
     porque: 'Es una de las memorias más extraordinarias escritas en el siglo XXI, tanto por la improbabilidad de la historia como por la honestidad y lucidez con que está narrada. Lee como una novela de formación, pero con el peso adicional de ser completamente verdadera.',
     relacionados: ['El color púrpura — Alice Walker', 'La chica del tren — (para el contraste narrativo)', 'Sapiens — Harari'],
+    tags: ['educación','memoria','familia','identidad','Westover','autodidacta','superación'],
   },
   {
     titulo: 'El retrato de Dorian Gray',
@@ -2893,6 +3157,7 @@ let libros = [
     paraQuien: 'Para cualquier lector que disfrute de la novela victoriana y las ideas filosóficas vestidas de ficción gótica. Para quienes se interesan por la tensión entre ética y estética. Para los fanáticos de Wilde que solo conocen su obra teatral.',
     porque: 'Es una de las novelas más perfectamente construidas del siglo XIX. Su brevedad, su prosa y su estructura son modelos de economía narrativa. Y su pregunta central —¿qué sucede cuando la apariencia y la realidad se separan completamente?— nunca ha sido más relevante que en la era de las redes sociales.',
     relacionados: ['Fausto — Goethe', 'El extraño caso del Dr. Jekyll y Mr. Hyde — Stevenson', 'Crimen y castigo — Dostoyevski'],
+    tags: ['belleza','moral','Oscar Wilde','esteticismo','corrupción','vanidad','victoriano'],
   },
   {
     titulo: 'Cien años de soledad',
@@ -2923,6 +3188,7 @@ let libros = [
     paraQuien: 'Para cualquier lector que quiera entender América Latina a través de su literatura más representativa. Para quienes aprecian la ambición narrativa y el lenguaje como experiencia en sí misma. Para lectores pacientes que disfrutan de novelas que requieren entrega total.',
     porque: 'Es la novela en español más importante del siglo XX y una de las grandes novelas de cualquier literatura. Leerla es adentrarse en una forma de contar el mundo que no existe en ninguna otra parte: el tiempo de la leyenda aplicado a la historia real, lo extraordinario presentado con la misma naturalidad que lo cotidiano.',
     relacionados: ['El amor en los tiempos del cólera — García Márquez', 'Pedro Páramo — Juan Rulfo', 'La casa de los espíritus — Isabel Allende'],
+    tags: ['realismo mágico','Latinoamérica','historia','García Márquez','soledad','familia','Colombia'],
   },
   {
     titulo: 'El poder',
@@ -2954,6 +3220,7 @@ let libros = [
     paraQuien: 'Para cualquier persona que quiera entender las dinámicas de poder en entornos competitivos. Para emprendedores, políticos, ejecutivos y cualquiera que navegue estructuras de poder complejas. Debe leerse con pensamiento crítico activo, no como recetario.',
     porque: 'Independientemente de la posición moral que se adopte sobre su contenido, el libro hace lo que dice: describe con rigor histórico cómo ha funcionado el poder a lo largo de la historia humana. Conocer esas dinámicas es más útil que ignorarlas, siempre que se haga con conciencia de sus implicaciones.',
     relacionados: ['El príncipe — Maquiavelo', 'El arte de la guerra — Sun Tzu', 'El juego infinito — Sinek'],
+    tags: ['poder','48 leyes','Greene','estrategia','manipulación','historia','influencia'],
   },
   {
     titulo: 'La metamorfosis',
@@ -2984,6 +3251,7 @@ let libros = [
     paraQuien: 'Para cualquier lector que quiera entender qué es la literatura modernista y por qué importa. Para quienes se sienten atrapados en roles que no eligieron. Para los que tienen poco tiempo: se lee en dos horas y se piensa durante años.',
     porque: 'En menos de cien páginas, Kafka dijo más sobre la condición del trabajador moderno, la familia y la identidad que la mayoría de los filósofos en volúmenes enteros. Es el tipo de texto que parece simple en la superficie y se vuelve más denso a cada relectura.',
     relacionados: ['El proceso — Franz Kafka', 'El extranjero — Albert Camus', 'Crimen y castigo — Dostoyevski'],
+    tags: ['absurdo','alienación','Kafka','trabajo','identidad','burocracia','modernidad'],
   },
   {
     titulo: 'Influencia: La psicología de la persuasión',
@@ -3016,6 +3284,7 @@ let libros = [
     paraQuien: 'Para cualquier persona que tome decisiones de compra, vote, negocie o interactúe con sistemas de marketing. Para profesionales de ventas, comunicación y diseño. Para padres que quieren enseñar a sus hijos a reconocer la manipulación.',
     porque: 'Es uno de los libros más directamente útiles que puede leer cualquier adulto en una sociedad de consumo. Los seis principios que describe están activos en prácticamente todos los mensajes de marketing, políticos y sociales que recibimos. Conocerlos cambia cómo procesas la realidad.',
     relacionados: ['Pensar rápido, pensar despacio — Kahneman', 'Cómo ganar amigos — Dale Carnegie', 'Nudge — Thaler y Sunstein'],
+    tags: ['persuasión','Cialdini','influencia','psicología social','reciprocidad','escasez','marketing'],
   },
   {
     titulo: 'El lobo estepario',
@@ -3047,6 +3316,7 @@ let libros = [
     paraQuien: 'Para lectores en períodos de crisis de identidad o sentido. Para quienes sienten que no encajan completamente en ningún lado. Para los que ya leyeron Siddhartha y quieren la versión más oscura y menos resuelta de Hesse.',
     porque: 'Es el libro de Hesse que más directamente habla a la experiencia de la alienación intelectual moderna. Su pregunta central —cómo vivir cuando el mundo en que naciste ya no te contiene— sigue siendo urgente.',
     relacionados: ['Siddhartha — Hermann Hesse', 'El extranjero — Albert Camus', 'Así habló Zaratustra — Nietzsche'],
+    tags: ['alienación','identidad','Hesse','crisis','mediana edad','burguesía','humor'],
   },
 ];
 
@@ -3120,17 +3390,20 @@ function sortLista(lista) {
 
 // --- FILTRAR ---
 function getListaFiltrada() {
-  const q = document.getElementById('buscador').value.toLowerCase();
+  const q = document.getElementById('buscador').value.trim().toLowerCase();
   return libros.filter(l => {
-    const matchFiltro  = filtroActivo === 'todos'
+    const matchCat = filtroActivo === 'todos'
       ? true
       : filtroActivo === 'favoritos'
         ? getFav(l.titulo)
         : l.categoria === filtroActivo;
-    const matchSearch  = l.titulo.toLowerCase().includes(q) ||
-                         l.autor.toLowerCase().includes(q)  ||
-                         l.sinopsis.toLowerCase().includes(q);
-    return matchFiltro && matchSearch;
+    const matchTag    = !tagActivo || (l.tags || []).includes(tagActivo);
+    const matchSearch = !q ||
+      l.titulo.toLowerCase().includes(q) ||
+      l.autor.toLowerCase().includes(q)  ||
+      l.sinopsis.toLowerCase().includes(q) ||
+      (l.tags || []).some(t => t.toLowerCase().includes(q));
+    return matchCat && matchTag && matchSearch;
   });
 }
 function filtrar() {
@@ -3174,6 +3447,11 @@ function renderGrid(lista) {
     card.className = 'book-card';
     card.style.animationDelay = (i * 0.04) + 's';
     const isInCompare = compareSeleccion.some(l => l && l.titulo === libro.titulo);
+    const cardTags = (libro.tags || []).slice(0, 3).map(t =>
+      `<button class="card-tag" onclick="event.stopPropagation();setTag('${t.replace(/'/g,"\\'")}')">
+        #${t}
+      </button>`).join('');
+
     card.innerHTML = `
       <button class="fav-toggle ${esFav ? 'active' : ''}" title="Favorito" onclick="toggleFav(event, '${libro.titulo.replace(/'/g,"\\'")}')">⭐</button>
       ${badge}
@@ -3182,6 +3460,7 @@ function renderGrid(lista) {
       <h3>${libro.titulo}</h3>
       <div class="book-author">${libro.autor}, ${libro.anio}</div>
       <p class="book-excerpt">${libro.sinopsis}</p>
+      ${cardTags ? `<div class="card-tags">${cardTags}</div>` : ''}
       <div class="card-meta">
         <div class="rating">${stars}<span class="rating-num">${libro.rating}.0</span></div>
         <span class="read-min">${libro.tiempo} min</span>
@@ -3230,6 +3509,14 @@ function abrirModal(libro) {
   // TL;DR y TOC
   renderTldr(libro);
   renderToc();
+
+  // Tags en modal
+  const tagsEl = document.getElementById('m-tags');
+  if (tagsEl) {
+    tagsEl.innerHTML = (libro.tags || []).map(t =>
+      `<button class="modal-tag" onclick="cerrarModal('modal-ver');setTimeout(()=>setTag('${t.replace(/'/g,"\\'")}'),200)">#${t}</button>`
+    ).join('');
+  }
   document.getElementById('m-porque').textContent      = libro.porque;
 
   const relEl    = document.getElementById('m-relacionados');
@@ -4124,6 +4411,187 @@ function renderComparePan(libro, idx) {
 }
 
 // Escape closes compare too
+// --- SISTEMA DE TAGS ---
+let tagActivo = null;
+
+function getAllTags() {
+  const set = new Set();
+  libros.forEach(l => (l.tags || []).forEach(t => set.add(t)));
+  return [...set].sort();
+}
+
+function getTagCount(tag) {
+  return libros.filter(l => (l.tags || []).includes(tag)).length;
+}
+
+function renderTagCloud() {
+  const cloud = document.getElementById('tag-cloud');
+  if (!cloud) return;
+  const tags = getAllTags();
+  cloud.innerHTML = tags.map(t => {
+    const count = getTagCount(t);
+    return `<button class="tag-cloud-item ${tagActivo === t ? 'active' : ''}"
+      onclick="setTag('${t.replace(/'/g,"\\'")}')">
+      ${t} <span style="opacity:0.5;font-size:0.52rem">(${count})</span>
+    </button>`;
+  }).join('');
+}
+
+function setTag(tag) {
+  tagActivo = tagActivo === tag ? null : tag;
+  document.getElementById('tag-cloud-clear').classList.toggle('visible', !!tagActivo);
+  renderTagCloud();
+  filtrar();
+}
+
+function limpiarTag() {
+  tagActivo = null;
+  document.getElementById('tag-cloud-clear').classList.remove('visible');
+  renderTagCloud();
+  filtrar();
+}
+
+// Wire tags into getListaFiltrada
+const _getListaFiltradaOrig = getListaFiltrada;
+// Override filtrar to include tag filter
+function getListaFiltradaConTags() {
+  const q = document.getElementById('buscador').value.toLowerCase();
+  return libros.filter(l => {
+    const matchCat   = filtroActivo === 'todos'
+      ? true
+      : filtroActivo === 'favoritos'
+        ? getFav(l.titulo)
+        : l.categoria === filtroActivo;
+    const matchTag   = !tagActivo || (l.tags || []).includes(tagActivo);
+    const matchSearch = !q || l.titulo.toLowerCase().includes(q) ||
+                         l.autor.toLowerCase().includes(q) ||
+                         l.sinopsis.toLowerCase().includes(q) ||
+                         (l.tags || []).some(t => t.toLowerCase().includes(q));
+    return matchCat && matchTag && matchSearch;
+  });
+}
+
+// --- AUTOCOMPLETE SEARCH ---
+let suggHighlight = -1;
+let suggResults   = [];
+
+function onSearchInput() {
+  const q = document.getElementById('buscador').value.trim().toLowerCase();
+  filtrar();
+  if (q.length < 1) { cerrarSuggestions(); return; }
+
+  // Search across title, author, tags
+  const matches = libros
+    .map(l => {
+      let score = 0;
+      let tagMatch = null;
+      const t = l.titulo.toLowerCase();
+      const a = l.autor.toLowerCase();
+      const tags = (l.tags || []);
+
+      if (t.startsWith(q))         score += 10;
+      else if (t.includes(q))      score += 6;
+      if (a.includes(q))           score += 4;
+      const mt = tags.find(tg => tg.toLowerCase().includes(q));
+      if (mt) { score += 3; tagMatch = mt; }
+      if (l.sinopsis.toLowerCase().includes(q)) score += 1;
+      return score > 0 ? { libro: l, score, tagMatch } : null;
+    })
+    .filter(Boolean)
+    .sort((a,b) => b.score - a.score)
+    .slice(0, 7);
+
+  suggResults = matches;
+  suggHighlight = -1;
+
+  const box = document.getElementById('search-suggestions');
+  if (!matches.length) {
+    box.innerHTML = `<div class="suggestions-empty">Sin resultados para "<em>${q}</em>"</div>`;
+    box.classList.add('open');
+    return;
+  }
+
+  const genreColors = {
+    filosofia:'genre-filosofia', negocios:'genre-negocios',
+    psicologia:'genre-psicologia', ciencia:'genre-ciencia',
+    historia:'genre-historia', autoayuda:'genre-autoayuda'
+  };
+
+  box.innerHTML = matches.map((m, i) => {
+    const l = m.libro;
+    // Highlight matching text
+    const re = new RegExp(`(${q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')})`, 'gi');
+    const titulo = l.titulo.replace(re, '<mark>$1</mark>');
+    const stars = '★'.repeat(l.rating) + '☆'.repeat(5 - l.rating);
+
+    return `<div class="suggestion-item" data-idx="${i}"
+      onmousedown="seleccionarSuggestion(${i})"
+      onmouseover="highlightSugg(${i})">
+      <span class="suggestion-genre ${genreColors[l.categoria]||''}">${genreLabels[l.categoria]||''}</span>
+      <div class="suggestion-info">
+        <div class="suggestion-titulo">${titulo}</div>
+        <div class="suggestion-autor">${l.autor}, ${l.anio}</div>
+      </div>
+      ${m.tagMatch ? `<span class="suggestion-tag-match">#${m.tagMatch}</span>` : ''}
+      <span class="suggestion-rating">${stars}</span>
+    </div>`;
+  }).join('') +
+  `<div class="suggestions-footer">
+    <span><kbd>↑↓</kbd> navegar</span>
+    <span><kbd>Enter</kbd> abrir</span>
+    <span><kbd>Esc</kbd> cerrar</span>
+  </div>`;
+
+  box.classList.add('open');
+}
+
+function onSearchKey(e) {
+  const box = document.getElementById('search-suggestions');
+  if (!box.classList.contains('open')) return;
+
+  if (e.key === 'ArrowDown') {
+    e.preventDefault();
+    suggHighlight = Math.min(suggHighlight + 1, suggResults.length - 1);
+    highlightSugg(suggHighlight);
+  } else if (e.key === 'ArrowUp') {
+    e.preventDefault();
+    suggHighlight = Math.max(suggHighlight - 1, -1);
+    highlightSugg(suggHighlight);
+  } else if (e.key === 'Enter' && suggHighlight >= 0) {
+    e.preventDefault();
+    seleccionarSuggestion(suggHighlight);
+  } else if (e.key === 'Escape') {
+    cerrarSuggestions();
+  }
+}
+
+function highlightSugg(idx) {
+  suggHighlight = idx;
+  document.querySelectorAll('.suggestion-item').forEach((el, i) => {
+    el.classList.toggle('highlighted', i === idx);
+  });
+}
+
+function seleccionarSuggestion(idx) {
+  const match = suggResults[idx];
+  if (!match) return;
+  cerrarSuggestions();
+  document.getElementById('buscador').value = '';
+  filtrar();
+  setTimeout(() => abrirModal(match.libro), 80);
+}
+
+function cerrarSuggestions() {
+  const box = document.getElementById('search-suggestions');
+  if (box) box.classList.remove('open');
+  suggHighlight = -1;
+}
+
+// Close suggestions when clicking outside
+document.addEventListener('click', e => {
+  if (!e.target.closest('.search-wrap')) cerrarSuggestions();
+});
+
 // Init
 initDark();
 initFraseDia();
@@ -4131,6 +4599,7 @@ initReadingBar();
 renderGrid(libros);
 actualizarProgreso();
 renderRecientes();
+renderTagCloud();
 </script>
 </body>
 </html>
