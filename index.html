@@ -753,6 +753,131 @@
   .nota-item-texto { font-size:0.75rem; color:var(--muted); line-height:1.55; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
   .empty-stat { font-size:0.8rem; color:var(--muted); font-style:italic; padding:0.4rem 0; }
 
+  /* ══════════════════════════════════════════════════
+     ÚLTIMOS VISITADOS
+  ══════════════════════════════════════════════════ */
+  .recents-section {
+    padding: 1.5rem clamp(1.5rem,5vw,4rem);
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .recents-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+  .recents-title {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .recents-clear {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+    padding: 0;
+  }
+  .recents-clear:hover { color: var(--rust); }
+  .recents-list {
+    display: flex;
+    gap: 0.6rem;
+    overflow-x: auto;
+    padding-bottom: 0.25rem;
+    scrollbar-width: none;
+  }
+  .recents-list::-webkit-scrollbar { display:none; }
+  .recent-chip {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.45rem 0.9rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .recent-chip:hover {
+    border-color: rgba(201,75,30,0.4);
+    background: rgba(201,75,30,0.06);
+    color: var(--rust);
+  }
+  .recent-chip-title {
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+  .recent-chip-autor {
+    font-size: 0.68rem;
+    color: var(--muted);
+    font-style: italic;
+  }
+  .recent-chip:hover .recent-chip-title { color: var(--rust); }
+
+  /* ══════════════════════════════════════════════════
+     MODO LECTURA ENFOCADA
+  ══════════════════════════════════════════════════ */
+  .btn-focus {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    width: 32px; height: 32px;
+    display: flex; align-items:center; justify-content:center;
+    cursor: pointer;
+    font-size: 0.82rem;
+    color: var(--muted);
+    transition: all 0.2s;
+    flex-shrink: 0;
+    title: "Modo lectura";
+  }
+  .btn-focus:hover { border-color:var(--ink); color:var(--ink); }
+
+  /* Focus mode: modal expands to near-fullscreen */
+  body.focus-mode .modal-overlay { padding: 0; align-items:stretch; }
+  body.focus-mode .modal {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+    border: none;
+  }
+  body.focus-mode .modal-header { border-radius: 0; }
+  body.focus-mode .modal-nav { border-radius: 0; }
+  body.focus-mode .modal-body {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+  }
+  body.focus-mode .modal-text { font-size: 1rem; line-height: 2; }
+  body.focus-mode .ideas-list li { font-size: 0.95rem; line-height: 1.85; }
+
+  /* ══════════════════════════════════════════════════
+     TIEMPO RESTANTE EN MODAL
+  ══════════════════════════════════════════════════ */
+  .reading-time-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.25rem 0.7rem;
+    transition: all 0.3s;
+  }
+  .reading-time-badge.finishing { border-color: rgba(90,128,89,0.4); color: var(--sage); }
+
   /* ── FOOTER ──────────────────────────────────────── */
   footer {
     border-top: 1px solid var(--border);
@@ -904,6 +1029,15 @@
   </div>
 </section>
 
+<!-- ÚLTIMOS VISITADOS -->
+<section class="recents-section" id="recents-section" style="display:none">
+  <div class="recents-header">
+    <span class="recents-title">⏱ Últimos visitados</span>
+    <button class="recents-clear" onclick="limpiarRecientes()">Borrar historial</button>
+  </div>
+  <div class="recents-list" id="recents-list"></div>
+</section>
+
 <!-- GRILLA -->
 <section class="books-section" id="biblioteca">
   <div class="section-header">
@@ -957,7 +1091,11 @@
         <h2 class="modal-title" id="m-title"></h2>
         <div class="modal-author" id="m-author"></div>
       </div>
-      <button class="modal-close" onclick="cerrarModal('modal-ver')">✕</button>
+      <div style="display:flex;align-items:center;gap:0.5rem;flex-shrink:0;">
+        <span class="reading-time-badge" id="reading-time-badge">— min</span>
+        <button class="btn-focus" id="btn-focus" onclick="toggleFocusMode()" title="Modo lectura">⛶</button>
+        <button class="modal-close" onclick="cerrarModal('modal-ver')">✕</button>
+      </div>
     </div>
     <div class="modal-body">
       <div class="modal-meta-row" id="m-meta"></div>
@@ -2391,12 +2529,28 @@ function abrirModal(libro) {
   document.getElementById('notas-saved').classList.remove('visible');
   document.getElementById('modal-ver').classList.add('open');
   document.body.style.overflow = 'hidden';
+
+  // Guardar en historial de recientes
+  guardarReciente(libro);
+
+  // Inicializar tiempo restante
+  const badge = document.getElementById('reading-time-badge');
+  if (badge) { badge.textContent = `~${libro.tiempo || 5} min`; badge.classList.remove('finishing'); }
 }
 
 function cerrarModal(id) {
   document.getElementById(id).classList.remove('open');
   document.body.style.overflow = '';
-  if (id === 'modal-ver') Audio.detener();
+  if (id === 'modal-ver') {
+    Audio.detener();
+    // Exit focus mode
+    if (focusMode) {
+      focusMode = false;
+      document.body.classList.remove('focus-mode');
+      const btn = document.getElementById('btn-focus');
+      if (btn) { btn.style.background=''; btn.style.color=''; btn.style.borderColor=''; }
+    }
+  }
 }
 function cerrarModalSiOverlay(e, id) {
   if (e.target === document.getElementById(id)) cerrarModal(id);
@@ -2589,6 +2743,9 @@ function navegarModal(dir) {
   actualizarShareLinks(libro);
   Audio.cargar(libro);
   document.getElementById('modal-read-fill').style.width = '0%';
+  const rtb = document.getElementById('reading-time-badge');
+  if (rtb) { rtb.textContent = `~${libro.tiempo || 5} min`; rtb.classList.remove('finishing'); }
+  guardarReciente(libro);
   document.getElementById('m-notas').value = getNota(libro.titulo);
   document.getElementById('notas-saved').classList.remove('visible');
   document.getElementById('modal-ver-content').scrollTop = 0;
@@ -2719,6 +2876,7 @@ function initReadingBar() {
     if (scrollable <= 0) { fill.style.width = '100%'; return; }
     const pct = Math.min(100, (modal.scrollTop / scrollable) * 100);
     fill.style.width = pct + '%';
+    actualizarTiempoRestante();
   });
 }
 
@@ -2953,12 +3111,87 @@ function audioSaltarSeccion(d)  { Audio.saltarSeccion(d); }
 function audioSetSpeed(s)       { Audio.setSpeed(s); }
 function audioClickTrack(e)     { Audio.clickTrack(e); }
 
+// --- HISTORIAL DE RECIENTES ---
+const MAX_RECIENTES = 8;
+
+function getRecientes() {
+  try { return JSON.parse(localStorage.getItem('recientes') || '[]'); }
+  catch(e) { return []; }
+}
+function guardarReciente(libro) {
+  let arr = getRecientes().filter(t => t !== libro.titulo);
+  arr.unshift(libro.titulo);
+  if (arr.length > MAX_RECIENTES) arr = arr.slice(0, MAX_RECIENTES);
+  localStorage.setItem('recientes', JSON.stringify(arr));
+  renderRecientes();
+}
+function renderRecientes() {
+  const titulos = getRecientes();
+  const section = document.getElementById('recents-section');
+  const list    = document.getElementById('recents-list');
+  if (!titulos.length) { section.style.display = 'none'; return; }
+  section.style.display = '';
+  list.innerHTML = titulos.map(t => {
+    const libro = libros.find(l => l.titulo === t);
+    if (!libro) return '';
+    return `<div class="recent-chip" onclick="abrirModal(libros.find(l=>l.titulo===${JSON.stringify(t)}))">
+      <span class="recent-chip-title">${libro.titulo}</span>
+      <span class="recent-chip-autor">— ${libro.autor}</span>
+    </div>`;
+  }).join('');
+}
+function limpiarRecientes() {
+  localStorage.removeItem('recientes');
+  renderRecientes();
+}
+
+// --- MODO LECTURA ENFOCADA ---
+let focusMode = false;
+function toggleFocusMode() {
+  focusMode = !focusMode;
+  document.body.classList.toggle('focus-mode', focusMode);
+  const btn = document.getElementById('btn-focus');
+  if (btn) {
+    btn.textContent = focusMode ? '⛶' : '⛶';
+    btn.title = focusMode ? 'Salir del modo lectura' : 'Modo lectura';
+    btn.style.background = focusMode ? 'var(--rust)' : '';
+    btn.style.color      = focusMode ? '#fff' : '';
+    btn.style.borderColor= focusMode ? 'var(--rust)' : '';
+  }
+}
+
+// --- TIEMPO RESTANTE DE LECTURA ---
+function actualizarTiempoRestante() {
+  const modal  = document.getElementById('modal-ver-content');
+  const badge  = document.getElementById('reading-time-badge');
+  if (!modal || !badge || !libroActual) return;
+
+  const scrollable = modal.scrollHeight - modal.clientHeight;
+  if (scrollable <= 0) { badge.textContent = '✓ Leído'; badge.classList.add('finishing'); return; }
+
+  const progreso  = modal.scrollTop / scrollable;          // 0..1
+  const totalMin  = libroActual.tiempo || 5;
+  const restante  = Math.max(0, Math.round(totalMin * (1 - progreso)));
+
+  if (restante <= 0) {
+    badge.textContent = '✓ Completado';
+    badge.classList.add('finishing');
+  } else if (restante < 2) {
+    badge.textContent = '< 1 min restante';
+    badge.classList.add('finishing');
+  } else {
+    badge.textContent = `~${restante} min restante`;
+    badge.classList.remove('finishing');
+  }
+}
+
 // Init
 initDark();
 initFraseDia();
 initReadingBar();
 renderGrid(libros);
 actualizarProgreso();
+renderRecientes();
 </script>
 </body>
 </html>
