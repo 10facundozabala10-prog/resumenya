@@ -878,6 +878,291 @@
   }
   .reading-time-badge.finishing { border-color: rgba(90,128,89,0.4); color: var(--sage); }
 
+  /* ══════════════════════════════════════════════════
+     TABLA DE CONTENIDOS (dentro del modal)
+  ══════════════════════════════════════════════════ */
+  .toc-wrap {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    margin-bottom: 1.75rem;
+    overflow: hidden;
+  }
+  .toc-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1.1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .toc-header:hover { background: rgba(242,235,224,0.04); }
+  .toc-label {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .toc-arrow {
+    font-size: 0.7rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+  .toc-arrow.open { transform: rotate(180deg); }
+  .toc-list {
+    display: none;
+    flex-direction: column;
+    border-top: 1px solid var(--border);
+  }
+  .toc-list.open { display: flex; }
+  .toc-item {
+    padding: 0.55rem 1.1rem;
+    font-size: 0.82rem;
+    color: var(--sub);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    border-left: 2px solid transparent;
+  }
+  .toc-item:hover { background: rgba(201,75,30,0.05); border-left-color: var(--rust); color: var(--ink); }
+  .toc-item-num {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    min-width: 1.2rem;
+  }
+
+  /* ══════════════════════════════════════════════════
+     TL;DR — RESUMEN EN 3 LÍNEAS
+  ══════════════════════════════════════════════════ */
+  .tldr-box {
+    border: 1px solid rgba(201,75,30,0.25);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    margin-bottom: 1.75rem;
+    background: linear-gradient(135deg, rgba(201,75,30,0.05), rgba(184,136,28,0.03));
+  }
+  .tldr-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.85rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .tldr-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .tldr-toggle-label {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    transition: color 0.2s;
+  }
+  .tldr-header:hover .tldr-toggle-label { color: var(--ink); }
+  .tldr-content {
+    padding: 0 1.25rem 1.25rem;
+    display: none;
+  }
+  .tldr-content.open { display: block; }
+  .tldr-points {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+  .tldr-points li {
+    display: flex;
+    gap: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--sub);
+    font-weight: 400;
+  }
+  .tldr-points li::before {
+    content: counter(tldr-c);
+    counter-increment: tldr-c;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--rust);
+    background: rgba(201,75,30,0.12);
+    border-radius: 50%;
+    width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 0.1rem;
+  }
+  .tldr-points { counter-reset: tldr-c; }
+
+  /* ══════════════════════════════════════════════════
+     MODO COMPARAR
+  ══════════════════════════════════════════════════ */
+  .btn-compare-card {
+    position: absolute;
+    bottom: 0.85rem;
+    left: 2.1rem;
+    background: none;
+    border: none;
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    cursor: pointer;
+    padding: 0;
+    letter-spacing: 0.06em;
+    transition: color 0.2s;
+    opacity: 0;
+    transition: opacity 0.2s, color 0.2s;
+  }
+  .book-card:hover .btn-compare-card { opacity: 1; }
+  .btn-compare-card:hover { color: var(--rust); }
+  .btn-compare-card.selected { color: var(--gold); opacity: 1; }
+
+  .compare-bar {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    background: var(--surface);
+    border-top: 1px solid var(--border);
+    padding: 1rem clamp(1.5rem,5vw,4rem);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 150;
+    transform: translateY(100%);
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 -8px 32px rgba(0,0,0,0.3);
+  }
+  .compare-bar.visible { transform: translateY(0); }
+  .compare-bar-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    flex-shrink: 0;
+  }
+  .compare-slots {
+    display: flex;
+    gap: 0.75rem;
+    flex: 1;
+    flex-wrap: wrap;
+  }
+  .compare-slot {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 0.4rem 0.85rem;
+    font-size: 0.8rem;
+    color: var(--sub);
+    min-width: 160px;
+  }
+  .compare-slot.filled { border-color: rgba(201,75,30,0.35); color: var(--ink); }
+  .compare-slot-x {
+    margin-left: auto;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 0.75rem;
+    transition: color 0.15s;
+    background: none; border: none; padding: 0;
+  }
+  .compare-slot-x:hover { color: var(--rust); }
+  .btn-compare-now {
+    background: var(--rust);
+    color: #fff;
+    border: none;
+    border-radius: var(--r-sm);
+    padding: 0.55rem 1.25rem;
+    font-size: 0.78rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .btn-compare-now:hover { background: #b03c18; }
+  .btn-compare-now:disabled { opacity: 0.4; cursor: default; }
+  .btn-compare-cancel {
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 0.55rem 1rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .btn-compare-cancel:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* Compare overlay */
+  .compare-overlay {
+    position: fixed; inset: 0; z-index: 1000;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    display: flex; align-items: stretch;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .compare-overlay.open { opacity: 1; pointer-events: all; }
+
+  .compare-pane {
+    flex: 1;
+    overflow-y: auto;
+    background: var(--surface);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .compare-pane:last-child { border-right: none; border-left: 1px solid var(--border); }
+
+  .compare-pane-header {
+    padding: 1.75rem 2rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0;
+    background: var(--surface);
+    backdrop-filter: blur(20px);
+  }
+  .compare-pane-cat { font-family: var(--font-mono); font-size: 0.58rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--rust); margin-bottom: 0.4rem; }
+  .compare-pane-title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; line-height: 1.1; margin-bottom: 0.25rem; }
+  .compare-pane-author { font-family: var(--font-display); font-size: 0.88rem; font-style: italic; color: var(--muted); }
+
+  .compare-close-btn {
+    position: fixed; top: 1.25rem; left: 50%; transform: translateX(-50%);
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 100px; padding: 0.45rem 1.25rem;
+    font-size: 0.72rem; font-family: var(--font-mono);
+    color: var(--muted); cursor: pointer; z-index: 1001;
+    transition: all 0.2s;
+  }
+  .compare-close-btn:hover { background: var(--rust); color: #fff; border-color: var(--rust); }
+
+  .compare-pane-body { padding: 1.75rem 2rem 3rem; flex: 1; }
+  .compare-section-title { font-family: var(--font-display); font-size: 0.92rem; font-weight: 600; color: var(--muted); margin: 1.5rem 0 0.6rem; padding-bottom: 0.4rem; border-bottom: 1px solid var(--border); }
+  .compare-text { font-size: 0.86rem; line-height: 1.85; color: rgba(242,235,224,0.65); }
+  .compare-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; margin-top: 0.4rem; }
+  .compare-list li { display: flex; gap: 0.7rem; font-size: 0.83rem; line-height: 1.65; color: rgba(242,235,224,0.65); }
+  .compare-list li::before { content: '→'; color: var(--rust); flex-shrink: 0; }
+
+  @media (max-width: 768px) {
+    .compare-overlay { flex-direction: column; }
+    .compare-pane { border-right: none; border-bottom: 1px solid var(--border); max-height: 50vh; }
+    .compare-pane:last-child { border-left: none; }
+  }
+
   /* ── FOOTER ──────────────────────────────────────── */
   footer {
     border-top: 1px solid var(--border);
@@ -938,8 +1223,9 @@
   <nav>
     <a href="#" onclick="scrollToBooks()">Biblioteca</a>
     <button class="btn-sorpresa" onclick="sorprendeme()">✦ Sorpréndeme</button>
-    <a href="#" onclick="abrirStats(); return false;" style="letter-spacing:0.12em;font-size:0.78rem;text-transform:uppercase;color:var(--dusty);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--dusty)'">Mis stats</a>
-    <a href="#" onclick="toggleIndice(); return false;" style="letter-spacing:0.12em;font-size:0.78rem;text-transform:uppercase;color:var(--dusty);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--dusty)'">Índice ☰</a>
+    <a href="#" onclick="abrirStats(); return false;" style="letter-spacing:0.12em;font-size:0.78rem;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Mis stats</a>
+    <a href="#" onclick="iniciarCompare(); return false;" style="letter-spacing:0.12em;font-size:0.78rem;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;" id="nav-compare-btn" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">⚖ Comparar</a>
+    <a href="#" onclick="toggleIndice(); return false;" style="letter-spacing:0.12em;font-size:0.78rem;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='var(--ink)'" onmouseout="this.style.color='var(--muted)'">Índice ☰</a>
     <button class="btn-darkmode" id="btn-dark" onclick="toggleDark()" title="Modo oscuro">🌙</button>
   </nav>
 </header>
@@ -1081,6 +1367,24 @@
   </div>
 </div>
 
+<!-- BARRA DE COMPARACIÓN -->
+<div class="compare-bar" id="compare-bar">
+  <span class="compare-bar-label">⚖ Comparar</span>
+  <div class="compare-slots">
+    <div class="compare-slot" id="compare-slot-0">Seleccioná un libro...</div>
+    <div class="compare-slot" id="compare-slot-1">Seleccioná otro libro...</div>
+  </div>
+  <button class="btn-compare-now" id="btn-compare-now" onclick="abrirCompare()" disabled>Comparar →</button>
+  <button class="btn-compare-cancel" onclick="cancelarCompare()">✕ Cancelar</button>
+</div>
+
+<!-- OVERLAY COMPARACIÓN -->
+<div class="compare-overlay" id="compare-overlay">
+  <button class="compare-close-btn" onclick="cerrarCompare()">✕ Cerrar comparación</button>
+  <div class="compare-pane" id="compare-pane-0"></div>
+  <div class="compare-pane" id="compare-pane-1"></div>
+</div>
+
 <!-- MODAL VER LIBRO -->
 <div class="modal-overlay" id="modal-ver" onclick="cerrarModalSiOverlay(event, 'modal-ver')">
   <div class="modal" id="modal-ver-content">
@@ -1139,10 +1443,30 @@
         </div>
       </div>
 
-      <div class="modal-section-title">¿De qué trata?</div>
+      <!-- TL;DR -->
+      <div class="tldr-box" id="m-tldr-box">
+        <div class="tldr-header" onclick="toggleTldr()">
+          <span class="tldr-tag">⚡ TL;DR — En 3 puntos</span>
+          <span class="tldr-toggle-label" id="tldr-toggle-label">Mostrar →</span>
+        </div>
+        <div class="tldr-content" id="tldr-content">
+          <ul class="tldr-points" id="tldr-points"></ul>
+        </div>
+      </div>
+
+      <!-- TABLA DE CONTENIDOS -->
+      <div class="toc-wrap" id="m-toc">
+        <div class="toc-header" onclick="toggleToc()">
+          <span class="toc-label">📋 Tabla de contenidos</span>
+          <span class="toc-arrow" id="toc-arrow">▾</span>
+        </div>
+        <div class="toc-list" id="toc-list"></div>
+      </div>
+
+      <div class="modal-section-title" id="toc-sec-sinopsis">¿De qué trata?</div>
       <p class="modal-text" id="m-sinopsis"></p>
 
-      <div class="modal-section-title">Contexto e historia del libro</div>
+      <div class="modal-section-title" id="toc-sec-contexto">Contexto e historia del libro</div>
       <p class="modal-text" id="m-contexto"></p>
 
       <div class="quote-block">
@@ -1156,22 +1480,22 @@
         <a class="btn-share twitter" id="btn-share-tw" href="#" target="_blank" rel="noopener">𝕏 Twitter</a>
       </div>
 
-      <div class="modal-section-title">Ideas y argumentos principales</div>
+      <div class="modal-section-title" id="toc-sec-ideas">Ideas y argumentos principales</div>
       <ul class="ideas-list" id="m-ideas"></ul>
 
-      <div class="modal-section-title">Desarrollo profundo</div>
+      <div class="modal-section-title" id="toc-sec-desarrollo">Desarrollo profundo</div>
       <p class="modal-text" id="m-desarrollo"></p>
 
-      <div class="modal-section-title">Lecciones aplicables</div>
+      <div class="modal-section-title" id="toc-sec-lecciones">Lecciones aplicables</div>
       <ul class="ideas-list" id="m-lecciones"></ul>
 
-      <div class="modal-section-title">Críticas y limitaciones</div>
+      <div class="modal-section-title" id="toc-sec-criticas">Críticas y limitaciones</div>
       <p class="modal-text" id="m-criticas"></p>
 
-      <div class="modal-section-title">¿Para quién es este libro?</div>
+      <div class="modal-section-title" id="toc-sec-para">¿Para quién es este libro?</div>
       <p class="modal-text" id="m-para-quien"></p>
 
-      <div class="modal-section-title">¿Por qué leerlo?</div>
+      <div class="modal-section-title" id="toc-sec-porque">¿Por qué leerlo?</div>
       <p class="modal-text" id="m-porque"></p>
 
       <div id="m-libros-bloque">
@@ -2445,6 +2769,7 @@ function renderGrid(lista) {
     const card = document.createElement('div');
     card.className = 'book-card';
     card.style.animationDelay = (i * 0.04) + 's';
+    const isInCompare = compareSeleccion.some(l => l && l.titulo === libro.titulo);
     card.innerHTML = `
       <button class="fav-toggle ${esFav ? 'active' : ''}" title="Favorito" onclick="toggleFav(event, '${libro.titulo.replace(/'/g,"\\'")}')">⭐</button>
       ${badge}
@@ -2457,6 +2782,9 @@ function renderGrid(lista) {
         <div class="rating">${stars}<span class="rating-num">${libro.rating}.0</span></div>
         <span class="read-min">${libro.tiempo} min</span>
       </div>
+      ${compareActivo ? `<button class="btn-compare-card ${isInCompare?'selected':''}" onclick="toggleCompareLibro(event, '${libro.titulo.replace(/'/g,"\\'")}')">
+        ${isInCompare ? '✓ Seleccionado' : '+ Comparar'}
+      </button>` : ''}
     `;
     card.addEventListener('click', () => abrirModal(libro));
     grid.appendChild(card);
@@ -2494,6 +2822,10 @@ function abrirModal(libro) {
   document.getElementById('m-lecciones').innerHTML     = (libro.lecciones || []).map(i => `<li>${i}</li>`).join('');
   document.getElementById('m-criticas').textContent    = libro.criticas || '';
   document.getElementById('m-para-quien').textContent  = libro.paraQuien || '';
+
+  // TL;DR y TOC
+  renderTldr(libro);
+  renderToc();
   document.getElementById('m-porque').textContent      = libro.porque;
 
   const relEl    = document.getElementById('m-relacionados');
@@ -2561,6 +2893,8 @@ document.addEventListener('keydown', e => {
     cerrarModal('modal-ver');
     if (indiceAbierto) { indiceAbierto = false; document.getElementById('indice-overlay').classList.remove('open'); document.body.style.overflow = ''; }
     cerrarStats();
+    cerrarCompare();
+    if (compareActivo) cancelarCompare();
   }
   if (modalAbierto && e.key === 'ArrowRight') navegarModal(1);
   if (modalAbierto && e.key === 'ArrowLeft')  navegarModal(-1);
@@ -3185,6 +3519,207 @@ function actualizarTiempoRestante() {
   }
 }
 
+// --- TL;DR ---
+const TLDR_SECCIONES = [
+  { key: 'ideas',    label: 'Ideas principales' },
+  { key: 'lecciones',label: 'Lecciones' },
+  { key: 'porque',   label: '¿Por qué leerlo?' },
+];
+
+function buildTldr(libro) {
+  const puntos = [];
+  // Pick first idea, first leccion, first sentence of porque
+  if (libro.ideas && libro.ideas.length)    puntos.push(libro.ideas[0]);
+  if (libro.lecciones && libro.lecciones.length) puntos.push(libro.lecciones[0]);
+  if (libro.porque) {
+    const frase = libro.porque.split('.')[0].trim();
+    if (frase) puntos.push(frase + '.');
+  }
+  return puntos.slice(0, 3);
+}
+
+function renderTldr(libro) {
+  const puntos = buildTldr(libro);
+  const ul = document.getElementById('tldr-points');
+  ul.innerHTML = puntos.map(p => `<li>${p}</li>`).join('');
+  // Reset state
+  document.getElementById('tldr-content').classList.remove('open');
+  document.getElementById('tldr-toggle-label').textContent = 'Mostrar →';
+}
+
+function toggleTldr() {
+  const content = document.getElementById('tldr-content');
+  const label   = document.getElementById('tldr-toggle-label');
+  const open = content.classList.toggle('open');
+  label.textContent = open ? 'Ocultar ↑' : 'Mostrar →';
+}
+
+// --- TABLA DE CONTENIDOS ---
+const TOC_SECCIONES = [
+  { id: 'toc-sec-sinopsis',  label: '¿De qué trata?' },
+  { id: 'toc-sec-contexto',  label: 'Contexto e historia' },
+  { id: 'toc-sec-ideas',     label: 'Ideas principales' },
+  { id: 'toc-sec-desarrollo',label: 'Desarrollo profundo' },
+  { id: 'toc-sec-lecciones', label: 'Lecciones aplicables' },
+  { id: 'toc-sec-criticas',  label: 'Críticas y limitaciones' },
+  { id: 'toc-sec-para',      label: '¿Para quién es?' },
+  { id: 'toc-sec-porque',    label: '¿Por qué leerlo?' },
+];
+
+function renderToc() {
+  const list = document.getElementById('toc-list');
+  list.innerHTML = TOC_SECCIONES.map((s, i) => `
+    <div class="toc-item" onclick="irSeccion('${s.id}')">
+      <span class="toc-item-num">${String(i+1).padStart(2,'0')}</span>
+      ${s.label}
+    </div>`).join('');
+  // Reset: closed by default
+  list.classList.remove('open');
+  document.getElementById('toc-arrow').classList.remove('open');
+}
+
+function toggleToc() {
+  const list  = document.getElementById('toc-list');
+  const arrow = document.getElementById('toc-arrow');
+  const open  = list.classList.toggle('open');
+  arrow.classList.toggle('open', open);
+}
+
+function irSeccion(id) {
+  const el = document.getElementById(id);
+  const modal = document.getElementById('modal-ver-content');
+  if (!el || !modal) return;
+  // Close TOC first
+  document.getElementById('toc-list').classList.remove('open');
+  document.getElementById('toc-arrow').classList.remove('open');
+  // Scroll modal to element
+  const offset = el.offsetTop - 80;
+  modal.scrollTo({ top: offset, behavior: 'smooth' });
+}
+
+// --- COMPARAR LIBROS ---
+let compareSeleccion = [null, null];
+let compareActivo = false;
+
+function iniciarCompare() {
+  compareActivo = true;
+  compareSeleccion = [null, null];
+  actualizarCompareBar();
+  document.getElementById('compare-bar').classList.add('visible');
+  document.getElementById('biblioteca').scrollIntoView({ behavior: 'smooth' });
+  // Add visual hint to cards
+  document.querySelectorAll('.btn-compare-card').forEach(b => {
+    b.textContent = '+ Comparar';
+    b.classList.remove('selected');
+  });
+}
+
+function cancelarCompare() {
+  compareActivo = false;
+  compareSeleccion = [null, null];
+  document.getElementById('compare-bar').classList.remove('visible');
+  document.querySelectorAll('.btn-compare-card').forEach(b => b.classList.remove('selected'));
+}
+
+function toggleCompareLibro(e, titulo) {
+  e.stopPropagation();
+  if (!compareActivo) return;
+  const libro = libros.find(l => l.titulo === titulo);
+  if (!libro) return;
+
+  // Already selected? Remove it
+  const idx = compareSeleccion.findIndex(l => l && l.titulo === titulo);
+  if (idx !== -1) {
+    compareSeleccion[idx] = null;
+    actualizarCompareBar();
+    renderGrid(getListaFiltrada());
+    return;
+  }
+
+  // Fill first empty slot
+  const slot = compareSeleccion.findIndex(l => l === null);
+  if (slot === -1) return; // already 2 selected
+  compareSeleccion[slot] = libro;
+  actualizarCompareBar();
+  renderGrid(getListaFiltrada());
+}
+
+function actualizarCompareBar() {
+  for (let i = 0; i < 2; i++) {
+    const slot = document.getElementById(`compare-slot-${i}`);
+    if (!slot) continue;
+    if (compareSeleccion[i]) {
+      slot.classList.add('filled');
+      slot.innerHTML = `<span>${compareSeleccion[i].titulo}</span>
+        <button class="compare-slot-x" onclick="quitarCompare(${i})">✕</button>`;
+    } else {
+      slot.classList.remove('filled');
+      slot.innerHTML = i === 0 ? 'Seleccioná un libro...' : 'Seleccioná otro libro...';
+    }
+  }
+  const btn = document.getElementById('btn-compare-now');
+  if (btn) btn.disabled = !(compareSeleccion[0] && compareSeleccion[1]);
+}
+
+function quitarCompare(idx) {
+  compareSeleccion[idx] = null;
+  actualizarCompareBar();
+  renderGrid(getListaFiltrada());
+}
+
+function abrirCompare() {
+  const [a, b] = compareSeleccion;
+  if (!a || !b) return;
+  renderComparePan(a, 0);
+  renderComparePan(b, 1);
+  document.getElementById('compare-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  cancelarCompare();
+}
+
+function cerrarCompare() {
+  document.getElementById('compare-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function renderComparePan(libro, idx) {
+  const pane = document.getElementById(`compare-pane-${idx}`);
+  const cat  = genreLabels[libro.categoria] || libro.categoria;
+  const stars = Array.from({length:5},(_,j)=>`<span class="star ${j<libro.rating?'':'empty'}">★</span>`).join('');
+
+  const ideas = (libro.ideas||[]).slice(0,4).map(i=>`<li>${i}</li>`).join('');
+  const lecs  = (libro.lecciones||[]).slice(0,3).map(i=>`<li>${i}</li>`).join('');
+
+  pane.innerHTML = `
+    <div class="compare-pane-header">
+      <div class="compare-pane-cat">${cat}</div>
+      <div class="compare-pane-title">${libro.titulo}</div>
+      <div class="compare-pane-author">— ${libro.autor}, ${libro.anio}</div>
+      <div style="display:flex;gap:0.75rem;align-items:center;margin-top:0.75rem;flex-wrap:wrap;">
+        <div style="display:flex;gap:2px">${stars}</div>
+        <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--muted);">${libro.tiempo} min · ${libro.paginas||'—'} págs.</span>
+        ${libro.linkAfiliado ? `<a href="${libro.linkAfiliado}" target="_blank" rel="noopener sponsored" class="btn-comprar" style="padding:0.4rem 0.9rem;font-size:0.72rem;">Comprar →</a>` : ''}
+      </div>
+    </div>
+    <div class="compare-pane-body">
+      <div class="compare-section-title">¿De qué trata?</div>
+      <p class="compare-text">${libro.sinopsis||''}</p>
+
+      <div class="compare-section-title">Ideas principales</div>
+      <ul class="compare-list">${ideas}</ul>
+
+      <div class="compare-section-title">Lecciones clave</div>
+      <ul class="compare-list">${lecs}</ul>
+
+      <div class="compare-section-title">¿Por qué leerlo?</div>
+      <p class="compare-text">${libro.porque||''}</p>
+
+      <div class="compare-section-title">Críticas</div>
+      <p class="compare-text">${libro.criticas||''}</p>
+    </div>`;
+}
+
+// Escape closes compare too
 // Init
 initDark();
 initFraseDia();
