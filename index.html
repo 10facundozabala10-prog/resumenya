@@ -949,73 +949,149 @@ nav {
   gap: var(--s3);
 }
 
+/* ══════════════════════════════════════════════════════
+   BOOK CARD — REDISEÑO CON PORTADA VISUAL
+══════════════════════════════════════════════════════ */
 .book-card {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: var(--r3);
-  padding: var(--s3) var(--s3) var(--s3) calc(var(--s3) + 14px);
+  padding: 0;
   cursor: pointer;
   position: relative;
   overflow: hidden;
-  transition: transform 0.3s cubic-bezier(.4,0,.2,1),
-              box-shadow 0.3s ease,
-              border-color 0.25s ease,
-              background 0.25s ease;
+  transition: transform 0.32s cubic-bezier(.4,0,.2,1),
+              box-shadow 0.32s ease,
+              border-color 0.25s ease;
   display: flex;
   flex-direction: column;
 }
-
-/* Left accent strip */
-.book-card::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(180deg, var(--accent), var(--accent-2));
-  opacity: 0;
-  transition: opacity 0.28s;
-  border-radius: var(--r3) 0 0 var(--r3);
-}
 .book-card:hover {
-  transform: translateY(-3px);
-  background: var(--card-hover);
-  box-shadow: 0 12px 40px rgba(0,0,0,0.35),
-              0 1px 0 rgba(200,72,26,0.15);
-  border-color: rgba(200,72,26,0.2);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.45), 0 1px 0 rgba(200,72,26,0.2);
+  border-color: rgba(200,72,26,0.22);
 }
-.book-card:hover::after { opacity: 1; }
 .book-card.hidden { display: none; }
 
+/* Portada generativa */
+.card-cover {
+  position: relative;
+  height: 120px;
+  overflow: hidden;
+  flex-shrink: 0;
+  border-radius: var(--r3) var(--r3) 0 0;
+}
+.cover-filosofia  { background: linear-gradient(140deg, #162816 0%, #1e3d1e 50%, #2d5a2d 100%); }
+.cover-negocios   { background: linear-gradient(140deg, #241a06 0%, #3d2d0a 50%, #5c4210 100%); }
+.cover-psicologia { background: linear-gradient(140deg, #260e06 0%, #3d160a 50%, #5c200f 100%); }
+.cover-ciencia    { background: linear-gradient(140deg, #060f1e 0%, #0a1a35 50%, #102548 100%); }
+.cover-historia   { background: linear-gradient(140deg, #161410 0%, #2a2416 50%, #3d3520 100%); }
+.cover-autoayuda  { background: linear-gradient(140deg, #180824 0%, #280d3a 50%, #3c1452 100%); }
+
+/* Número decorativo */
+.card-cover-num {
+  position: absolute;
+  right: -6px; bottom: -20px;
+  font-family: var(--font-display);
+  font-size: 7.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(255,255,255,0.055);
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.04em;
+}
+
+/* Título en la portada */
+.card-cover-title {
+  position: absolute;
+  inset: 0;
+  padding: var(--s2) var(--s3);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.card-cover-cat {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.38);
+  margin-bottom: 0.3rem;
+}
+.card-cover-h {
+  font-family: var(--font-display);
+  font-size: 1.0rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: rgba(255,255,255,0.85);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Línea de acento al hover */
+.card-cover::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+.book-card:hover .card-cover::after { opacity: 1; }
+
+/* Patrón de puntos */
+.card-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.035) 1px, transparent 1px);
+  background-size: 16px 16px;
+  pointer-events: none;
+}
+
+/* Fav toggle */
 .fav-toggle {
   position: absolute;
-  top: var(--s2); left: var(--s2);
-  z-index: 2;
-  background: none; border: none;
-  font-size: 0.82rem;
+  top: var(--s2); right: var(--s2);
+  z-index: 3;
+  background: rgba(0,0,0,0.4);
+  border: none;
+  border-radius: 50%;
+  width: 26px; height: 26px;
+  font-size: 0.68rem;
   cursor: pointer;
-  opacity: 0.16;
+  opacity: 0;
   transition: opacity 0.2s, transform 0.2s;
   line-height: 1; padding: 0;
+  display: flex; align-items: center; justify-content: center;
 }
-.fav-toggle:hover { opacity: 0.6; transform: scale(1.18); }
-.fav-toggle.active { opacity: 1; }
+.book-card:hover .fav-toggle { opacity: 0.65; }
+.fav-toggle:hover { opacity: 1 !important; transform: scale(1.15); }
+.fav-toggle.active { opacity: 1 !important; }
 
+/* Status badge sobre portada */
 .status-badge {
   position: absolute;
-  top: var(--s2); right: var(--s2);
+  top: var(--s2); left: var(--s2);
+  z-index: 3;
   font-family: var(--font-mono);
-  font-size: 0.56rem;
+  font-size: 0.5rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  padding: 0.18rem 0.55rem;
+  padding: 0.15rem 0.5rem;
   border-radius: var(--pill);
   border: 1px solid transparent;
+  backdrop-filter: blur(6px);
 }
-.status-leido    { background: rgba(80,122,80,0.14); color: var(--sage); border-color: rgba(80,122,80,0.28); }
-.status-leyendo  { background: rgba(181,131,26,0.12); color: var(--accent-2); border-color: rgba(181,131,26,0.28); }
-.status-pendiente{ display: none; }
+.status-leido   { background: rgba(80,122,80,0.3); color: #9fd49f; border-color: rgba(80,122,80,0.45); }
+.status-leyendo { background: rgba(181,131,26,0.3); color: var(--accent-2); border-color: rgba(181,131,26,0.45); }
+.status-pendiente { display: none; }
 
+/* Amazon badge */
 .amazon-card-badge {
   position: absolute;
   bottom: var(--s2); right: var(--s2);
@@ -1023,53 +1099,50 @@ nav {
   color: #C98010;
   font-family: var(--font-mono);
   font-size: 0.52rem;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  padding: 0.15rem 0.45rem;
+  padding: 0.2rem 0.55rem;
   border-radius: var(--pill);
-  border: 1px solid rgba(255,153,0,0.18);
+  border: 1px solid rgba(255,153,0,0.22);
+  white-space: nowrap;
+  line-height: 1.4;
 }
 
-.card-genre {
-  display: inline-block;
-  padding: 0.16rem 0.6rem;
-  border-radius: var(--pill);
-  font-family: var(--font-mono);
-  font-size: 0.57rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-bottom: var(--s2);
-  align-self: flex-start;
+/* card-genre inline (oculto — ya está en cover) */
+.card-genre { display: none; }
+
+/* Cuerpo de la card */
+.card-body {
+  padding: var(--s2) var(--s3) calc(var(--s3) + 22px);
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
 }
-.genre-filosofia { background: rgba(80,122,80,0.14);  color: var(--sage); }
-.genre-negocios  { background: rgba(181,131,26,0.12); color: var(--accent-2); }
-.genre-psicologia{ background: rgba(200,72,26,0.12);  color: var(--accent); }
-.genre-ciencia   { background: rgba(240,232,218,0.07);color: var(--muted); }
-.genre-historia  { background: rgba(80,122,80,0.1);   color: var(--sage); }
-.genre-autoayuda { background: rgba(181,131,26,0.1);  color: var(--accent-2); }
 
 .book-card h3 {
   font-family: var(--font-display);
-  font-size: 1.15rem;
+  font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.2;
-  margin-bottom: 0.2rem;
+  margin-bottom: 0.15rem;
   color: var(--ink);
+  display: none; /* título ahora está en la portada */
 }
 .book-author {
-  font-size: 0.74rem;
+  font-size: 0.7rem;
   color: var(--muted);
   font-style: italic;
-  margin-bottom: var(--s2);
+  margin-bottom: var(--s1);
 }
 .book-excerpt {
-  font-size: 0.8rem;
-  line-height: 1.7;
-  color: rgba(240,232,218,0.44);
+  font-size: 0.77rem;
+  line-height: 1.65;
+  color: rgba(240,232,218,0.38);
   flex: 1;
-  margin-bottom: var(--s2);
+  margin-bottom: var(--s1);
   display: -webkit-box;
-  -webkit-line-clamp: 3;
+  -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
@@ -1080,44 +1153,30 @@ nav {
   margin-top: auto;
 }
 .rating { display: flex; gap: 2px; align-items: center; }
-.star { color: var(--accent-2); font-size: 0.62rem; }
+.star { color: var(--accent-2); font-size: 0.6rem; }
 .star.empty { color: rgba(240,232,218,0.1); }
-.rating-num {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  color: var(--muted);
-  margin-left: 0.3rem;
-}
-.read-min {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  color: var(--muted);
-}
+.rating-num { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); margin-left: 0.3rem; }
+.read-min   { font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted); }
+.card-tags  { display: flex; flex-wrap: wrap; gap: 0.3rem; margin-bottom: var(--s1); }
+.card-tag   { font-family: var(--font-mono); font-size: 0.54rem; color: var(--muted); background: transparent; border: none; padding: 0; cursor: pointer; transition: color 0.15s; }
+.card-tag:hover { color: var(--accent); }
 
 /* List view */
-.books-grid.list-view {
-  grid-template-columns: 1fr;
-  gap: 0;
-  border: 1px solid var(--border);
-  border-radius: var(--r3);
-  overflow: hidden;
-}
-.books-grid.list-view .book-card {
-  border-radius: 0; border: none;
-  border-bottom: 1px solid var(--border);
-  display: grid;
-  grid-template-columns: auto 1fr auto;
-  align-items: center;
-  gap: var(--s2);
-  padding: var(--s2) var(--s3);
-  flex-direction: unset;
-}
-.books-grid.list-view .book-card:last-child { border-bottom: none; }
-.books-grid.list-view .book-card::after { display: none; }
-.books-grid.list-view .book-card .book-excerpt,
-.books-grid.list-view .book-card .fav-toggle,
-.books-grid.list-view .book-card .amazon-card-badge { display: none; }
-.books-grid.list-view .book-card h3 { font-size: 0.95rem; margin-bottom: 0.1rem; }
+.books-grid.list-view { grid-template-columns:1fr; gap:0; border:1px solid var(--border); border-radius:var(--r3); overflow:hidden; }
+.books-grid.list-view .book-card { border-radius:0; border:none; border-bottom:1px solid var(--border); flex-direction:row; }
+.books-grid.list-view .book-card:last-child { border-bottom:none; }
+.books-grid.list-view .card-cover { width:72px; height:72px; border-radius:var(--r2) 0 0 var(--r2); flex-shrink:0; }
+.books-grid.list-view .card-cover-title { padding:var(--s1) var(--s1); }
+.books-grid.list-view .card-cover-h { font-size:0.6rem; -webkit-line-clamp:3; }
+.books-grid.list-view .card-cover-cat { display:none; }
+.books-grid.list-view .card-cover-num { font-size:3rem; }
+.books-grid.list-view .card-body { padding:var(--s2) var(--s3); }
+.books-grid.list-view .book-excerpt,
+.books-grid.list-view .card-tags,
+.books-grid.list-view .amazon-card-badge { display:none; }
+.books-grid.list-view .fav-toggle { opacity:0.5; }
+.books-grid.list-view .book-card:hover .fav-toggle { opacity:0.8; }
+.books-grid.list-view .status-badge { position:static; display:inline-flex; margin-bottom:var(--s1); }
 .books-grid.list-view .book-card .book-author { margin-bottom: 0; }
 .books-grid.list-view .book-card .card-genre { margin-bottom: 0; }
 .books-grid.list-view .book-card .card-meta { flex-direction: column; align-items: flex-end; gap: 0.25rem; margin-top: 0; }
@@ -7299,23 +7358,32 @@ function renderGrid(lista) {
     </div>`;
 
     card.innerHTML = `
-      <button class="fav-toggle ${esFav ? 'active' : ''}" title="Favorito" onclick="toggleFav(event, '${libro.titulo.replace(/'/g,"\\'")}')">⭐</button>
-      ${badge}
-      ${amazonBadge}
-      <span class="card-genre genre-${libro.categoria}">${genreLabels[libro.categoria]}</span>
-      <h3>${libro.titulo}</h3>
-      <div class="book-author">${libro.autor}, ${libro.anio}</div>
-      <p class="book-excerpt">${libro.sinopsis}</p>
-      ${cardTags ? `<div class="card-tags">${cardTags}</div>` : ''}
-      ${vistaActiva === 'quick' ? quickTldr : ''}
-      <div class="card-meta">
-        <div class="rating">${stars}<span class="rating-num">${libro.rating}.0</span></div>
-        <span class="read-min">${libro.tiempo} min</span>
+      <!-- Portada visual -->
+      <div class="card-cover cover-${libro.categoria}">
+        <div class="card-cover-num">${i + 1}</div>
+        <div class="card-cover-title">
+          <span class="card-cover-cat">${genreLabels[libro.categoria]}</span>
+          <span class="card-cover-h">${libro.titulo}</span>
+        </div>
+        ${badge}
+        <button class="fav-toggle ${esFav ? 'active' : ''}" title="Favorito" onclick="toggleFav(event, '${libro.titulo.replace(/'/g,"\\'")}')">⭐</button>
       </div>
-      ${vistaActiva === 'quick' ? quickMeta : ''}
-      ${compareActivo ? `<button class="btn-compare-card ${isInCompare?'selected':''}" onclick="toggleCompareLibro(event, '${libro.titulo.replace(/'/g,"\\'")}')">
-        ${isInCompare ? '✓ Seleccionado' : '+ Comparar'}
-      </button>` : ''}
+      <!-- Cuerpo -->
+      <div class="card-body">
+        ${amazonBadge}
+        <div class="book-author">${libro.autor} · ${libro.anio}</div>
+        <p class="book-excerpt">${libro.sinopsis}</p>
+        ${cardTags ? `<div class="card-tags">${cardTags}</div>` : ''}
+        ${vistaActiva === 'quick' ? quickTldr : ''}
+        <div class="card-meta">
+          <div class="rating">${stars}<span class="rating-num">${libro.rating}.0</span></div>
+          <span class="read-min">${libro.tiempo} min</span>
+        </div>
+        ${vistaActiva === 'quick' ? quickMeta : ''}
+        ${compareActivo ? `<button class="btn-compare-card ${isInCompare?'selected':''}" onclick="toggleCompareLibro(event, '${libro.titulo.replace(/'/g,"\\'")}')">
+          ${isInCompare ? '✓ Seleccionado' : '+ Comparar'}
+        </button>` : ''}
+      </div>
     `;
     card.addEventListener('click', () => abrirModal(libro));
     grid.appendChild(card);
