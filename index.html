@@ -4357,14 +4357,18 @@ footer {
    DRAWER LATERAL MOBILE
 ══════════════════════════════════════════════════════ */
 .mobile-drawer-overlay {
-  display: none;
+  display: block;
   position: fixed; inset: 0; z-index: 1400;
   background: rgba(0,0,0,0.6);
   backdrop-filter: blur(4px);
   opacity: 0;
+  pointer-events: none;
   transition: opacity 0.28s;
 }
-.mobile-drawer-overlay.open { opacity: 1; }
+.mobile-drawer-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
 
 .mobile-drawer {
   position: fixed;
@@ -4555,7 +4559,6 @@ footer {
   nav .btn-sorpresa { display: none; }
   nav .btn-darkmode { display: none; }
   .mobile-tabbar    { display: block; }
-  .mobile-drawer-overlay { display: block; }
 
   /* Espacio para bottom tab bar */
   body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0)); }
