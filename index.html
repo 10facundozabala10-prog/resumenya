@@ -4324,6 +4324,212 @@ footer {
   nav .nav-link:not(.btn-sorpresa) { display: none; }
 }
 
+/* ══════════════════════════════════════════════════════
+   MOBILE HEADER — ocultar nav, mostrar hamburger
+══════════════════════════════════════════════════════ */
+.btn-hamburger {
+  display: none;
+  width: 38px; height: 38px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--r2);
+  cursor: pointer;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  transition: border-color 0.2s;
+  flex-shrink: 0;
+}
+.btn-hamburger:hover { border-color: var(--accent); }
+.btn-hamburger span {
+  display: block;
+  width: 18px; height: 1.5px;
+  background: var(--ink);
+  border-radius: 2px;
+  transition: all 0.3s cubic-bezier(.4,0,.2,1);
+}
+.btn-hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.btn-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.btn-hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* ══════════════════════════════════════════════════════
+   DRAWER LATERAL MOBILE
+══════════════════════════════════════════════════════ */
+.mobile-drawer-overlay {
+  display: none;
+  position: fixed; inset: 0; z-index: 1400;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transition: opacity 0.28s;
+}
+.mobile-drawer-overlay.open { opacity: 1; }
+
+.mobile-drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(320px, 85vw);
+  z-index: 1401;
+  background: var(--surface);
+  border-left: 1px solid var(--border-md);
+  box-shadow: -20px 0 60px rgba(0,0,0,0.5);
+  transform: translateX(100%);
+  transition: transform 0.32s cubic-bezier(.4,0,.2,1);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+}
+.mobile-drawer.open { transform: translateX(0); }
+
+.mobile-drawer-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s3) var(--s4);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.mobile-drawer-logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.02em;
+}
+.mobile-drawer-logo span { color: var(--accent); }
+.mobile-drawer-close {
+  width: 32px; height: 32px;
+  background: transparent; border: none; cursor: pointer;
+  font-size: 1rem; color: var(--muted);
+  display: flex; align-items: center; justify-content: center;
+  border-radius: var(--r1); transition: all 0.15s;
+}
+.mobile-drawer-close:hover { background: var(--card); color: var(--ink); }
+
+.mobile-drawer-body {
+  flex: 1; overflow-y: auto;
+  padding: var(--s2) 0;
+  scrollbar-width: none;
+}
+.mobile-drawer-body::-webkit-scrollbar { display: none; }
+
+.drawer-section-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--muted);
+  padding: var(--s2) var(--s4) var(--s1);
+  display: block;
+}
+
+.drawer-item {
+  display: flex; align-items: center; gap: var(--s2);
+  width: 100%; padding: 0.75rem var(--s4);
+  background: transparent; border: none;
+  cursor: pointer; text-align: left;
+  font-size: 0.92rem; font-family: var(--font-body);
+  color: var(--sub); transition: all 0.15s;
+  border-left: 2px solid transparent;
+}
+.drawer-item:hover {
+  background: rgba(200,72,26,0.05);
+  border-left-color: var(--accent);
+  color: var(--ink);
+}
+.drawer-item:active { background: rgba(200,72,26,0.08); }
+.drawer-item-icon {
+  font-size: 1rem; flex-shrink: 0; width: 22px; text-align: center;
+}
+.drawer-item-text { flex: 1; }
+.drawer-item.highlight {
+  color: var(--accent);
+  font-weight: 500;
+}
+.drawer-divider {
+  height: 1px; background: var(--border);
+  margin: var(--s1) var(--s4);
+}
+
+.mobile-drawer-footer {
+  padding: var(--s3) var(--s4);
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-shrink: 0;
+}
+.drawer-theme-btn {
+  display: flex; align-items: center; gap: var(--s1);
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--pill); padding: 0.38rem 0.85rem;
+  cursor: pointer; font-size: 0.78rem; font-family: var(--font-body);
+  color: var(--sub); transition: all 0.18s;
+}
+.drawer-theme-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ══════════════════════════════════════════════════════
+   BOTTOM TAB BAR
+══════════════════════════════════════════════════════ */
+.mobile-tabbar {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0;
+  z-index: 1300;
+  background: var(--surface);
+  border-top: 1px solid var(--border-md);
+  padding: 0 0 env(safe-area-inset-bottom, 0);
+  box-shadow: 0 -8px 32px rgba(0,0,0,0.3);
+}
+.tabbar-inner {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  padding: 6px 0 4px;
+}
+.tab-item {
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 3px;
+  padding: 6px 4px 4px;
+  background: transparent; border: none;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+  transition: all 0.15s;
+  position: relative;
+}
+.tab-item:active { transform: scale(0.92); }
+.tab-icon {
+  font-size: 1.25rem; line-height: 1;
+  transition: transform 0.2s cubic-bezier(.4,0,.2,1);
+}
+.tab-label {
+  font-family: var(--font-mono);
+  font-size: 0.55rem; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--muted);
+  white-space: nowrap; transition: color 0.15s;
+}
+.tab-item.active .tab-icon   { transform: scale(1.1); }
+.tab-item.active .tab-label  { color: var(--accent); }
+
+/* Sorpréndeme tab — botón central destacado */
+.tab-item.tab-surprise {
+  position: relative; top: -10px;
+}
+.tab-item.tab-surprise .tab-icon-wrap {
+  width: 50px; height: 50px;
+  background: linear-gradient(135deg, var(--accent), #e05a20);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 20px rgba(200,72,26,0.45);
+  font-size: 1.1rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.tab-item.tab-surprise:active .tab-icon-wrap {
+  transform: scale(0.92);
+  box-shadow: 0 2px 10px rgba(200,72,26,0.3);
+}
+.tab-item.tab-surprise .tab-label { color: var(--accent); margin-top: 2px; }
+
+/* Notificación badge en tab */
+.tab-badge {
+  position: absolute; top: 4px; right: calc(50% - 16px);
+  width: 8px; height: 8px;
+  background: var(--accent); border-radius: 50%;
+  border: 1.5px solid var(--surface);
+  display: none;
+}
+.tab-badge.visible { display: block; }
+
 @media (max-width: 768px) {
   .hero { grid-template-columns: 1fr; gap: var(--s5); padding: var(--s6) var(--page-pad) var(--s5); }
   .hero-right { display: none; }
@@ -4343,11 +4549,46 @@ footer {
   .compare-pane   { border-right: none; border-bottom: 1px solid var(--border); max-height: 50vh; }
   .compare-pane:last-child { border-left: none; }
   .modal-title { font-size: 1.5rem; }
+
+  /* Activar mobile UI */
+  .btn-hamburger    { display: flex; }
+  nav .btn-sorpresa { display: none; }
+  nav .btn-darkmode { display: none; }
+  .mobile-tabbar    { display: block; }
+  .mobile-drawer-overlay { display: block; }
+
+  /* Espacio para bottom tab bar */
+  body { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0)); }
+
+  /* Modal en mobile */
+  .modal-overlay { align-items: flex-end; padding: 0; }
+  .modal {
+    border-radius: var(--r4) var(--r4) 0 0;
+    max-height: 95vh;
+    margin: 0;
+  }
+
+  /* Searchbar full width */
+  .search-section { flex-direction: column; gap: var(--s2); }
+  .search-wrap    { max-width: 100%; }
+
+  /* Hero compact */
+  .hero-left h1 { font-size: clamp(2.2rem, 8vw, 3.5rem); }
+  .btn-test-trigger { font-size: 0.74rem; }
+
+  /* Grid controls wrap */
+  .grid-controls { flex-wrap: wrap; gap: var(--s1); }
 }
 
 @media (max-width: 480px) {
   :root { --page-pad: 1rem; }
   .search-section { position: relative; top: 0; }
+  .filtros { gap: 0.35rem; }
+  .filtro-btn { font-size: 0.7rem; padding: 0.32rem 0.7rem; }
+  .modal-header { gap: var(--s1); }
+  .modal-header div[style] { gap: 0.3rem !important; }
+  .btn-focus { width: 30px; height: 30px; font-size: 0.75rem; }
+  .reading-time-badge { display: none; }
 }
 </style>
 
@@ -4383,8 +4624,115 @@ footer {
     <button class="nav-link" onclick="iniciarCompare()">⚖ Comparar</button>
     <button class="nav-link" onclick="toggleIndice()">Índice</button>
     <button class="btn-darkmode" id="btn-dark" onclick="toggleDark()" title="Modo oscuro">🌙</button>
+    <!-- Hamburger solo mobile -->
+    <button class="btn-hamburger" id="btn-hamburger" onclick="toggleDrawer()" aria-label="Menú">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 </header>
+
+<!-- MOBILE DRAWER OVERLAY -->
+<div class="mobile-drawer-overlay" id="drawer-overlay" onclick="cerrarDrawer()"></div>
+
+<!-- MOBILE DRAWER -->
+<div class="mobile-drawer" id="mobile-drawer">
+  <div class="mobile-drawer-header">
+    <span class="mobile-drawer-logo">LE<span>E</span>R</span>
+    <button class="mobile-drawer-close" onclick="cerrarDrawer()">✕</button>
+  </div>
+  <div class="mobile-drawer-body">
+
+    <span class="drawer-section-label">Explorar</span>
+    <button class="drawer-item" onclick="drawerAction(scrollToBooks)">
+      <span class="drawer-item-icon">📚</span>
+      <span class="drawer-item-text">Biblioteca</span>
+    </button>
+    <button class="drawer-item highlight" onclick="drawerAction(sorprendeme)">
+      <span class="drawer-item-icon">✦</span>
+      <span class="drawer-item-text">Sorpréndeme</span>
+    </button>
+    <button class="drawer-item" onclick="drawerAction(abrirTestPerfil)">
+      <span class="drawer-item-icon">🧠</span>
+      <span class="drawer-item-text">Test de perfil lector</span>
+    </button>
+
+    <div class="drawer-divider"></div>
+    <span class="drawer-section-label">Mi biblioteca</span>
+    <button class="drawer-item" onclick="drawerAction(abrirStats)">
+      <span class="drawer-item-icon">📊</span>
+      <span class="drawer-item-text">Mis estadísticas</span>
+    </button>
+    <button class="drawer-item" onclick="drawerAction(abrirHistory)">
+      <span class="drawer-item-icon">📅</span>
+      <span class="drawer-item-text">Historial de lectura</span>
+    </button>
+    <button class="drawer-item" onclick="drawerAction(abrirQuotes)">
+      <span class="drawer-item-icon">💛</span>
+      <span class="drawer-item-text">Mis citas guardadas</span>
+    </button>
+    <button class="drawer-item" onclick="drawerAction(abrirNoteSearch)">
+      <span class="drawer-item-icon">🔍</span>
+      <span class="drawer-item-text">Buscar en mis notas</span>
+    </button>
+
+    <div class="drawer-divider"></div>
+    <span class="drawer-section-label">Herramientas</span>
+    <button class="drawer-item" onclick="drawerAction(iniciarMaraton)">
+      <span class="drawer-item-icon">🏃</span>
+      <span class="drawer-item-text">Modo maratón</span>
+    </button>
+    <button class="drawer-item" onclick="drawerAction(abrirGoalsModal)">
+      <span class="drawer-item-icon">🎯</span>
+      <span class="drawer-item-text">Mis metas</span>
+    </button>
+    <button class="drawer-item" onclick="drawerAction(abrirExport)">
+      <span class="drawer-item-icon">📥</span>
+      <span class="drawer-item-text">Exportar notas</span>
+    </button>
+    <button class="drawer-item" onclick="drawerAction(iniciarCompare)">
+      <span class="drawer-item-icon">⚖</span>
+      <span class="drawer-item-text">Comparar libros</span>
+    </button>
+    <button class="drawer-item" onclick="drawerAction(toggleIndice)">
+      <span class="drawer-item-icon">☰</span>
+      <span class="drawer-item-text">Índice de libros</span>
+    </button>
+
+  </div>
+  <div class="mobile-drawer-footer">
+    <button class="drawer-theme-btn" onclick="toggleDark()">
+      <span id="drawer-dark-icon">🌙</span> Cambiar tema
+    </button>
+    <span style="font-family:var(--font-mono);font-size:0.6rem;color:var(--muted)">resumenya.com</span>
+  </div>
+</div>
+
+<!-- BOTTOM TAB BAR (solo mobile) -->
+<nav class="mobile-tabbar" id="mobile-tabbar">
+  <div class="tabbar-inner">
+    <button class="tab-item active" id="tab-inicio" onclick="tabAction('inicio')">
+      <span class="tab-icon">🏠</span>
+      <span class="tab-label">Inicio</span>
+    </button>
+    <button class="tab-item" id="tab-buscar" onclick="tabAction('buscar')">
+      <span class="tab-icon">🔎</span>
+      <span class="tab-label">Buscar</span>
+    </button>
+    <button class="tab-item tab-surprise" id="tab-surprise" onclick="sorprendeme()">
+      <div class="tab-icon-wrap">✦</div>
+      <span class="tab-label">Suerte</span>
+    </button>
+    <button class="tab-item" id="tab-stats" onclick="tabAction('stats')">
+      <span class="tab-icon">📊</span>
+      <span class="tab-badge" id="tab-badge-stats"></span>
+      <span class="tab-label">Stats</span>
+    </button>
+    <button class="tab-item" id="tab-menu" onclick="toggleDrawer()">
+      <span class="tab-icon">☰</span>
+      <span class="tab-label">Menú</span>
+    </button>
+  </div>
+</nav>
 
 <!-- HERO -->
 <section class="hero">
@@ -6802,6 +7150,7 @@ function setStatus(estado) {
   actualizarProgreso();
   renderRecomendaciones();
   renderGoals();
+  actualizarTabBadges();
   if (estado === 'leido') {
     const now = new Date();
     const keyMes = `leidos_mes_${now.getFullYear()}_${now.getMonth()}`;
@@ -7109,6 +7458,7 @@ document.addEventListener('keydown', e => {
     cerrarStats(); cerrarCompare(); cerrarHistory(); cerrarQuotes();
     cerrarNoteSearch(); cerrarFlashcards(); cerrarShareImg();
     if (typeof cerrarTest === 'function') cerrarTest();
+    if (typeof cerrarDrawer === 'function') cerrarDrawer();
     if (compareActivo) cancelarCompare();
   }
   if (modalAbierto && e.key === 'ArrowRight') navegarModal(1);
@@ -9653,6 +10003,75 @@ function compartirPerfil(ganador) {
   window.open(`https://wa.me/?text=${txt}`, '_blank');
 }
 
+// --- MENÚ MOBILE (DRAWER + BOTTOM TAB BAR) ---
+let drawerAbierto = false;
+let tabActiva = 'inicio';
+
+function toggleDrawer() {
+  drawerAbierto ? cerrarDrawer() : abrirDrawer();
+}
+
+function abrirDrawer() {
+  drawerAbierto = true;
+  document.getElementById('mobile-drawer').classList.add('open');
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('btn-hamburger').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  // Sync dark icon
+  const isDark = document.body.classList.contains('dark') ||
+    !document.body.classList.contains('light');
+  document.getElementById('drawer-dark-icon').textContent = isDark ? '☀️' : '🌙';
+}
+
+function cerrarDrawer() {
+  drawerAbierto = false;
+  document.getElementById('mobile-drawer').classList.remove('open');
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('btn-hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+// Acción desde drawer: cierra el drawer y ejecuta la función
+function drawerAction(fn) {
+  cerrarDrawer();
+  setTimeout(fn, 180);
+}
+
+// Bottom tab bar
+function tabAction(tab) {
+  // Actualizar visual
+  document.querySelectorAll('.tab-item:not(.tab-surprise)').forEach(el => el.classList.remove('active'));
+  const el = document.getElementById('tab-' + tab);
+  if (el) el.classList.add('active');
+  tabActiva = tab;
+
+  if (tab === 'inicio') {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (tab === 'buscar') {
+    // Scroll to search and focus
+    const buscador = document.getElementById('buscador');
+    if (buscador) {
+      const top = buscador.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
+      setTimeout(() => buscador.focus(), 400);
+    }
+  } else if (tab === 'stats') {
+    abrirStats();
+    // Reset tab visual after opening modal
+    setTimeout(() => {
+      document.querySelectorAll('.tab-item:not(.tab-surprise)').forEach(el => el.classList.remove('active'));
+      document.getElementById('tab-inicio').classList.add('active');
+    }, 300);
+  }
+}
+
+// Mostrar badge en tab de stats si hay libros leídos
+function actualizarTabBadges() {
+  const leidos = libros.filter(l => getStatus(l.titulo) === 'leido').length;
+  const badge = document.getElementById('tab-badge-stats');
+  if (badge) badge.classList.toggle('visible', leidos > 0);
+}
+
 // Init
 initDark();
 initFraseDia();
@@ -9671,6 +10090,7 @@ setTimeout(() => {
   renderRecomendaciones();
   renderHeatmap(new Date().getFullYear());
   checkHashOnLoad();
+  actualizarTabBadges();
 }, 350);
 </script>
 </body>
