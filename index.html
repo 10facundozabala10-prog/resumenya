@@ -4052,6 +4052,258 @@ footer {
 .btn-shareimg-cp  { background: var(--card); color: var(--sub); border: 1px solid var(--border); }
 .btn-shareimg-cp:hover  { border-color: var(--border-md); color: var(--ink); }
 
+/* ══════════════════════════════════════════════════════
+   TEST DE PERFIL LECTOR
+══════════════════════════════════════════════════════ */
+.test-overlay {
+  position: fixed; inset: 0; z-index: 1200;
+  background: rgba(0,0,0,0.82);
+  backdrop-filter: blur(14px);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--s4);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.test-overlay.open { opacity: 1; pointer-events: all; }
+
+.test-panel {
+  background: var(--surface);
+  border: 1px solid var(--border-md);
+  border-radius: var(--r4);
+  width: 100%; max-width: 580px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.7);
+  transform: scale(0.96) translateY(12px);
+  transition: transform 0.32s cubic-bezier(.4,0,.2,1);
+  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+}
+.test-overlay.open .test-panel { transform: scale(1) translateY(0); }
+
+/* Header */
+.test-header {
+  padding: var(--s4) var(--s4) var(--s3);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--surface);
+  border-radius: var(--r4) var(--r4) 0 0;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s2);
+}
+.test-header-left {}
+.test-eyebrow {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 0.3rem; display: block;
+}
+.test-header h2 {
+  font-family: var(--font-display); font-size: 1.4rem; font-weight: 600;
+  color: var(--ink); line-height: 1.2;
+}
+.test-header-desc {
+  font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; line-height: 1.5;
+}
+
+/* Progress */
+.test-progress-wrap {
+  display: flex; align-items: center; gap: var(--s2);
+  padding: var(--s2) var(--s4);
+  border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
+}
+.test-progress-track {
+  flex: 1; height: 3px;
+  background: var(--border); border-radius: 2px; overflow: hidden;
+}
+.test-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 2px;
+  transition: width 0.5s cubic-bezier(.4,0,.2,1);
+}
+.test-progress-label {
+  font-family: var(--font-mono); font-size: 0.62rem; color: var(--muted);
+  flex-shrink: 0; white-space: nowrap;
+}
+
+/* Body */
+.test-body { padding: var(--s4); }
+
+.test-question {
+  font-family: var(--font-display); font-size: 1.15rem; font-weight: 600;
+  color: var(--ink); line-height: 1.4; margin-bottom: var(--s3);
+  animation: testFadeIn 0.3s ease both;
+}
+@keyframes testFadeIn {
+  from { opacity: 0; transform: translateX(10px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.test-options {
+  display: flex; flex-direction: column; gap: var(--s1);
+  animation: testFadeIn 0.35s 0.05s ease both;
+}
+.test-option {
+  display: flex; align-items: flex-start; gap: var(--s2);
+  padding: var(--s2) var(--s3);
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--r3);
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+.test-option:hover {
+  border-color: rgba(200,72,26,0.35);
+  background: rgba(200,72,26,0.04);
+  transform: translateX(3px);
+}
+.test-option.selected {
+  border-color: var(--accent);
+  background: rgba(200,72,26,0.08);
+}
+.test-option-letter {
+  font-family: var(--font-mono); font-size: 0.62rem;
+  color: var(--accent); font-weight: 500;
+  flex-shrink: 0; margin-top: 0.15rem;
+  width: 18px;
+}
+.test-option-text {
+  font-size: 0.88rem; line-height: 1.55; color: var(--sub);
+}
+.test-option.selected .test-option-text { color: var(--ink); }
+
+/* Nav buttons */
+.test-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s3) var(--s4);
+  border-top: 1px solid var(--border);
+  gap: var(--s2);
+  flex-shrink: 0;
+}
+.btn-test-back {
+  padding: 0.5rem var(--s3);
+  background: transparent; border: 1px solid var(--border);
+  border-radius: var(--r2); font-size: 0.8rem;
+  font-family: var(--font-body); color: var(--muted);
+  cursor: pointer; transition: all 0.18s;
+}
+.btn-test-back:hover { border-color: var(--border-md); color: var(--sub); }
+.btn-test-back:disabled { opacity: 0.3; cursor: default; }
+.btn-test-next {
+  padding: 0.52rem var(--s4);
+  background: var(--accent); color: #fff;
+  border: none; border-radius: var(--r2);
+  font-size: 0.82rem; font-weight: 500;
+  font-family: var(--font-body); cursor: pointer;
+  transition: background 0.18s; opacity: 0.4;
+  pointer-events: none;
+}
+.btn-test-next.enabled { opacity: 1; pointer-events: all; }
+.btn-test-next.enabled:hover { background: #a83a14; }
+
+/* Resultado */
+.test-result {
+  padding: var(--s4); display: none;
+  flex-direction: column; gap: var(--s3);
+  animation: testFadeIn 0.4s ease both;
+}
+.test-result.visible { display: flex; }
+.test-result-perfil {
+  text-align: center; padding: var(--s3) 0;
+}
+.test-result-emoji { font-size: 3rem; line-height: 1; margin-bottom: var(--s1); }
+.test-result-nombre {
+  font-family: var(--font-display); font-size: 1.8rem;
+  font-weight: 700; color: var(--ink); margin-bottom: 0.4rem;
+}
+.test-result-desc {
+  font-size: 0.88rem; line-height: 1.75; color: var(--sub);
+  max-width: 48ch; margin: 0 auto;
+}
+.test-result-divider {
+  height: 1px; background: var(--border); margin: var(--s1) 0;
+}
+.test-result-label {
+  font-family: var(--font-mono); font-size: 0.6rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: var(--s2);
+  display: block; text-align: center;
+}
+.test-result-libros {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s2);
+}
+.test-result-libro {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: var(--s2);
+  cursor: pointer; transition: all 0.2s;
+  display: flex; flex-direction: column; gap: 0.3rem;
+  position: relative; overflow: hidden;
+}
+.test-result-libro::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  opacity: 0; transition: opacity 0.2s;
+}
+.test-result-libro:hover { transform: translateY(-2px); border-color: rgba(200,72,26,0.25); }
+.test-result-libro:hover::before { opacity: 1; }
+.test-rl-titulo {
+  font-family: var(--font-display); font-size: 0.92rem;
+  font-weight: 600; color: var(--ink); line-height: 1.2;
+}
+.test-rl-autor { font-size: 0.7rem; color: var(--muted); font-style: italic; }
+.test-rl-cat {
+  font-family: var(--font-mono); font-size: 0.55rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--accent); margin-top: auto;
+}
+.test-result-actions {
+  display: flex; gap: var(--s1); flex-wrap: wrap; justify-content: center;
+  margin-top: var(--s1);
+}
+.btn-test-retry {
+  padding: 0.45rem var(--s3);
+  background: transparent; border: 1px solid var(--border);
+  border-radius: var(--r2); font-size: 0.78rem;
+  font-family: var(--font-body); color: var(--sub);
+  cursor: pointer; transition: all 0.18s;
+}
+.btn-test-retry:hover { border-color: var(--accent); color: var(--accent); }
+.btn-test-share {
+  padding: 0.45rem var(--s3);
+  background: var(--accent); color: #fff; border: none;
+  border-radius: var(--r2); font-size: 0.78rem; font-weight: 500;
+  font-family: var(--font-body); cursor: pointer; transition: background 0.18s;
+}
+.btn-test-share:hover { background: #a83a14; }
+
+/* Trigger button en hero */
+.btn-test-trigger {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.55rem var(--s3);
+  background: transparent;
+  border: 1px solid var(--border-md);
+  border-radius: var(--pill);
+  font-size: 0.78rem; font-family: var(--font-body);
+  color: var(--sub); cursor: pointer;
+  transition: all 0.2s; margin-top: var(--s2);
+}
+.btn-test-trigger:hover {
+  border-color: var(--accent); color: var(--accent);
+  background: rgba(200,72,26,0.05);
+}
+.btn-test-trigger-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--accent); animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+
+@media (max-width: 600px) {
+  .test-result-libros { grid-template-columns: 1fr; }
+}
+
 /* ═══════════════════════════════════════════════════════
    ANIMATIONS
 ═══════════════════════════════════════════════════════ */
@@ -4154,7 +4406,36 @@ footer {
         <div class="stat-label">Min. promedio</div>
       </div>
     </div>
+    <button class="btn-test-trigger" onclick="abrirTestPerfil()">
+      <span class="btn-test-trigger-dot"></span>
+      ¿Qué tipo de lector sos? Descubrilo →
+    </button>
   </div>
+
+<!-- TEST DE PERFIL LECTOR -->
+<div class="test-overlay" id="test-overlay" onclick="cerrarTestSiOverlay(event)">
+  <div class="test-panel" id="test-panel">
+    <div class="test-header">
+      <div class="test-header-left">
+        <span class="test-eyebrow">✦ Test de perfil lector</span>
+        <h2>¿Qué tipo de lector sos?</h2>
+        <p class="test-header-desc">5 preguntas · 2 minutos · Resultado personalizado</p>
+      </div>
+      <button class="modal-close" onclick="cerrarTest()">✕</button>
+    </div>
+    <div class="test-progress-wrap">
+      <div class="test-progress-track"><div class="test-progress-fill" id="test-progress-fill" style="width:0%"></div></div>
+      <span class="test-progress-label" id="test-progress-label">1 / 5</span>
+    </div>
+    <div class="test-body" id="test-body"></div>
+    <div class="test-result" id="test-result"></div>
+    <div class="test-nav" id="test-nav">
+      <button class="btn-test-back" id="btn-test-back" onclick="testNav(-1)" disabled>← Anterior</button>
+      <button class="btn-test-next" id="btn-test-next" onclick="testNav(1)">Siguiente →</button>
+    </div>
+  </div>
+</div>
+
   <div class="hero-right">
     <div class="featured-tag">✦ Destacado esta semana</div>
     <div class="featured-card" onclick="abrirModal(libros[0])">
@@ -6827,6 +7108,7 @@ document.addEventListener('keydown', e => {
     if (indiceAbierto) { indiceAbierto = false; document.getElementById('indice-overlay').classList.remove('open'); document.body.style.overflow = ''; }
     cerrarStats(); cerrarCompare(); cerrarHistory(); cerrarQuotes();
     cerrarNoteSearch(); cerrarFlashcards(); cerrarShareImg();
+    if (typeof cerrarTest === 'function') cerrarTest();
     if (compareActivo) cancelarCompare();
   }
   if (modalAbierto && e.key === 'ArrowRight') navegarModal(1);
@@ -9147,6 +9429,228 @@ function copiarShareImg() {
       descargarShareImg(); // fallback
     });
   });
+}
+
+// --- TEST DE PERFIL LECTOR ---
+const TEST_PREGUNTAS = [
+  {
+    pregunta: '¿Qué hacés cuando tenés un problema difícil que resolver?',
+    opciones: [
+      { texto: 'Lo analizo desde múltiples ángulos hasta encontrar la solución más lógica', perfil: 'cientifico' },
+      { texto: 'Confío en mi intuición y actúo rápido', perfil: 'estratega' },
+      { texto: 'Me pregunto qué significado tiene ese problema en mi vida', perfil: 'filosofo' },
+      { texto: 'Hablo con alguien y busco perspectivas externas', perfil: 'humanista' },
+      { texto: 'Busco un sistema o método probado para resolverlo', perfil: 'optimizador' },
+    ]
+  },
+  {
+    pregunta: '¿Cuál de estas frases resuena más con vos?',
+    opciones: [
+      { texto: '"El conocimiento es poder"', perfil: 'estratega' },
+      { texto: '"La vida no examinada no merece ser vivida"', perfil: 'filosofo' },
+      { texto: '"Los datos no mienten"', perfil: 'cientifico' },
+      { texto: '"Las relaciones son lo único que importa"', perfil: 'humanista' },
+      { texto: '"Pequeñas mejoras diarias producen resultados extraordinarios"', perfil: 'optimizador' },
+    ]
+  },
+  {
+    pregunta: 'Si pudieras viajar en el tiempo, ¿a dónde irías primero?',
+    opciones: [
+      { texto: 'Al futuro, para ver cómo evolucionó la tecnología y la humanidad', perfil: 'cientifico' },
+      { texto: 'A la antigua Roma o Grecia, para aprender de sus filósofos', perfil: 'filosofo' },
+      { texto: 'Al momento exacto de una batalla o decisión histórica clave', perfil: 'estratega' },
+      { texto: 'A cualquier momento para entender cómo vivía la gente común', perfil: 'humanista' },
+      { texto: 'A la Revolución Industrial, para ver cómo cambió el trabajo', perfil: 'optimizador' },
+    ]
+  },
+  {
+    pregunta: '¿Qué es lo primero que pensás cuando terminás un libro muy bueno?',
+    opciones: [
+      { texto: '¿Cómo puedo aplicar esto a mi vida esta semana?', perfil: 'optimizador' },
+      { texto: '¿Qué implicaciones tiene esto para el mundo?', perfil: 'cientifico' },
+      { texto: '¿Cómo puedo usar esto a mi favor?', perfil: 'estratega' },
+      { texto: 'Me cambió algo en la forma de ver la existencia', perfil: 'filosofo' },
+      { texto: 'Quiero hablar de esto con alguien', perfil: 'humanista' },
+    ]
+  },
+  {
+    pregunta: 'Elegís un fin de semana libre. ¿Qué te atrae más?',
+    opciones: [
+      { texto: 'Armar un sistema para organizar mejor mi vida', perfil: 'optimizador' },
+      { texto: 'Explorar un documental sobre física, biología o historia natural', perfil: 'cientifico' },
+      { texto: 'Leer sobre liderazgo, negociación o estrategia', perfil: 'estratega' },
+      { texto: 'Releer algo que me hizo pensar sobre el sentido de la vida', perfil: 'filosofo' },
+      { texto: 'Una novela o historia que me conecte con personas reales', perfil: 'humanista' },
+    ]
+  },
+];
+
+const TEST_PERFILES = {
+  filosofo: {
+    emoji: '🧠',
+    nombre: 'El Filósofo',
+    desc: 'Buscás sentido, no solo información. Los libros para vos son espejos: los usás para entender quién sos, qué querés y por qué el mundo funciona como funciona. Preferís la profundidad sobre la amplitud, y una buena idea te puede ocupar la mente durante días.',
+    libros: ['Meditaciones', 'Sobre la brevedad de la vida', 'El hombre en busca de sentido'],
+  },
+  cientifico: {
+    emoji: '🔬',
+    nombre: 'El Científico',
+    desc: 'Confiás en los datos y en el método. Querés entender los mecanismos reales detrás de las cosas, sin adornos ni metáforas vagas. Un buen libro para vos es el que cambia genuinamente cómo entendés el mundo, con evidencia que lo respalde.',
+    libros: ['Sapiens', 'El gen egoísta', 'Pensar rápido, pensar despacio'],
+  },
+  estratega: {
+    emoji: '♟',
+    nombre: 'El Estratega',
+    desc: 'Leés para ganar ventaja. Te interesan los patrones de poder, las decisiones bajo presión y las tácticas que separan a los que logran cosas de los que no. Sos pragmático: si una idea no se puede aplicar, apenas te interesa.',
+    libros: ['El príncipe', 'El arte de la guerra', 'Nunca dividas la diferencia'],
+  },
+  humanista: {
+    emoji: '🤝',
+    nombre: 'El Humanista',
+    desc: 'Para vos los libros son puentes hacia otras personas. Lo que más te mueve es entender cómo piensan, sienten y viven los demás —en otras épocas, otras culturas, otras circunstancias. Tenés una inteligencia emocional naturalmente alta y los libros la nutren.',
+    libros: ['El arte de amar', 'Cómo ganar amigos e influir sobre las personas', 'La inteligencia emocional'],
+  },
+  optimizador: {
+    emoji: '⚡',
+    nombre: 'El Optimizador',
+    desc: 'Leés para mejorar. Cada libro es una herramienta: si no podés sacar al menos tres cosas concretas para implementar esta semana, el libro no te convence. Creés en los sistemas, en los hábitos y en que la diferencia entre el éxito y el fracaso está en los detalles.',
+    libros: ['Atomic Habits', 'Deep Work', 'Esencialismo'],
+  },
+};
+
+let testRespuestas = [];
+let testIdx = 0;
+
+function abrirTestPerfil() {
+  testRespuestas = new Array(TEST_PREGUNTAS.length).fill(null);
+  testIdx = 0;
+  document.getElementById('test-result').classList.remove('visible');
+  document.getElementById('test-result').style.display = 'none';
+  document.getElementById('test-body').style.display = 'block';
+  document.getElementById('test-nav').style.display = 'flex';
+  document.getElementById('test-progress-wrap') && (document.querySelector('.test-progress-wrap').style.display = 'flex');
+  renderTestPregunta();
+  document.getElementById('test-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarTest() {
+  document.getElementById('test-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function cerrarTestSiOverlay(e) {
+  if (e.target === document.getElementById('test-overlay')) cerrarTest();
+}
+
+function renderTestPregunta() {
+  const q   = TEST_PREGUNTAS[testIdx];
+  const tot = TEST_PREGUNTAS.length;
+  const sel = testRespuestas[testIdx];
+
+  // Progress
+  document.getElementById('test-progress-fill').style.width = `${((testIdx) / tot) * 100}%`;
+  document.getElementById('test-progress-label').textContent = `${testIdx + 1} / ${tot}`;
+
+  // Body
+  const letras = ['A','B','C','D','E'];
+  document.getElementById('test-body').innerHTML = `
+    <div class="test-question">${q.pregunta}</div>
+    <div class="test-options">
+      ${q.opciones.map((op, i) => `
+        <button class="test-option ${sel === i ? 'selected' : ''}"
+          onclick="seleccionarOpcion(${i})">
+          <span class="test-option-letter">${letras[i]}</span>
+          <span class="test-option-text">${op.texto}</span>
+        </button>`).join('')}
+    </div>`;
+
+  // Nav buttons
+  const backBtn = document.getElementById('btn-test-back');
+  const nextBtn = document.getElementById('btn-test-next');
+  backBtn.disabled = testIdx === 0;
+  nextBtn.textContent = testIdx === tot - 1 ? 'Ver mi perfil →' : 'Siguiente →';
+  nextBtn.classList.toggle('enabled', sel !== null);
+}
+
+function seleccionarOpcion(i) {
+  testRespuestas[testIdx] = i;
+  document.querySelectorAll('.test-option').forEach((el, j) => {
+    el.classList.toggle('selected', j === i);
+  });
+  document.getElementById('btn-test-next').classList.add('enabled');
+}
+
+function testNav(dir) {
+  if (dir === 1 && testRespuestas[testIdx] === null) return;
+  const newIdx = testIdx + dir;
+  if (newIdx < 0) return;
+  if (newIdx >= TEST_PREGUNTAS.length) {
+    mostrarResultadoTest();
+    return;
+  }
+  testIdx = newIdx;
+  renderTestPregunta();
+}
+
+function mostrarResultadoTest() {
+  // Contar votos por perfil
+  const conteo = {};
+  TEST_PREGUNTAS.forEach((q, qi) => {
+    const respIdx = testRespuestas[qi];
+    if (respIdx === null) return;
+    const perfil = q.opciones[respIdx].perfil;
+    conteo[perfil] = (conteo[perfil] || 0) + 1;
+  });
+
+  // Perfil ganador
+  const ganador = Object.entries(conteo).sort((a,b) => b[1]-a[1])[0][0];
+  const perfil  = TEST_PERFILES[ganador];
+
+  // Progress al 100%
+  document.getElementById('test-progress-fill').style.width = '100%';
+  document.getElementById('test-progress-label').textContent = '✓ Completado';
+
+  // Ocultar pregunta y nav
+  document.getElementById('test-body').style.display = 'none';
+  document.getElementById('test-nav').style.display  = 'none';
+
+  // Libros recomendados
+  const librosHTML = perfil.libros.map(titulo => {
+    const l = libros.find(b => b.titulo === titulo);
+    if (!l) return '';
+    return `<div class="test-result-libro"
+      onclick="cerrarTest();setTimeout(()=>abrirModal(libros.find(b=>b.titulo===${JSON.stringify(l.titulo)})),80)">
+      <div class="test-rl-titulo">${l.titulo}</div>
+      <div class="test-rl-autor">${l.autor}</div>
+      <div class="test-rl-cat">${genreLabels[l.categoria]||''}</div>
+    </div>`;
+  }).join('');
+
+  const resultEl = document.getElementById('test-result');
+  resultEl.innerHTML = `
+    <div class="test-result-perfil">
+      <div class="test-result-emoji">${perfil.emoji}</div>
+      <div class="test-result-nombre">${perfil.nombre}</div>
+      <div class="test-result-desc">${perfil.desc}</div>
+    </div>
+    <div class="test-result-divider"></div>
+    <span class="test-result-label">✦ Tus próximas lecturas</span>
+    <div class="test-result-libros">${librosHTML}</div>
+    <div class="test-result-actions">
+      <button class="btn-test-retry" onclick="abrirTestPerfil()">↺ Repetir test</button>
+      <button class="btn-test-share" onclick="compartirPerfil('${ganador}')">Compartir mi perfil 💬</button>
+    </div>`;
+
+  resultEl.style.display = 'flex';
+  resultEl.classList.add('visible');
+  // Guardar en localStorage
+  localStorage.setItem('perfil_lector', ganador);
+}
+
+function compartirPerfil(ganador) {
+  const p = TEST_PERFILES[ganador];
+  const txt = encodeURIComponent(`Soy "${p.nombre}" según LEER 📚\n${p.desc.slice(0,80)}…\n\nDescubrí tu perfil en resumenya.com`);
+  window.open(`https://wa.me/?text=${txt}`, '_blank');
 }
 
 // Init
