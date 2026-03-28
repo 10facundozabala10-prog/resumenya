@@ -4721,6 +4721,510 @@ footer {
   .creator-mision { text-align: left; }
 }
 
+/* ══════════════════════════════════════════════════════
+   PARED DE FRASES
+══════════════════════════════════════════════════════ */
+.frases-section {
+  padding: var(--s8) var(--page-pad);
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+.frases-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+  flex-wrap: wrap;
+}
+.frases-header-left {}
+.frases-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.frases-titulo {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.frases-desc {
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-top: 0.4rem;
+  line-height: 1.6;
+}
+.btn-frases-shuffle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem var(--s3);
+  background: transparent;
+  border: 1px solid var(--border-md);
+  border-radius: var(--pill);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.btn-frases-shuffle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(200,72,26,0.04);
+}
+.btn-frases-shuffle-icon {
+  font-size: 0.9rem;
+  transition: transform 0.4s;
+}
+.btn-frases-shuffle:hover .btn-frases-shuffle-icon {
+  transform: rotate(180deg);
+}
+
+/* Masonry grid */
+.frases-grid {
+  columns: 3;
+  column-gap: var(--s3);
+}
+@media (max-width: 900px) { .frases-grid { columns: 2; } }
+@media (max-width: 520px)  { .frases-grid { columns: 1; } }
+
+.frase-card {
+  break-inside: avoid;
+  display: block;
+  margin-bottom: var(--s3);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r3);
+  padding: var(--s3) var(--s3);
+  cursor: pointer;
+  transition: transform 0.22s cubic-bezier(.4,0,.2,1),
+              border-color 0.2s,
+              box-shadow 0.22s;
+  position: relative;
+  overflow: hidden;
+  animation: fcFadeIn 0.4s ease both;
+}
+@keyframes fcFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.frase-card::before {
+  content: '"';
+  position: absolute;
+  top: -8px; left: 8px;
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--accent);
+  opacity: 0.06;
+  pointer-events: none;
+  font-style: normal;
+}
+.frase-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(200,72,26,0.25);
+  box-shadow: 0 12px 36px rgba(0,0,0,0.3);
+}
+
+/* Variantes de color por categoría */
+.frase-card.fc-filosofia  { border-left: 3px solid rgba(80,122,80,0.5); }
+.frase-card.fc-negocios   { border-left: 3px solid rgba(181,131,26,0.5); }
+.frase-card.fc-psicologia { border-left: 3px solid rgba(200,72,26,0.5); }
+.frase-card.fc-ciencia    { border-left: 3px solid rgba(100,140,200,0.5); }
+.frase-card.fc-historia   { border-left: 3px solid rgba(160,130,80,0.5); }
+.frase-card.fc-autoayuda  { border-left: 3px solid rgba(160,80,180,0.5); }
+
+.frase-card-text {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  line-height: 1.65;
+  color: var(--sub);
+  margin-bottom: var(--s2);
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.frase-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s1);
+}
+.frase-card-libro {
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+  min-width: 0;
+}
+.frase-card-autor {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.frase-card-cat {
+  font-family: var(--font-mono);
+  font-size: 0.5rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.12rem 0.45rem;
+  border-radius: var(--pill);
+  flex-shrink: 0;
+}
+.frase-card .frase-card-leer {
+  position: absolute;
+  bottom: var(--s2); right: var(--s2);
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0;
+  transition: opacity 0.18s;
+  pointer-events: none;
+}
+.frase-card:hover .frase-card-leer { opacity: 1; }
+
+.frases-ver-mas {
+  display: flex;
+  justify-content: center;
+  margin-top: var(--s4);
+}
+.btn-ver-mas-frases {
+  padding: 0.55rem var(--s5);
+  background: transparent;
+  border: 1px solid var(--border-md);
+  border-radius: var(--pill);
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-ver-mas-frases:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(200,72,26,0.04);
+}
+
+/* ══════════════════════════════════════════════════════
+   GENERADOR DE PLAN DE LECTURA
+══════════════════════════════════════════════════════ */
+.plan-overlay {
+  position: fixed; inset: 0; z-index: 1200;
+  background: rgba(0,0,0,0.82);
+  backdrop-filter: blur(14px);
+  display: flex; align-items: center; justify-content: center;
+  padding: var(--s4);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.plan-overlay.open { opacity: 1; pointer-events: all; }
+
+.plan-panel {
+  background: var(--surface);
+  border: 1px solid var(--border-md);
+  border-radius: var(--r4);
+  width: 100%; max-width: 620px;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.65);
+  transform: scale(0.96) translateY(10px);
+  transition: transform 0.32s cubic-bezier(.4,0,.2,1);
+  scrollbar-width: thin; scrollbar-color: var(--border) transparent;
+}
+.plan-overlay.open .plan-panel { transform: scale(1) translateY(0); }
+
+/* Header */
+.plan-header {
+  padding: var(--s4) var(--s4) var(--s3);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0;
+  background: var(--surface);
+  border-radius: var(--r4) var(--r4) 0 0;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: var(--s2);
+  z-index: 2;
+}
+.plan-header-left {}
+.plan-eyebrow {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--accent); display: block; margin-bottom: 0.3rem;
+}
+.plan-header h2 {
+  font-family: var(--font-display); font-size: 1.3rem;
+  font-weight: 600; color: var(--ink); line-height: 1.2;
+}
+.plan-header-desc {
+  font-size: 0.78rem; color: var(--muted); margin-top: 0.25rem; line-height: 1.5;
+}
+
+/* Steps progress */
+.plan-steps-bar {
+  display: flex; align-items: center; gap: 0;
+  padding: var(--s2) var(--s4);
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+}
+.plan-step-item {
+  display: flex; align-items: center; gap: var(--s1); flex: 1;
+}
+.plan-step-num {
+  width: 26px; height: 26px; border-radius: 50%;
+  background: var(--border); color: var(--muted);
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 600;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.3s;
+}
+.plan-step-item.active .plan-step-num {
+  background: var(--accent); color: #fff;
+}
+.plan-step-item.done .plan-step-num {
+  background: var(--sage); color: #fff;
+}
+.plan-step-label {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); transition: color 0.3s;
+}
+.plan-step-item.active .plan-step-label { color: var(--accent); }
+.plan-step-item.done  .plan-step-label  { color: var(--sage); }
+.plan-step-connector {
+  height: 1px; background: var(--border); flex: 1; margin: 0 var(--s1);
+  transition: background 0.3s;
+}
+.plan-step-connector.done { background: var(--sage); }
+
+/* Body */
+.plan-body { padding: var(--s4); }
+
+/* Question blocks */
+.plan-question { margin-bottom: var(--s4); animation: planFadeIn 0.3s ease both; }
+@keyframes planFadeIn {
+  from { opacity: 0; transform: translateX(8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.plan-q-label {
+  font-family: var(--font-display); font-size: 1rem; font-weight: 600;
+  color: var(--ink); margin-bottom: var(--s2); line-height: 1.4;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.plan-q-emoji { font-size: 1.1rem; }
+
+.plan-options-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--s1);
+}
+.plan-options-grid.cols3 { grid-template-columns: repeat(3, 1fr); }
+.plan-option {
+  padding: var(--s2) var(--s2);
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--r2); cursor: pointer; text-align: center;
+  transition: all 0.18s; position: relative;
+}
+.plan-option:hover { border-color: rgba(200,72,26,0.3); background: rgba(200,72,26,0.03); }
+.plan-option.selected {
+  border-color: var(--accent);
+  background: rgba(200,72,26,0.07);
+}
+.plan-option.selected::after {
+  content: '✓';
+  position: absolute; top: 6px; right: 8px;
+  font-size: 0.65rem; color: var(--accent);
+  font-family: var(--font-mono);
+}
+.plan-opt-icon { font-size: 1.3rem; margin-bottom: 0.25rem; }
+.plan-opt-text {
+  font-size: 0.78rem; font-weight: 500; color: var(--ink); display: block;
+}
+.plan-opt-sub { font-size: 0.67rem; color: var(--muted); margin-top: 0.1rem; display: block; }
+
+/* Multi-select chips */
+.plan-chips { display: flex; flex-wrap: wrap; gap: var(--s1); }
+.plan-chip {
+  padding: 0.4rem 0.85rem;
+  background: var(--card); border: 1.5px solid var(--border);
+  border-radius: var(--pill); cursor: pointer;
+  font-family: var(--font-mono); font-size: 0.62rem;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--muted); transition: all 0.15s;
+}
+.plan-chip:hover { border-color: var(--accent); color: var(--accent); }
+.plan-chip.selected {
+  background: var(--accent); color: #fff;
+  border-color: var(--accent);
+}
+
+/* Nav buttons */
+.plan-nav {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: var(--s3) var(--s4);
+  border-top: 1px solid var(--border); gap: var(--s2);
+}
+.btn-plan-back {
+  padding: 0.5rem var(--s3); background: transparent;
+  border: 1px solid var(--border); border-radius: var(--r2);
+  font-size: 0.8rem; font-family: var(--font-body);
+  color: var(--muted); cursor: pointer; transition: all 0.18s;
+}
+.btn-plan-back:hover { border-color: var(--border-md); color: var(--sub); }
+.btn-plan-back:disabled { opacity: 0.3; cursor: default; }
+.btn-plan-next {
+  padding: 0.52rem var(--s4); background: var(--accent); color: #fff;
+  border: none; border-radius: var(--r2); font-size: 0.82rem;
+  font-weight: 500; font-family: var(--font-body); cursor: pointer;
+  transition: background 0.18s;
+}
+.btn-plan-next:hover { background: #a83a14; }
+.btn-plan-next:disabled { opacity: 0.4; cursor: default; pointer-events: none; }
+
+/* ── RESULTADO DEL PLAN ── */
+.plan-result { display: none; padding: var(--s4); flex-direction: column; gap: var(--s3); }
+.plan-result.visible { display: flex; animation: planFadeIn 0.4s ease both; }
+
+.plan-result-header { text-align: center; padding-bottom: var(--s2); }
+.plan-result-emoji { font-size: 2.5rem; margin-bottom: var(--s1); }
+.plan-result-title {
+  font-family: var(--font-display); font-size: 1.4rem; font-weight: 700;
+  color: var(--ink); margin-bottom: 0.4rem;
+}
+.plan-result-desc { font-size: 0.82rem; color: var(--muted); line-height: 1.6; }
+
+.plan-kpis {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: var(--s2);
+}
+.plan-kpi {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); padding: var(--s2); text-align: center;
+}
+.plan-kpi-num {
+  font-family: var(--font-display); font-size: 1.5rem;
+  font-weight: 700; color: var(--accent); line-height: 1;
+  margin-bottom: 0.2rem;
+}
+.plan-kpi-lbl {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted);
+}
+
+.plan-semanas { display: flex; flex-direction: column; gap: var(--s2); }
+.plan-semana {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--r2); overflow: hidden;
+}
+.plan-semana-header {
+  display: flex; align-items: center; gap: var(--s2);
+  padding: var(--s1) var(--s2);
+  background: rgba(200,72,26,0.05);
+  border-bottom: 1px solid var(--border);
+}
+.plan-semana-num {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); flex-shrink: 0;
+}
+.plan-semana-total {
+  font-family: var(--font-mono); font-size: 0.58rem;
+  color: var(--muted); margin-left: auto;
+}
+.plan-semana-libros { padding: var(--s1) var(--s2); }
+.plan-semana-libro {
+  display: flex; align-items: center; gap: var(--s2);
+  padding: 0.45rem 0; border-bottom: 1px solid var(--border);
+  cursor: pointer; transition: all 0.15s;
+}
+.plan-semana-libro:last-child { border-bottom: none; }
+.plan-semana-libro:hover .plan-sl-titulo { color: var(--accent); }
+.plan-sl-cover {
+  width: 32px; height: 32px; border-radius: 4px;
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  font-size: 0.6rem; font-family: var(--font-mono); color: rgba(255,255,255,0.7);
+  font-weight: 700;
+}
+.plan-sl-cover.cat-filosofia  { background: linear-gradient(135deg,#1e3d1e,#2d5a2d); }
+.plan-sl-cover.cat-negocios   { background: linear-gradient(135deg,#3d2d0a,#5c4210); }
+.plan-sl-cover.cat-psicologia { background: linear-gradient(135deg,#3d160a,#5c200f); }
+.plan-sl-cover.cat-ciencia    { background: linear-gradient(135deg,#0a1a35,#102548); }
+.plan-sl-cover.cat-historia   { background: linear-gradient(135deg,#2a2416,#3d3520); }
+.plan-sl-cover.cat-autoayuda  { background: linear-gradient(135deg,#280d3a,#3c1452); }
+
+.plan-sl-info { flex: 1; min-width: 0; }
+.plan-sl-titulo {
+  font-size: 0.84rem; font-weight: 500; color: var(--ink);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+.plan-sl-autor { font-size: 0.68rem; color: var(--muted); font-style: italic; }
+.plan-sl-tiempo {
+  font-family: var(--font-mono); font-size: 0.6rem; color: var(--muted);
+  flex-shrink: 0;
+}
+
+.plan-result-actions {
+  display: flex; gap: var(--s1); flex-wrap: wrap; justify-content: center;
+  padding-top: var(--s1);
+}
+.btn-plan-exportar {
+  padding: 0.45rem var(--s3); background: transparent;
+  border: 1px solid var(--border); border-radius: var(--r2);
+  font-size: 0.78rem; font-family: var(--font-body);
+  color: var(--sub); cursor: pointer; transition: all 0.18s;
+}
+.btn-plan-exportar:hover { border-color: var(--accent); color: var(--accent); }
+.btn-plan-maratonear {
+  padding: 0.45rem var(--s3); background: var(--accent); color: #fff;
+  border: none; border-radius: var(--r2); font-size: 0.78rem;
+  font-weight: 500; font-family: var(--font-body); cursor: pointer;
+  transition: background 0.18s;
+}
+.btn-plan-maratonear:hover { background: #a83a14; }
+.btn-plan-retry {
+  padding: 0.45rem var(--s3); background: transparent;
+  border: 1px solid var(--border); border-radius: var(--r2);
+  font-size: 0.78rem; font-family: var(--font-body);
+  color: var(--muted); cursor: pointer; transition: all 0.18s;
+}
+.btn-plan-retry:hover { color: var(--sub); }
+
+/* Trigger button */
+.btn-plan-trigger {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.52rem var(--s3);
+  background: var(--accent); color: #fff;
+  border: none; border-radius: var(--pill);
+  font-size: 0.78rem; font-weight: 500; font-family: var(--font-body);
+  cursor: pointer; transition: background 0.2s;
+}
+.btn-plan-trigger:hover { background: #a83a14; }
+
+@media (max-width: 520px) {
+  .plan-options-grid { grid-template-columns: 1fr; }
+  .plan-options-grid.cols3 { grid-template-columns: repeat(2,1fr); }
+  .plan-kpis { grid-template-columns: repeat(3,1fr); }
+}
+
 /* ═══════════════════════════════════════════════════════
    ANIMATIONS
 ═══════════════════════════════════════════════════════ */
@@ -5178,7 +5682,51 @@ footer {
       <span class="btn-test-trigger-dot"></span>
       ¿Qué tipo de lector sos? Descubrilo →
     </button>
+    <button class="btn-plan-trigger" onclick="abrirPlanLectura()" style="margin-top:var(--s1)">
+      📅 Generá tu plan de lectura
+    </button>
   </div>
+
+<!-- GENERADOR DE PLAN DE LECTURA -->
+<div class="plan-overlay" id="plan-overlay" onclick="cerrarPlanSiOverlay(event)">
+  <div class="plan-panel" id="plan-panel">
+
+    <div class="plan-header">
+      <div class="plan-header-left">
+        <span class="plan-eyebrow">📅 Generador de plan de lectura</span>
+        <h2>Tu plan personalizado</h2>
+        <p class="plan-header-desc">3 preguntas · Tu plan semanal listo al instante</p>
+      </div>
+      <button class="modal-close" onclick="cerrarPlan()">✕</button>
+    </div>
+
+    <div class="plan-steps-bar" id="plan-steps-bar">
+      <div class="plan-step-item active" id="plan-step-1">
+        <div class="plan-step-num">1</div>
+        <span class="plan-step-label">Tiempo</span>
+      </div>
+      <div class="plan-step-connector" id="plan-conn-1"></div>
+      <div class="plan-step-item" id="plan-step-2">
+        <div class="plan-step-num">2</div>
+        <span class="plan-step-label">Intereses</span>
+      </div>
+      <div class="plan-step-connector" id="plan-conn-2"></div>
+      <div class="plan-step-item" id="plan-step-3">
+        <div class="plan-step-num">3</div>
+        <span class="plan-step-label">Objetivo</span>
+      </div>
+    </div>
+
+    <div class="plan-body" id="plan-body"></div>
+    <div class="plan-result" id="plan-result"></div>
+
+    <div class="plan-nav" id="plan-nav">
+      <button class="btn-plan-back" id="btn-plan-back" onclick="planNav(-1)" disabled>← Anterior</button>
+      <button class="btn-plan-next" id="btn-plan-next" onclick="planNav(1)" disabled>Siguiente →</button>
+    </div>
+
+  </div>
+</div>
 
 <!-- TEST DE PERFIL LECTOR -->
 <div class="test-overlay" id="test-overlay" onclick="cerrarTestSiOverlay(event)">
@@ -5519,6 +6067,26 @@ footer {
     </div>
   </div>
   <div class="books-grid" id="grid"></div>
+</section>
+
+<!-- PARED DE FRASES -->
+<section class="frases-section" aria-label="Frases de los libros">
+  <div class="frases-header">
+    <div class="frases-header-left">
+      <span class="frases-eyebrow">✦ Frases que cambian perspectivas</span>
+      <h2 class="frases-titulo">Las ideas más poderosas<br>en una sola frase.</h2>
+      <p class="frases-desc">Hacé clic en cualquier frase para leer el resumen completo del libro.</p>
+    </div>
+    <button class="btn-frases-shuffle" onclick="shuffleFrases()">
+      <span class="btn-frases-shuffle-icon">⟳</span> Nuevas frases
+    </button>
+  </div>
+  <div class="frases-grid" id="frases-grid"></div>
+  <div class="frases-ver-mas">
+    <button class="btn-ver-mas-frases" id="btn-ver-mas-frases" onclick="verMasFrases()">
+      Ver más frases →
+    </button>
+  </div>
 </section>
 
 <!-- SECCIÓN CREADOR -->
@@ -9180,6 +9748,7 @@ document.addEventListener('keydown', e => {
     cerrarNoteSearch(); cerrarFlashcards(); cerrarShareImg();
     if (typeof cerrarTest === 'function') cerrarTest();
     if (typeof cerrarDrawer === 'function') cerrarDrawer();
+    if (typeof cerrarPlan === 'function') cerrarPlan();
     if (compareActivo) cancelarCompare();
   }
   if (modalAbierto && e.key === 'ArrowRight') navegarModal(1);
@@ -11813,6 +12382,398 @@ function initPorQueLeer() {
   });
 }
 
+// --- PARED DE FRASES ---
+const FRASES_POR_PAGINA = 12;
+let frasesOffset = 0;
+let frasesOrden = [];
+
+function initFrasesWall() {
+  // Crear orden aleatorio inicial
+  frasesOrden = libros
+    .filter(l => l.frase && l.frase.length > 20)
+    .map((l, i) => i);
+  shuffleArray(frasesOrden);
+  frasesOffset = 0;
+  renderFrasesGrid(true);
+}
+
+function shuffleArray(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleFrases() {
+  const librosConFrase = libros.filter(l => l.frase && l.frase.length > 20);
+  frasesOrden = librosConFrase.map((_, i) => i);
+  shuffleArray(frasesOrden);
+  frasesOffset = 0;
+  renderFrasesGrid(true);
+  // Animate button
+  const icon = document.querySelector('.btn-frases-shuffle-icon');
+  if (icon) {
+    icon.style.transform = 'rotate(360deg)';
+    setTimeout(() => { icon.style.transform = ''; }, 400);
+  }
+}
+
+function verMasFrases() {
+  frasesOffset += FRASES_POR_PAGINA;
+  renderFrasesGrid(false);
+}
+
+function renderFrasesGrid(reset) {
+  const librosConFrase = libros.filter(l => l.frase && l.frase.length > 20);
+  const grid = document.getElementById('frases-grid');
+  if (!grid) return;
+
+  if (reset) {
+    grid.innerHTML = '';
+    frasesOffset = 0;
+  }
+
+  const end = Math.min(frasesOffset + FRASES_POR_PAGINA, frasesOrden.length);
+  const batch = frasesOrden.slice(frasesOffset, end);
+
+  batch.forEach((idx, batchI) => {
+    const libro = librosConFrase[idx];
+    if (!libro) return;
+
+    const card = document.createElement('article');
+    card.className = `frase-card fc-${libro.categoria}`;
+    card.style.animationDelay = `${batchI * 0.04}s`;
+    card.setAttribute('role', 'button');
+    card.setAttribute('aria-label', `Frase de ${libro.titulo}`);
+
+    const catLabel = genreLabels[libro.categoria] || libro.categoria;
+
+    card.innerHTML = `
+      <p class="frase-card-text">"${libro.frase}"</p>
+      <div class="frase-card-footer">
+        <span class="frase-card-libro">${libro.titulo}</span>
+        <span class="frase-card-autor">${libro.autor.split(' ').pop()}</span>
+      </div>
+      <span class="frase-card-leer">Leer resumen →</span>
+    `;
+
+    card.addEventListener('click', () => {
+      abrirModal(libro);
+    });
+
+    grid.appendChild(card);
+  });
+
+  // Mostrar/ocultar botón "ver más"
+  const btnVerMas = document.getElementById('btn-ver-mas-frases');
+  if (btnVerMas) {
+    const hayMas = end < frasesOrden.length;
+    btnVerMas.style.display = hayMas ? 'block' : 'none';
+    if (hayMas) {
+      const restantes = frasesOrden.length - end;
+      btnVerMas.textContent = `Ver ${Math.min(FRASES_POR_PAGINA, restantes)} frases más →`;
+    }
+  }
+}
+
+// --- GENERADOR DE PLAN DE LECTURA ---
+let planStep = 1;
+let planData = { minutos: null, categorias: [], objetivo: null };
+
+const PLAN_PREGUNTAS = [
+  {
+    step: 1,
+    tipo: 'single',
+    pregunta: '⏱ ¿Cuánto tiempo tenés para leer por semana?',
+    opciones: [
+      { icon:'☕', text:'30 minutos',   sub:'3-4 resúmenes cortos', value: 30  },
+      { icon:'📖', text:'1 hora',       sub:'5-7 resúmenes',        value: 60  },
+      { icon:'🔥', text:'2 horas',      sub:'10-12 resúmenes',      value: 120 },
+      { icon:'🚀', text:'3 horas o más',sub:'Lector intensivo',     value: 180 },
+    ]
+  },
+  {
+    step: 2,
+    tipo: 'multi',
+    pregunta: '📚 ¿Qué categorías te interesan? (elegí una o más)',
+    opciones: [
+      { text:'Filosofía',  value:'filosofia'  },
+      { text:'Psicología', value:'psicologia' },
+      { text:'Negocios',   value:'negocios'   },
+      { text:'Ciencia',    value:'ciencia'    },
+      { text:'Historia',   value:'historia'   },
+      { text:'Autoayuda',  value:'autoayuda'  },
+    ]
+  },
+  {
+    step: 3,
+    tipo: 'single',
+    pregunta: '🎯 ¿Cuál es tu objetivo principal?',
+    opciones: [
+      { icon:'💡', text:'Aprender ideas nuevas',   sub:'Ampliar perspectivas', value:'ideas'     },
+      { icon:'⚡', text:'Mejorar mi productividad', sub:'Hábitos y sistemas',   value:'prod'      },
+      { icon:'🧠', text:'Crecer personalmente',     sub:'Autoconocimiento',     value:'personal'  },
+      { icon:'📈', text:'Éxito profesional',        sub:'Negocios y liderazgo', value:'profesional'},
+    ]
+  },
+];
+
+function abrirPlanLectura() {
+  planStep = 1;
+  planData = { minutos: null, categorias: [], objetivo: null };
+  document.getElementById('plan-result').classList.remove('visible');
+  document.getElementById('plan-result').style.display = 'none';
+  document.getElementById('plan-body').style.display = 'block';
+  document.getElementById('plan-nav').style.display = 'flex';
+  document.querySelector('.plan-steps-bar').style.display = 'flex';
+  renderPlanStep();
+  document.getElementById('plan-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function cerrarPlan() {
+  document.getElementById('plan-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+function cerrarPlanSiOverlay(e) {
+  if (e.target === document.getElementById('plan-overlay')) cerrarPlan();
+}
+
+function actualizarStepsBar() {
+  [1,2,3].forEach(i => {
+    const el = document.getElementById(`plan-step-${i}`);
+    const conn = document.getElementById(`plan-conn-${i}`);
+    el.classList.toggle('active', i === planStep);
+    el.classList.toggle('done', i < planStep);
+    if (conn) conn.classList.toggle('done', i < planStep);
+  });
+}
+
+function renderPlanStep() {
+  actualizarStepsBar();
+  const q = PLAN_PREGUNTAS[planStep - 1];
+  const body = document.getElementById('plan-body');
+
+  if (q.tipo === 'single') {
+    const selVal = planStep === 1 ? planData.minutos : planData.objetivo;
+    body.innerHTML = `
+      <div class="plan-question">
+        <div class="plan-q-label">${q.pregunta}</div>
+        <div class="plan-options-grid">
+          ${q.opciones.map(op => `
+            <div class="plan-option ${selVal === op.value ? 'selected' : ''}"
+              onclick="seleccionarPlanOpcion('${op.value}')">
+              <div class="plan-opt-icon">${op.icon}</div>
+              <span class="plan-opt-text">${op.text}</span>
+              <span class="plan-opt-sub">${op.sub}</span>
+            </div>`).join('')}
+        </div>
+      </div>`;
+  } else {
+    // multi select chips
+    body.innerHTML = `
+      <div class="plan-question">
+        <div class="plan-q-label">${q.pregunta}</div>
+        <div class="plan-chips">
+          ${q.opciones.map(op => `
+            <button class="plan-chip ${planData.categorias.includes(op.value) ? 'selected' : ''}"
+              onclick="togglePlanCategoria('${op.value}')">${op.text}</button>`
+          ).join('')}
+        </div>
+        <p style="font-size:0.72rem;color:var(--muted);margin-top:var(--s2)">
+          Seleccioná al menos una categoría. Si no elegís ninguna, usaremos todas.
+        </p>
+      </div>`;
+  }
+
+  actualizarBtnPlan();
+}
+
+function seleccionarPlanOpcion(val) {
+  if (planStep === 1) planData.minutos  = val;
+  else                planData.objetivo = val;
+  renderPlanStep();
+}
+
+function togglePlanCategoria(val) {
+  const idx = planData.categorias.indexOf(val);
+  if (idx === -1) planData.categorias.push(val);
+  else            planData.categorias.splice(idx, 1);
+  renderPlanStep();
+}
+
+function actualizarBtnPlan() {
+  const btn = document.getElementById('btn-plan-next');
+  const back = document.getElementById('btn-plan-back');
+  back.disabled = planStep === 1;
+
+  let enabled = false;
+  if      (planStep === 1) enabled = planData.minutos  !== null;
+  else if (planStep === 2) enabled = true; // categorias optional
+  else if (planStep === 3) enabled = planData.objetivo !== null;
+
+  btn.disabled = !enabled;
+  btn.textContent = planStep === 3 ? '🗓 Generar mi plan →' : 'Siguiente →';
+}
+
+function planNav(dir) {
+  if (dir === 1) {
+    if (planStep === 3) { generarPlan(); return; }
+    planStep++;
+  } else {
+    if (planStep === 1) return;
+    planStep--;
+  }
+  renderPlanStep();
+}
+
+function generarPlan() {
+  // Determine weekly minutes
+  const minPorSemana = planData.minutos || 60;
+  // Categories filter
+  const cats = planData.categorias.length > 0 ? planData.categorias : Object.keys(genreLabels);
+  // Objective weights
+  const objWeights = {
+    ideas:       { ciencia:2, historia:2, filosofia:1.5 },
+    prod:        { negocios:2, autoayuda:2, psicologia:1.5 },
+    personal:    { psicologia:2, filosofia:2, autoayuda:1.5 },
+    profesional: { negocios:2.5, psicologia:1.5 },
+  };
+  const weights = objWeights[planData.objetivo] || {};
+
+  // Score and sort books
+  let pool = libros
+    .filter(l => cats.includes(l.categoria))
+    .filter(l => getStatus(l.titulo) !== 'leido')
+    .map(l => ({
+      libro: l,
+      score: (weights[l.categoria] || 1) * l.rating + (l.linkAfiliado ? 0.2 : 0)
+    }))
+    .sort((a, b) => b.score - a.score)
+    .map(x => x.libro);
+
+  // If not enough books, add from other categories
+  if (pool.length < 4) {
+    const extra = libros.filter(l => !pool.includes(l) && getStatus(l.titulo) !== 'leido');
+    pool = [...pool, ...extra];
+  }
+
+  // Build weekly plan
+  const semanas = [];
+  let poolIdx = 0;
+  const totalSemanas = 4;
+
+  for (let s = 0; s < totalSemanas; s++) {
+    const semana = { num: s + 1, libros: [], minutos: 0 };
+    let minRestantes = minPorSemana;
+
+    while (minRestantes > 0 && poolIdx < pool.length) {
+      const libro = pool[poolIdx];
+      if (libro.tiempo <= minRestantes + 3) { // 3min tolerance
+        semana.libros.push(libro);
+        semana.minutos += libro.tiempo;
+        minRestantes -= libro.tiempo;
+        poolIdx++;
+      } else {
+        poolIdx++; // skip books that are too long
+        if (poolIdx >= pool.length) break;
+      }
+    }
+    if (semana.libros.length > 0) semanas.push(semana);
+  }
+
+  // Total stats
+  const totalLibros = semanas.reduce((s,sem) => s + sem.libros.length, 0);
+  const totalMin    = semanas.reduce((s,sem) => s + sem.minutos, 0);
+
+  // Render result
+  document.getElementById('plan-body').style.display = 'none';
+  document.getElementById('plan-nav').style.display  = 'none';
+  document.querySelector('.plan-steps-bar').style.display = 'none';
+
+  const resultEl = document.getElementById('plan-result');
+  const objetivoLabel = {
+    ideas:'ampliar perspectivas', prod:'mejorar productividad',
+    personal:'crecer personalmente', profesional:'avanzar profesionalmente'
+  }[planData.objetivo] || 'leer más';
+
+  const semanasHTML = semanas.map(sem => `
+    <div class="plan-semana">
+      <div class="plan-semana-header">
+        <span class="plan-semana-num">Semana ${sem.num}</span>
+        <span class="plan-semana-total">${sem.libros.length} libro${sem.libros.length!==1?'s':''} · ${sem.minutos} min</span>
+      </div>
+      <div class="plan-semana-libros">
+        ${sem.libros.map(l => `
+          <div class="plan-semana-libro"
+            onclick="cerrarPlan();setTimeout(()=>abrirModal(libros.find(b=>b.titulo===${JSON.stringify(l.titulo)})),100)">
+            <div class="plan-sl-cover cat-${l.categoria}">
+              ${l.titulo.slice(0,2).toUpperCase()}
+            </div>
+            <div class="plan-sl-info">
+              <div class="plan-sl-titulo">${l.titulo}</div>
+              <div class="plan-sl-autor">${l.autor}</div>
+            </div>
+            <span class="plan-sl-tiempo">${l.tiempo} min</span>
+          </div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  resultEl.innerHTML = `
+    <div class="plan-result-header">
+      <div class="plan-result-emoji">🗓</div>
+      <div class="plan-result-title">Tu plan de 4 semanas</div>
+      <div class="plan-result-desc">Armado para ${objetivoLabel} con ${minPorSemana} minutos por semana.</div>
+    </div>
+    <div class="plan-kpis">
+      <div class="plan-kpi">
+        <div class="plan-kpi-num">${semanas.length}</div>
+        <div class="plan-kpi-lbl">Semanas</div>
+      </div>
+      <div class="plan-kpi">
+        <div class="plan-kpi-num">${totalLibros}</div>
+        <div class="plan-kpi-lbl">Resúmenes</div>
+      </div>
+      <div class="plan-kpi">
+        <div class="plan-kpi-num">${totalMin}</div>
+        <div class="plan-kpi-lbl">Minutos</div>
+      </div>
+    </div>
+    <div class="plan-semanas">${semanasHTML}</div>
+    <div class="plan-result-actions">
+      <button class="btn-plan-retry" onclick="abrirPlanLectura()">↺ Nuevo plan</button>
+      <button class="btn-plan-exportar" onclick="exportarPlan(${JSON.stringify(semanas.map(s=>s.libros.map(l=>l.titulo)))})">📥 Exportar plan</button>
+      <button class="btn-plan-maratonear" onclick="cerrarPlan();setTimeout(()=>{marathonList=[...${JSON.stringify(semanas.flatMap(s=>s.libros.map(l=>l.titulo)))}.map(t=>libros.find(l=>l.titulo===t)).filter(Boolean)];if(marathonList.length){marathonActivo=true;marathonIdx=0;actualizarMarathonBar();document.getElementById('marathon-bar').classList.add('active');abrirModal(marathonList[0]);}},200)">🏃 Maratonear plan</button>
+    </div>`;
+
+  resultEl.style.display = 'flex';
+  resultEl.classList.add('visible');
+
+  // Save to localStorage
+  localStorage.setItem('ultimo_plan', JSON.stringify({
+    fecha: new Date().toISOString(),
+    semanas: semanas.map(s => ({ num:s.num, libros: s.libros.map(l=>l.titulo) }))
+  }));
+}
+
+function exportarPlan(semanavsTitulos) {
+  const lines = ['# Mi Plan de Lectura — LEER (resumenya.com)', ''];
+  semanavsTitulos.forEach((titulos, i) => {
+    lines.push(`## Semana ${i+1}`);
+    titulos.forEach(t => {
+      const l = libros.find(b => b.titulo === t);
+      if (l) lines.push(`- ${l.titulo} — ${l.autor} (${l.tiempo} min)`);
+    });
+    lines.push('');
+  });
+  const blob = new Blob([lines.join('\n')], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'plan-lectura-leer.txt';
+  a.click();
+}
+
 // Init
 initDark();
 initFraseDia();
@@ -11833,6 +12794,7 @@ setTimeout(() => {
   checkHashOnLoad();
   actualizarTabBadges();
   initPorQueLeer();
+  initFrasesWall();
 }, 350);
 </script>
 </body>
