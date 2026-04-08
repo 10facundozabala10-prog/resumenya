@@ -4778,6 +4778,309 @@ footer {
 /* ══════════════════════════════════════════════════════
    SECCIÓN CREADOR
 ══════════════════════════════════════════════════════ */
+/* ═══ RADIOGRAFÍA DE LA BIBLIOTECA ══════════════════════════════ */
+.radiografia-section {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: var(--s8) var(--page-pad);
+  overflow: hidden;
+}
+.radio-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.radio-header {
+  text-align: center;
+  margin-bottom: var(--s6);
+}
+.radio-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: var(--s2);
+}
+.radio-titulo {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.1;
+  margin-bottom: var(--s2);
+}
+.radio-titulo em { color: var(--accent-2); font-style: italic; }
+.radio-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--sub);
+  max-width: 48ch;
+  margin: 0 auto;
+}
+
+/* KPIs */
+.radio-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--s3);
+  margin-bottom: var(--s6);
+}
+.radio-kpi {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r3);
+  padding: var(--s3) var(--s2);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.25s;
+}
+.radio-kpi::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(200,72,26,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.radio-kpi:hover {
+  border-color: var(--border-md);
+  transform: translateY(-2px);
+}
+.radio-kpi-num {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1;
+  margin-bottom: 0.4rem;
+  transition: color 0.3s;
+}
+.radio-kpi:hover .radio-kpi-num { color: var(--accent-2); }
+.radio-kpi-lbl {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Grid de cards */
+.radio-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: var(--s3);
+  margin-bottom: var(--s5);
+}
+.radio-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--r3);
+  padding: var(--s3);
+}
+.radio-card-title {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: var(--s3);
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+}
+
+/* Categorías */
+.radio-cat-item {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-bottom: 0.85rem;
+}
+.radio-cat-item:last-child { margin-bottom: 0; }
+.radio-cat-label {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  color: var(--sub);
+  width: 80px;
+  flex-shrink: 0;
+  text-transform: capitalize;
+}
+.radio-cat-bar-wrap {
+  flex: 1;
+  height: 5px;
+  background: rgba(255,242,220,0.06);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.radio-cat-bar {
+  height: 100%;
+  border-radius: 100px;
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.radio-cat-count {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--muted);
+  width: 24px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Colores por categoría */
+.radio-cat-bar[data-cat="filosofía"]    { background: #8B7355; }
+.radio-cat-bar[data-cat="psicología"]   { background: #507A50; }
+.radio-cat-bar[data-cat="negocios"]     { background: var(--accent); }
+.radio-cat-bar[data-cat="ciencia"]      { background: #4A7A9B; }
+.radio-cat-bar[data-cat="historia"]     { background: #9B7A4A; }
+.radio-cat-bar[data-cat="literatura"]   { background: #7A4A9B; }
+.radio-cat-bar[data-cat="autoayuda"]    { background: #9B4A6A; }
+
+/* Autores */
+.radio-autor-item {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.radio-autor-item:last-child { border-bottom: none; }
+.radio-autor-item:hover { opacity: 0.75; }
+.radio-autor-rank {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--muted);
+  width: 18px;
+  flex-shrink: 0;
+}
+.radio-autor-nombre {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--ink);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.radio-autor-obras {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--accent);
+  background: rgba(200,72,26,0.1);
+  border-radius: var(--pill);
+  padding: 0.15rem 0.5rem;
+  flex-shrink: 0;
+}
+
+/* Décadas */
+.radio-decada-item {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-bottom: 0.65rem;
+}
+.radio-decada-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--sub);
+  width: 48px;
+  flex-shrink: 0;
+}
+.radio-decada-bar-wrap {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,242,220,0.06);
+  border-radius: 100px;
+  overflow: hidden;
+}
+.radio-decada-bar {
+  height: 100%;
+  border-radius: 100px;
+  background: var(--accent-2);
+  width: 0;
+  transition: width 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.radio-decada-count {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  color: var(--muted);
+  width: 20px;
+  text-align: right;
+}
+
+/* Extremos (más largo / más corto) */
+.radio-extremos {
+  margin-top: var(--s3);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+.radio-extremo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.radio-extremo-item:hover { opacity: 0.75; }
+.radio-extremo-icon {
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.radio-extremo-info {}
+.radio-extremo-meta {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 0.15rem;
+}
+.radio-extremo-titulo {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--ink);
+  line-height: 1.3;
+}
+
+/* Cierre */
+.radio-cierre {
+  display: flex;
+  align-items: center;
+  gap: var(--s3);
+  justify-content: center;
+}
+.radio-cierre-linea {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+  max-width: 200px;
+}
+.radio-cierre-texto {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .radio-kpis { grid-template-columns: repeat(2, 1fr); }
+  .radio-grid  { grid-template-columns: 1fr; }
+}
+@media (max-width: 500px) {
+  .radio-kpis { grid-template-columns: repeat(2, 1fr); gap: var(--s2); }
+  .radio-cierre-texto { white-space: normal; font-size: 0.85rem; }
+}
+
 .creator-section {
   background: var(--bg);
   border-top: 1px solid var(--border);
@@ -6270,6 +6573,55 @@ footer {
     <button class="btn-ver-mas-frases" id="btn-ver-mas-frases" onclick="verMasFrases()">
       Ver más frases →
     </button>
+  </div>
+</section>
+
+<!-- ═══ SECCIÓN: RADIOGRAFÍA DE LA BIBLIOTECA ══════════════════ -->
+<section class="radiografia-section" id="radiografia-section" aria-label="Datos de la biblioteca">
+  <div class="radio-inner">
+    <div class="radio-header">
+      <span class="radio-eyebrow">✦ La colección en números</span>
+      <h2 class="radio-titulo">Radiografía<br><em>de la biblioteca.</em></h2>
+      <p class="radio-desc">Cada número es un libro. Cada libro, una perspectiva distinta del mundo.</p>
+    </div>
+    <div class="radio-kpis" id="radio-kpis">
+      <div class="radio-kpi">
+        <div class="radio-kpi-num" id="rkpi-total">0</div>
+        <div class="radio-kpi-lbl">Resúmenes</div>
+      </div>
+      <div class="radio-kpi">
+        <div class="radio-kpi-num" id="rkpi-tiempo">0</div>
+        <div class="radio-kpi-lbl">Min. de lectura</div>
+      </div>
+      <div class="radio-kpi">
+        <div class="radio-kpi-num" id="rkpi-autores">0</div>
+        <div class="radio-kpi-lbl">Autores distintos</div>
+      </div>
+      <div class="radio-kpi">
+        <div class="radio-kpi-num" id="rkpi-siglos">0</div>
+        <div class="radio-kpi-lbl">Siglos cubiertos</div>
+      </div>
+    </div>
+    <div class="radio-grid">
+      <div class="radio-card radio-card--cats">
+        <div class="radio-card-title">Por categoría</div>
+        <div class="radio-cats-list" id="radio-cats-list"></div>
+      </div>
+      <div class="radio-card radio-card--autores">
+        <div class="radio-card-title">Autores con más obras</div>
+        <div class="radio-autores-list" id="radio-autores-list"></div>
+      </div>
+      <div class="radio-card radio-card--decadas">
+        <div class="radio-card-title">Por época de publicación</div>
+        <div class="radio-decadas-list" id="radio-decadas-list"></div>
+        <div class="radio-extremos" id="radio-extremos"></div>
+      </div>
+    </div>
+    <div class="radio-cierre">
+      <span class="radio-cierre-linea"></span>
+      <span class="radio-cierre-texto">Todos los libros esperan a quien los lea.</span>
+      <span class="radio-cierre-linea"></span>
+    </div>
   </div>
 </section>
 
@@ -15008,7 +15360,176 @@ setTimeout(() => {
   actualizarTabBadges();
   initPorQueLeer();
   initFrasesWall();
+  initRadiografia();
 }, 350);
+
+// ── RADIOGRAFÍA DE LA BIBLIOTECA ─────────────────────────────────
+function initRadiografia() {
+  if (!document.getElementById('radio-cats-list')) return;
+
+  // ── 1. KPIs ──────────────────────────────────────────────────
+  const total   = libros.length;
+  const tiempo  = libros.reduce((s, l) => s + (l.tiempo || 0), 0);
+  const autores = new Set(libros.map(l => l.autor)).size;
+  const anios   = libros.map(l => l.anio).filter(Boolean);
+  const sigloMin = Math.floor(Math.min(...anios) / 100) + 1;
+  const sigloMax = Math.floor(Math.max(...anios) / 100) + 1;
+  const siglos  = sigloMax - sigloMin + 1;
+
+  // Animación de conteo
+  function animarNum(el, target, suffix) {
+    const dur = 1400;
+    const start = performance.now();
+    function tick(now) {
+      const p = Math.min((now - start) / dur, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(ease * target) + (suffix || '');
+      if (p < 1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // IntersectionObserver para disparar animación al entrar en vista
+  const kpisEl = document.getElementById('radio-kpis');
+  let kpisAnimado = false;
+  const kpisObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !kpisAnimado) {
+      kpisAnimado = true;
+      animarNum(document.getElementById('rkpi-total'),   total);
+      animarNum(document.getElementById('rkpi-tiempo'),  tiempo);
+      animarNum(document.getElementById('rkpi-autores'), autores);
+      animarNum(document.getElementById('rkpi-siglos'),  siglos);
+      kpisObs.disconnect();
+    }
+  }, { threshold: 0.3 });
+  kpisObs.observe(kpisEl);
+
+  // ── 2. Categorías ─────────────────────────────────────────────
+  const catCount = {};
+  libros.forEach(l => {
+    const c = l.categoria || 'otro';
+    catCount[c] = (catCount[c] || 0) + 1;
+  });
+  const catsSorted = Object.entries(catCount).sort((a, b) => b[1] - a[1]);
+  const maxCat = catsSorted[0][1];
+  const catLabels = {
+    filosofia: 'Filosofía', filosofía: 'Filosofía',
+    psicologia: 'Psicología', psicología: 'Psicología',
+    negocios: 'Negocios', ciencia: 'Ciencia',
+    historia: 'Historia', literatura: 'Literatura',
+    autoayuda: 'Autoayuda'
+  };
+
+  const catsList = document.getElementById('radio-cats-list');
+  catsList.innerHTML = catsSorted.map(([cat, n]) => `
+    <div class="radio-cat-item">
+      <div class="radio-cat-label">${catLabels[cat] || cat}</div>
+      <div class="radio-cat-bar-wrap">
+        <div class="radio-cat-bar" data-cat="${cat}" data-pct="${(n / maxCat * 100).toFixed(1)}"></div>
+      </div>
+      <div class="radio-cat-count">${n}</div>
+    </div>
+  `).join('');
+
+  // ── 3. Autores top ────────────────────────────────────────────
+  const autorCount = {};
+  libros.forEach(l => {
+    const a = l.autor || '';
+    autorCount[a] = (autorCount[a] || 0) + 1;
+  });
+  const autoresTop = Object.entries(autorCount)
+    .filter(([, n]) => n > 1)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 7);
+
+  const autoresList = document.getElementById('radio-autores-list');
+  autoresList.innerHTML = autoresTop.length
+    ? autoresTop.map(([autor, n], i) => `
+      <div class="radio-autor-item" onclick="filtrarPorAutor(${JSON.stringify(autor)})">
+        <div class="radio-autor-rank">${String(i + 1).padStart(2, '0')}</div>
+        <div class="radio-autor-nombre">${autor}</div>
+        <div class="radio-autor-obras">${n} libros</div>
+      </div>
+    `).join('')
+    : '<div style="font-size:0.78rem;color:var(--muted);padding:var(--s2) 0">Los autores aparecen aquí cuando tienen 2+ obras.</div>';
+
+  // ── 4. Décadas ────────────────────────────────────────────────
+  const decCount = {};
+  libros.forEach(l => {
+    if (!l.anio) return;
+    const dec = l.anio < 1900 ? 'Antes 1900' : Math.floor(l.anio / 10) * 10 + 's';
+    decCount[dec] = (decCount[dec] || 0) + 1;
+  });
+  const decsSorted = Object.entries(decCount).sort((a, b) => {
+    const valA = a[0] === 'Antes 1900' ? 0 : parseInt(a[0]);
+    const valB = b[0] === 'Antes 1900' ? 0 : parseInt(b[0]);
+    return valA - valB;
+  });
+  const maxDec = Math.max(...decsSorted.map(([, n]) => n));
+
+  const decsList = document.getElementById('radio-decadas-list');
+  decsList.innerHTML = decsSorted.map(([dec, n]) => `
+    <div class="radio-decada-item">
+      <div class="radio-decada-label">${dec}</div>
+      <div class="radio-decada-bar-wrap">
+        <div class="radio-decada-bar" data-pct="${(n / maxDec * 100).toFixed(1)}"></div>
+      </div>
+      <div class="radio-decada-count">${n}</div>
+    </div>
+  `).join('');
+
+  // ── 5. Extremos ───────────────────────────────────────────────
+  const sorted = [...libros].filter(l => l.tiempo).sort((a, b) => a.tiempo - b.tiempo);
+  const masCorto = sorted[0];
+  const masLargo = sorted[sorted.length - 1];
+  const extremosEl = document.getElementById('radio-extremos');
+  extremosEl.innerHTML = `
+    <div class="radio-extremo-item" onclick="abrirModal(libros.find(l=>l.titulo===${JSON.stringify(masCorto.titulo)}))">
+      <div class="radio-extremo-icon">⚡</div>
+      <div class="radio-extremo-info">
+        <div class="radio-extremo-meta">Lectura más corta · ${masCorto.tiempo} min</div>
+        <div class="radio-extremo-titulo">${masCorto.titulo}</div>
+      </div>
+    </div>
+    <div class="radio-extremo-item" onclick="abrirModal(libros.find(l=>l.titulo===${JSON.stringify(masLargo.titulo)}))">
+      <div class="radio-extremo-icon">📖</div>
+      <div class="radio-extremo-info">
+        <div class="radio-extremo-meta">Lectura más extensa · ${masLargo.tiempo} min</div>
+        <div class="radio-extremo-titulo">${masLargo.titulo}</div>
+      </div>
+    </div>
+  `;
+
+  // ── 6. Animar barras al entrar en vista ───────────────────────
+  const gridEl = document.querySelector('.radio-grid');
+  let barsAnimadas = false;
+  const gridObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting && !barsAnimadas) {
+      barsAnimadas = true;
+      document.querySelectorAll('.radio-cat-bar, .radio-decada-bar').forEach(bar => {
+        const pct = bar.dataset.pct || 0;
+        requestAnimationFrame(() => { bar.style.width = pct + '%'; });
+      });
+      gridObs.disconnect();
+    }
+  }, { threshold: 0.2 });
+  gridObs.observe(gridEl);
+}
+
+// Helper: filtrar grid por autor desde radiografía
+function filtrarPorAutor(autor) {
+  // Scroll a biblioteca
+  const bib = document.getElementById('biblioteca');
+  if (bib) bib.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  // Filtrar
+  setTimeout(() => {
+    const q = document.getElementById('search-input') || document.querySelector('input[type=search], input[placeholder*="Buscar"]');
+    if (q) {
+      q.value = autor;
+      q.dispatchEvent(new Event('input'));
+    }
+  }, 400);
+}
 </script>
 </body>
 </html>
