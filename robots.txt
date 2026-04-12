@@ -1,4 +1,19 @@
 User-agent: *
 Allow: /
 
+# Bloquear parámetros de búsqueda interna para evitar URLs duplicadas
+Disallow: /*?q=
+Disallow: /*?filtro=
+Disallow: /*?tag=
+
+# Crawl-delay para bots secundarios
+User-agent: AhrefsBot
+Crawl-delay: 10
+
+User-agent: SemrushBot
+Crawl-delay: 10
+
+User-agent: MJ12bot
+Disallow: /
+
 Sitemap: https://resumenya.com/sitemap.xml
